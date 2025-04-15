@@ -3,9 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Corpse.icu</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <title>corpse.icu</title>
+    <style>
+        :root {
+            padding: 0;
+            margin: 0;
+            font-family: "Roboto";
+            overflow: hidden;
+            color: white;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: white;
+            background-image: url(bg.png);
+            background-position: center;
+            background-repeat: 0;
+            background-size: cover;
+        }
+        .glass {
+            backdrop-filter: blur(16px) saturate(180%);
+            background-color: rgba(20, 20, 20, 0.75);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .button {
+            display: flex;
+            align-items: center;
+            padding-left: 12px;
+            padding-right: 12px;
+            transition-duration: 0.2s;
+            border: 1px solid #ffffff20;
+        }
+        .button:hover {
+            border-color: white;
+        }
+    </style>
 </head>
 <body>
-    Hello, world!
+    <div class="w-screen h-screen flex flex-col items-center justify-center">
+        <div class="glass rounded-2xl w-[425px] h-fit flex flex-col items-center p-[25px] gap-[10px]">
+            <img class="w-auto h-[125px] rounded-2xl" src="https://discord-info-amber.vercel.app/pfp/1026927459783942205">
+            <a class="text-3xl">corpse</a>
+            <span class="w-full h-px bg-white"></span>
+            <div class="w-full glass rounded-2xl p-[10px] flex flex-row gap-[10px] items-center">
+                <img class="w-auto h-[75px] rounded-2xl" src="https://discord-info-amber.vercel.app/pfp/1026927459783942205">
+                <a class="shrink-0">𝐂𝐨𝐫𝐩𝐬𝐞 𝐆𝐫𝐚𝐯𝐞</a>
+                <div class="w-full grow flex flex-row-reverse">
+                    <a href="https://discord.gg/s5YhvaG4kw" class="cursor-pointer rounded-md button py-[5px]">Join Discord</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
