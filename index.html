@@ -1,1 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <title>rabbit corpse</title>
+    <style>
+      :root {
+        padding: 0;
+        margin: 0;
+        font-family: "Roboto";
+        overflow: hidden;
+        color: #68aa6c;
+        box-sizing: border-box;
+      }
 
+      body {
+        background-color: white;
+        background-image: url(bg.png);
+        background-position: center;
+        background-repeat: 0;
+        background-size: cover;
+      }
+
+      .glass {
+        backdrop-filter: blur(10px) saturate(180%);
+        background-color: rgba(20, 20, 20, 0.75);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .button {
+        display: flex;
+        align-items: center;
+        padding-left: 12px;
+        padding-right: 12px;
+        transition-duration: 0.2s;
+        border: 1px solid #ffffff20;
+      }
+
+      .button:hover {
+        border-color: white;
+      }
+
+      .glow {
+        text-shadow: white 0px 0px 20px
+      }
+    </style>
+    <script>
+      $(document).ready(function () {
+        var originalTitle = document.title;
+        var scrollText = originalTitle + " • ";
+        var pos = 0;
+
+        function scrollTitle() {
+          document.title = scrollText.substring(pos) + scrollText.substring(0, pos);
+          pos = (pos + 1) % scrollText.length;
+          setTimeout(scrollTitle, 200);
+        }
+
+        scrollTitle();
+      });
+    </script>
+  </head>
+  <body>
+    <div class="w-screen h-screen flex flex-col items-center justify-center">
+      <audio id="sound" loop hidden autoplay>
+        <source src="audio.mp3" type="audio/mp3">
+      </audio>
+      <div id="cover" class="cursor-pointer fixed w-full h-full z-9999 bg-black flex flex-col items-center justify-center">
+        <a class="glow text-3xl">click to enter</a>
+      </div>
+      <div class="glass rounded-2xl w-[425px] h-fit flex flex-col items-center p-[25px] gap-[10px]">
+        <img class="w-auto h-[125px] rounded-2xl" src="https://discord-info-amber.vercel.app/pfp/417030812010020864">
+        <a class="glow text-3xl">corpse</a>
+        <a class="text-center">𝐄𝐕𝐄𝐑𝐘 𝐒𝐀𝐈𝐍𝐓 𝐇𝐀𝐒 𝐀 𝐏𝐀𝐒𝐓 <br>𝐄𝐕𝐄𝐑𝐘 𝐒𝐈𝐍𝐍𝐄𝐑 𝐇𝐀𝐒 𝐀 𝐅𝐔𝐓𝐔𝐑𝐄 <br>♡ Michelle ♡ <br>୨୧ Jack <br>☆ 15 <br>☆ alt rock <br>not addicted to vaping </a>
+        <span class="w-full h-px bg-white"></span>
+        <div class="w-full glass rounded-2xl p-[10px] flex flex-row gap-[10px] items-center">
+          <img class="w-auto h-[75px] rounded-2xl" src="https://discord-info-amber.vercel.app/pfp/417030812010020864">
+          <a class="glow shrink-0">LGBTQIA+ friendly server</a>
+          <div class="w-full grow flex flex-row-reverse">
+            <a href="https://discord.gg/fwYzVKN9cx" class="glow cursor-pointer rounded-md button py-[5px]">Join Jerk Circle</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      const cover = $('#cover');
+      cover.on('click', function () {
+        cover.hide(200);
+        document.getElementById('sound').play()
+      });
+    </script>
+  </body>
+</html>
