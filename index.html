@@ -157,12 +157,12 @@
             playPauseBtn.innerHTML = "⏸"; // pause icon
           } else {
             audio.pause();
-            playPauseBtn.innerHTML = "▶️"; // play icon
+            playPauseBtn.innerHTML = "▶"; // play icon
           }
         });
 
         // Initialize button icon depending on audio state
-        playPauseBtn.innerHTML = audio.paused ? "▶️" : "⏸";
+        playPauseBtn.innerHTML = audio.paused ? "▶" : "⏸";
 
         // Also hide cover and start audio on click (your original)
         $("#cover").on("click", function () {
