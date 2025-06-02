@@ -16,7 +16,7 @@
       :root {
         padding: 0;
         margin: 0;
-        font-family: "Roboto";
+        font-family: "Roboto", sans-serif;
         overflow: hidden;
         color: #aea1cd;
         box-sizing: border-box;
@@ -28,7 +28,6 @@
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
-        margin: 0;
       }
 
       .glass {
@@ -54,158 +53,57 @@
         text-shadow: #c8a1cd 2px 2px 20px;
       }
 
-      /* AUDIO PLAYER BOTTOM RIGHT */
+      /* Audio Player Styling */
       #audio-player-container {
         position: fixed;
         bottom: 20px;
         right: 20px;
-        background: rgba(20, 20, 20, 0.85);
-        border-radius: 15px;
-        padding: 10px 15px;
+        width: 300px;
         display: flex;
         align-items: center;
-        gap: 15px;
-        width: 320px;
-        box-sizing: border-box;
-        border: 1px solid rgba(255, 255, 255, 0.15);
-        box-shadow: 0 0 15px #c8a1cd;
-        z-index: 10000;
+        gap: 10px;
+        padding: 12px;
+        border-radius: 1rem;
+        z-index: 9999;
+        color: white;
       }
 
       #audio-player-container img {
         width: 60px;
         height: 60px;
-        border-radius: 10px;
+        border-radius: 0.5rem;
         object-fit: cover;
       }
 
       #audio-info {
         flex-grow: 1;
-        overflow: hidden;
       }
 
       #audio-info .title {
-        font-weight: 700;
-        font-size: 1.1rem;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        color: #aea1cd;
+        font-size: 14px;
+        font-weight: bold;
+        color: white;
       }
 
       #audio-info .artist {
-        font-size: 0.85rem;
-        opacity: 0.7;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        color: #aea1cd;
+        font-size: 12px;
+        color: #ccc;
       }
 
-      audio {
-        width: 140px;
-        outline: none;
-        filter: drop-shadow(0 0 2px #aea1cd);
+      #audio-player-container audio {
+        width: 100%;
+        margin-top: 8px;
       }
     </style>
 
     <script>
-      // Typewriter Effect that never fully clears the title
       const fullTitle = document.title;
       let index = 1;
-      let direction = 1; // 1 = typing, -1 = deleting
+      let direction = 1;
       const speed = 150;
 
       function typewriterLoop() {
         document.title = fullTitle.substring(0, index);
-
         if (direction === 1 && index === fullTitle.length) {
           direction = -1;
-          setTimeout(typewriterLoop, 1000);
-        } else if (direction === -1 && index === 1) {
-          direction = 1;
-          setTimeout(typewriterLoop, 500);
-        } else {
-          index += direction;
-          setTimeout(typewriterLoop, speed);
-        }
-      }
-
-      window.onload = typewriterLoop;
-    </script>
-  </head>
-  <body>
-    <div class="w-screen h-screen flex flex-col items-center justify-center">
-      <audio id="sound" loop hidden autoplay>
-        <source src="audio.mp3" type="audio/mp3" />
-      </audio>
-      <div
-        id="cover"
-        class="cursor-pointer fixed w-full h-full z-9999 bg-black flex flex-col items-center justify-center"
-      >
-        <a class="glow text-3xl">click to enter</a>
-      </div>
-      <div
-        class="glass rounded-2xl w-[425px] h-fit flex flex-col items-center p-[25px] gap-[10px]"
-      >
-        <img
-          class="w-auto h-[125px] rounded-2xl"
-          src="https://discord-info-amber.vercel.app/pfp/417030812010020864"
-          alt="Profile"
-        />
-        <a class="glow text-3xl">CORPSE</a>
-        <a class="text-2xl">𝐇𝐄𝐑𝐌𝐈𝐓 | 𝐍𝐎𝐋𝐈𝐅𝐄 | 𝐕𝐈𝐊𝐈𝐍𝐆</a>
-        <a class="glow text-2xl"></a>
-        <span class="w-full h-px bg-white"></span>
-        <a class="text-1xl">¯\_(ツ)_/¯</a>
-        <a class="text-1xl" style="color: white;">hello, im corpse</a>
-        <a class="text-1xl text-center" style="color: white;">
-          my life consists of either watching anime, sitting at my desk, playing
-          games or listening to music
-        </a>
-        <span class="w-full h-px bg-white"></span>
-        <div
-          class="w-full glass rounded-2xl p-[10px] flex flex-row gap-[10px] items-center"
-        >
-          <img
-            class="w-auto h-[75px] rounded-2xl"
-            src="https://discord-info-amber.vercel.app/pfp/417030812010020864"
-            alt="Profile"
-          />
-          <a class="glow shrink-0">CantThinkOfName</a>
-          <div class="w-full grow flex flex-row-reverse">
-            <a
-              href="https://discord.gg/fwYzVKN9cx"
-              class="glow cursor-pointer rounded-md button py-[6px]"
-              >ᴊᴏɪɴ :3</a
-            >
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Bottom Right Audio Player -->
-    <div id="audio-player-container" class="glass">
-      <img
-        src="https://i.scdn.co/image/ab67616d0000b273bd2b3d122af47d0a1f0468ef"
-        alt="Album Cover"
-      />
-      <div id="audio-info">
-        <div class="title">Ghostemane - Mercury</div>
-        <div class="artist">Ghostemane</div>
-      </div>
-      <audio controls loop autoplay>
-        <source src="audio.mp3" type="audio/mp3" />
-        Your browser does not support the audio element.
-      </audio>
-    </div>
-
-    <script>
-      const cover = $("#cover");
-      cover.on("click", function () {
-        cover.hide(200);
-        document.getElementById("sound").play();
-      });
-    </script>
-  </body>
-</html>
+          setTimeout(typewriterLoop, 1
