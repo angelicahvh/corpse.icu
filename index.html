@@ -11,7 +11,7 @@
       href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet"
     />
-    <title>corpse killed you</title>
+    <title>c</title>
     <style>
       :root {
         padding: 0;
@@ -55,34 +55,37 @@
     </style>
 
     <script>
-      const fullTitle = document.title;
+      // Typewriter Effect that never fully clears the title and stays consistent regardless of tab focus
+      const fullTitle = "corpse.skid.larper.lol";
       let index = 1;
       let direction = 1; // 1 = typing, -1 = deleting
-      let delayCounter = 0;
 
-      const speed = 150; // typing speed
-      const delayBeforeDelete = 1000 / speed; // ~6-7 frames
-      const delayBeforeType = 500 / speed;
+      const speed = 150; // milliseconds per step
+      let lastUpdate = 0;
 
-      setInterval(() => {
-        if (direction === 1 && index === fullTitle.length) {
-          delayCounter++;
-          if (delayCounter >= delayBeforeDelete) {
+      function typewriterLoop(timestamp) {
+        if (!lastUpdate) lastUpdate = timestamp;
+        const elapsed = timestamp - lastUpdate;
+
+        if (elapsed >= speed) {
+          document.title = fullTitle.substring(0, index);
+
+          if (direction === 1 && index === fullTitle.length) {
             direction = -1;
-            delayCounter = 0;
-          }
-        } else if (direction === -1 && index === 1) {
-          delayCounter++;
-          if (delayCounter >= delayBeforeType) {
+            lastUpdate = timestamp + 1000 - speed; // pause 1 second before deleting
+          } else if (direction === -1 && index === 1) {
             direction = 1;
-            delayCounter = 0;
+            lastUpdate = timestamp + 500 - speed; // pause 0.5 seconds before typing again
+          } else {
+            index += direction;
+            lastUpdate = timestamp;
           }
-        } else {
-          index += direction;
         }
 
-        document.title = fullTitle.substring(0, index);
-      }, speed);
+        requestAnimationFrame(typewriterLoop);
+      }
+
+      window.onload = () => requestAnimationFrame(typewriterLoop);
     </script>
   </head>
   <body>
