@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
@@ -49,6 +50,21 @@
         text-shadow: white 0px 0px 20px
       }
     </style>
+    <script>
+      $(document).ready(function () {
+        var originalTitle = document.title;
+        var scrollText = originalTitle + " • ";
+        var pos = 0;
+
+        function scrollTitle() {
+          document.title = scrollText.substring(pos) + scrollText.substring(0, pos);
+          pos = (pos + 1) % scrollText.length;
+          setTimeout(scrollTitle, 200);
+        }
+
+        scrollTitle();
+      });
+    </script>
   </head>
   <body>
     <div class="w-screen h-screen flex flex-col items-center justify-center">
@@ -72,10 +88,9 @@
         </div>
       </div>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script>
       const cover = $('#cover');
-      cover.on('click', function() {
+      cover.on('click', function () {
         cover.hide(200);
         document.getElementById('sound').play()
       });
