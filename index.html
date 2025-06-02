@@ -1,4 +1,3 @@
-<!-- Insert this entire code in your editor -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -88,6 +87,7 @@
         margin-top: 0.5rem;
       }
 
+      /* Custom progress bar color */
       audio::-webkit-media-controls-panel {
         background-color: transparent;
       }
@@ -106,6 +106,51 @@
       audio::-webkit-media-controls-volume-slider,
       audio::-webkit-media-controls-mute-button {
         filter: invert(1);
+      }
+
+      /* Social icons container */
+      .social-icons {
+        margin-top: 1.5rem;
+        width: 425px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .social-icons .icons-row {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .social-icons a {
+        border: 1px solid white;
+        border-radius: 0.5rem;
+        padding: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: border-color 0.2s;
+      }
+
+      .social-icons a:hover {
+        border-color: #998da2;
+      }
+
+      .social-icons img {
+        width: 32px;
+        height: 32px;
+        filter: invert(85%) sepia(15%) saturate(0%) hue-rotate(180deg)
+          brightness(95%) contrast(90%);
+        transition: filter 0.2s;
+      }
+
+      .social-icons a:hover img {
+        filter: invert(58%) sepia(46%) saturate(469%) hue-rotate(239deg)
+          brightness(92%) contrast(95%);
       }
     </style>
 
@@ -141,14 +186,13 @@
       >
         <a class="glow text-3xl">click to enter</a>
       </div>
-
-      <!-- Main Profile Card -->
       <div
         class="glass rounded-2xl w-[425px] h-fit flex flex-col items-center p-[25px] gap-[10px]"
       >
         <img
           class="w-auto h-[125px] rounded-2xl"
           src="https://discord-info-amber.vercel.app/pfp/417030812010020864"
+          alt="Profile"
         />
         <a class="glow text-3xl">CORPSE</a>
         <a class="text-2xl">𝐇𝐄𝐑𝐌𝐈𝐓 | 𝐍𝐎𝐋𝐈𝐅𝐄 | 𝐕𝐈𝐊𝐈𝐍𝐆</a>
@@ -156,10 +200,11 @@
         <span class="w-full h-px bg-white"></span>
         <a class="text-1xl">¯\_(ツ)_/¯</a>
         <a class="text-1xl" style="color: white;">hello, im corpse</a>
-        <a class="text-1xl text-center" style="color: white;">
-          my life consists of either watching anime, sitting at my desk, playing
-          games or listening to music
-        </a>
+        <a
+          class="text-1xl text-center"
+          style="color: white;"
+        >my life consists of either watching anime, sitting at my desk, playing
+          games or listening to music</a>
         <span class="w-full h-px bg-white"></span>
         <div
           class="w-full glass rounded-2xl p-[10px] flex flex-row gap-[10px] items-center"
@@ -167,6 +212,7 @@
           <img
             class="w-auto h-[75px] rounded-2xl"
             src="https://discord-info-amber.vercel.app/pfp/417030812010020864"
+            alt="Profile Small"
           />
           <a class="glow shrink-0">CantThinkOfName</a>
           <div class="w-full grow flex flex-row-reverse">
@@ -177,50 +223,52 @@
             >
           </div>
         </div>
-      </div>
 
-      <!-- Social Buttons Box -->
-      <div
-        class="glass mt-4 rounded-2xl w-[425px] h-fit flex flex-col items-center p-[20px] gap-[10px]"
-      >
-        <span class="glow text-xl">Find Me Online</span>
-        <div class="flex gap-4 flex-wrap justify-center">
-          <a
-            href="https://discord.gg/fwYzVKN9cx"
-            target="_blank"
-            class="glow button text-sm py-2 px-4 rounded-md"
-            style="color: white;"
-          >
-            Discord
-          </a>
-          <a
-            href="https://twitter.com/YOUR_HANDLE"
-            target="_blank"
-            class="glow button text-sm py-2 px-4 rounded-md"
-            style="color: white;"
-          >
-            Twitter
-          </a>
-          <a
-            href="https://github.com/YOUR_USERNAME"
-            target="_blank"
-            class="glow button text-sm py-2 px-4 rounded-md"
-            style="color: white;"
-          >
-            GitHub
-          </a>
-          <a
-            href="https://instagram.com/YOUR_INSTAGRAM"
-            target="_blank"
-            class="glow button text-sm py-2 px-4 rounded-md"
-            style="color: white;"
-          >
-            Instagram
-          </a>
+        <!-- Social Buttons Section -->
+        <div class="glass social-icons rounded-2xl">
+          <span class="glow text-xl">Find Me Online</span>
+          <div class="icons-row">
+            <a
+              href="https://discord.gg/fwYzVKN9cx"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Discord"
+              ><img
+                src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/discord.svg"
+                alt="Discord"
+              /></a>
+            <a
+              href="https://twitter.com/YOUR_HANDLE"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Twitter"
+              ><img
+                src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/twitter.svg"
+                alt="Twitter"
+              /></a>
+            <a
+              href="https://github.com/YOUR_USERNAME"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub"
+              ><img
+                src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg"
+                alt="GitHub"
+              /></a>
+            <a
+              href="https://instagram.com/YOUR_INSTAGRAM"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+              ><img
+                src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/instagram.svg"
+                alt="Instagram"
+              /></a>
+          </div>
         </div>
       </div>
 
-      <!-- Audio Player -->
+      <!-- Custom Audio Player -->
       <div class="audio-player glass">
         <img src="album.png" alt="Album Art" />
         <div class="info">
