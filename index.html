@@ -28,6 +28,7 @@
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
+        margin: 0;
       }
 
       .glass {
@@ -53,72 +54,58 @@
         text-shadow: #c8a1cd 2px 2px 20px;
       }
 
-      /* Player box styles */
-      #spotify-player {
+      /* AUDIO PLAYER BOTTOM RIGHT */
+      #audio-player-container {
         position: fixed;
         bottom: 20px;
         right: 20px;
-        width: 280px;
-        height: 70px;
         background: rgba(20, 20, 20, 0.85);
-        border: 1px solid rgba(255, 255, 255, 0.2);
         border-radius: 15px;
-        backdrop-filter: blur(10px);
+        padding: 10px 15px;
         display: flex;
         align-items: center;
-        padding: 10px 15px;
-        box-shadow: 0 0 15px #c8a1cdaa;
-        z-index: 9999;
-        color: white;
+        gap: 15px;
+        width: 320px;
+        box-sizing: border-box;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        box-shadow: 0 0 15px #c8a1cd;
+        z-index: 10000;
       }
 
-      #spotify-player img {
-        width: 50px;
-        height: 50px;
-        border-radius: 8px;
+      #audio-player-container img {
+        width: 60px;
+        height: 60px;
+        border-radius: 10px;
         object-fit: cover;
-        flex-shrink: 0;
       }
 
-      #spotify-player .song-info {
-        margin-left: 15px;
+      #audio-info {
         flex-grow: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
         overflow: hidden;
       }
 
-      #spotify-player .song-title {
+      #audio-info .title {
         font-weight: 700;
         font-size: 1.1rem;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+        color: #aea1cd;
       }
 
-      #spotify-player .song-artist {
-        font-weight: 400;
+      #audio-info .artist {
         font-size: 0.85rem;
-        color: #aea1cd;
+        opacity: 0.7;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-      }
-
-      #spotify-player button {
-        background: transparent;
-        border: none;
         color: #aea1cd;
-        cursor: pointer;
-        font-size: 1.4rem;
-        margin-left: 15px;
-        flex-shrink: 0;
-        transition: color 0.2s ease;
       }
 
-      #spotify-player button:hover {
-        color: white;
+      audio {
+        width: 140px;
+        outline: none;
+        filter: drop-shadow(0 0 2px #aea1cd);
       }
     </style>
 
@@ -144,33 +131,7 @@
         }
       }
 
-      window.onload = function () {
-        typewriterLoop();
-
-        // Play/pause button logic for player
-        const audio = document.getElementById("sound");
-        const playPauseBtn = document.getElementById("play-pause-btn");
-
-        playPauseBtn.addEventListener("click", () => {
-          if (audio.paused) {
-            audio.play();
-            playPauseBtn.innerHTML = "⏸"; // pause icon
-          } else {
-            audio.pause();
-            playPauseBtn.innerHTML = "▶"; // play icon
-          }
-        });
-
-        // Initialize button icon depending on audio state
-        playPauseBtn.innerHTML = audio.paused ? "▶" : "⏸";
-
-        // Also hide cover and start audio on click (your original)
-        $("#cover").on("click", function () {
-          $("#cover").hide(200);
-          audio.play();
-          playPauseBtn.innerHTML = "⏸";
-        });
-      };
+      window.onload = typewriterLoop;
     </script>
   </head>
   <body>
@@ -190,6 +151,7 @@
         <img
           class="w-auto h-[125px] rounded-2xl"
           src="https://discord-info-amber.vercel.app/pfp/417030812010020864"
+          alt="Profile"
         />
         <a class="glow text-3xl">CORPSE</a>
         <a class="text-2xl">𝐇𝐄𝐑𝐌𝐈𝐓 | 𝐍𝐎𝐋𝐈𝐅𝐄 | 𝐕𝐈𝐊𝐈𝐍𝐆</a>
@@ -198,8 +160,8 @@
         <a class="text-1xl">¯\_(ツ)_/¯</a>
         <a class="text-1xl" style="color: white;">hello, im corpse</a>
         <a class="text-1xl text-center" style="color: white;">
-          my life consists of either watching anime, sitting at my desk, playing games
-          or listening to music
+          my life consists of either watching anime, sitting at my desk, playing
+          games or listening to music
         </a>
         <span class="w-full h-px bg-white"></span>
         <div
@@ -208,6 +170,7 @@
           <img
             class="w-auto h-[75px] rounded-2xl"
             src="https://discord-info-amber.vercel.app/pfp/417030812010020864"
+            alt="Profile"
           />
           <a class="glow shrink-0">CantThinkOfName</a>
           <div class="w-full grow flex flex-row-reverse">
@@ -221,17 +184,28 @@
       </div>
     </div>
 
-    <!-- Spotify-style player at bottom right -->
-    <div id="spotify-player" class="glass">
+    <!-- Bottom Right Audio Player -->
+    <div id="audio-player-container" class="glass">
       <img
-        src="https://i.scdn.co/image/ab67616d00004851c3a58d3036788be76c8dc7d3" 
-        alt="Album cover"
+        src="https://i.scdn.co/image/ab67616d0000b273bd2b3d122af47d0a1f0468ef"
+        alt="Album Cover"
       />
-      <div class="song-info">
-        <div class="song-title">Your Song Title</div>
-        <div class="song-artist">Artist Name</div>
+      <div id="audio-info">
+        <div class="title">Ghostemane - Mercury</div>
+        <div class="artist">Ghostemane</div>
       </div>
-      <button id="play-pause-btn" aria-label="Play/Pause">▶</button>
+      <audio controls loop autoplay>
+        <source src="audio.mp3" type="audio/mp3" />
+        Your browser does not support the audio element.
+      </audio>
     </div>
+
+    <script>
+      const cover = $("#cover");
+      cover.on("click", function () {
+        cover.hide(200);
+        document.getElementById("sound").play();
+      });
+    </script>
   </body>
 </html>
