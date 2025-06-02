@@ -11,7 +11,7 @@
       href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet"
     />
-    <title>c</title>
+    <title>corpse</title>
     <style>
       :root {
         padding: 0;
@@ -55,37 +55,28 @@
     </style>
 
     <script>
-      // Typewriter Effect that never fully clears the title and stays consistent regardless of tab focus
-      const fullTitle = "corpse.skid.larper.lol";
+      // Typewriter Effect that never fully clears the title
+      const fullTitle = document.title;
       let index = 1;
       let direction = 1; // 1 = typing, -1 = deleting
+      const speed = 150;
 
-      const speed = 150; // milliseconds per step
-      let lastUpdate = 0;
+      function typewriterLoop() {
+        document.title = fullTitle.substring(0, index);
 
-      function typewriterLoop(timestamp) {
-        if (!lastUpdate) lastUpdate = timestamp;
-        const elapsed = timestamp - lastUpdate;
-
-        if (elapsed >= speed) {
-          document.title = fullTitle.substring(0, index);
-
-          if (direction === 1 && index === fullTitle.length) {
-            direction = -1;
-            lastUpdate = timestamp + 1000 - speed; // pause 1 second before deleting
-          } else if (direction === -1 && index === 1) {
-            direction = 1;
-            lastUpdate = timestamp + 500 - speed; // pause 0.5 seconds before typing again
-          } else {
-            index += direction;
-            lastUpdate = timestamp;
-          }
+        if (direction === 1 && index === fullTitle.length) {
+          direction = -1;
+          setTimeout(typewriterLoop, 1000);
+        } else if (direction === -1 && index === 1) {
+          direction = 1;
+          setTimeout(typewriterLoop, 500);
+        } else {
+          index += direction;
+          setTimeout(typewriterLoop, speed);
         }
-
-        requestAnimationFrame(typewriterLoop);
       }
 
-      window.onload = () => requestAnimationFrame(typewriterLoop);
+      window.onload = typewriterLoop;
     </script>
   </head>
   <body>
@@ -111,11 +102,9 @@
         <a class="glow text-2xl"></a>
         <span class="w-full h-px bg-white"></span>
         <a class="text-1xl">¯\_(ツ)_/¯</a>
-        <a class="text-1xl">hello, im corpse</a>
-        <a class="text-center 1xl"
-          >my life consists of either watching anime, sitting at my desk, playing
-          games or listening to music</a
-        >
+      <a class="text-1xl" style="color: white;">hello, im corpse</a>
+      <a class="text-1xl" style="color: white;">my life consists of either watching anime, sitting at my desk, playing
+          games or listening to music</a>
         <span class="w-full h-px bg-white"></span>
         <div
           class="w-full glass rounded-2xl p-[10px] flex flex-row gap-[10px] items-center"
