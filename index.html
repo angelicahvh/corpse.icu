@@ -50,19 +50,6 @@
         text-shadow: #c8a1cd 2px 2px 20px
       }
     </style>
-    <script>
-      $(document).ready(function () {
-        var originalTitle = document.title;
-        var scrollText = originalTitle + " • ";
-        var pos = 0;
-
-        function scrollTitle() {
-          document.title = scrollText.substring(pos) + scrollText.substring(0, pos);
-          pos = (pos + 1) % scrollText.length;
-          setTimeout(scrollTitle, 200);
-        }
-
-        scrollTitle();
       });
     </script>
   </head>
