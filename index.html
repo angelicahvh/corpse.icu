@@ -16,7 +16,7 @@
       :root {
         padding: 0;
         margin: 0;
-        font-family: "Roboto", sans-serif;
+        font-family: "Roboto";
         overflow: hidden;
         color: #aea1cd;
         box-sizing: border-box;
@@ -53,46 +53,59 @@
         text-shadow: #c8a1cd 2px 2px 20px;
       }
 
-      /* Audio Player Styling */
-      #audio-player-container {
+      .audio-player {
         position: fixed;
         bottom: 20px;
         right: 20px;
-        width: 300px;
+        background: rgba(20, 20, 20, 0.85);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 1rem;
+        padding: 1rem;
         display: flex;
         align-items: center;
-        gap: 10px;
-        padding: 12px;
-        border-radius: 1rem;
-        z-index: 9999;
+        gap: 1rem;
         color: white;
+        width: 300px;
+        z-index: 50;
       }
 
-      #audio-player-container img {
+      .audio-player img {
         width: 60px;
         height: 60px;
-        border-radius: 0.5rem;
         object-fit: cover;
+        border-radius: 0.5rem;
       }
 
-      #audio-info {
-        flex-grow: 1;
+      .audio-player .info {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
       }
 
-      #audio-info .title {
-        font-size: 14px;
-        font-weight: bold;
+      .audio-player audio {
+        width: 100%;
+        margin-top: 0.5rem;
+      }
+
+      /* Custom progress bar color */
+      audio::-webkit-media-controls-panel {
+        background-color: transparent;
+      }
+
+      audio::-webkit-media-controls-timeline {
+        background: #998da2;
+        border-radius: 10px;
+      }
+
+      audio::-webkit-media-controls-current-time-display,
+      audio::-webkit-media-controls-time-remaining-display {
         color: white;
       }
 
-      #audio-info .artist {
-        font-size: 12px;
-        color: #ccc;
-      }
-
-      #audio-player-container audio {
-        width: 100%;
-        margin-top: 8px;
+      audio::-webkit-media-controls-play-button,
+      audio::-webkit-media-controls-volume-slider,
+      audio::-webkit-media-controls-mute-button {
+        filter: invert(1);
       }
     </style>
 
@@ -119,17 +132,15 @@
       window.onload = typewriterLoop;
     </script>
   </head>
+
   <body>
     <div class="w-screen h-screen flex flex-col items-center justify-center">
-      <!-- Removed hidden <audio> element -->
-
       <div
         id="cover"
         class="cursor-pointer fixed w-full h-full z-9999 bg-black flex flex-col items-center justify-center"
       >
         <a class="glow text-3xl">click to enter</a>
       </div>
-
       <div
         class="glass rounded-2xl w-[425px] h-fit flex flex-col items-center p-[25px] gap-[10px]"
       >
@@ -143,10 +154,11 @@
         <span class="w-full h-px bg-white"></span>
         <a class="text-1xl">¯\_(ツ)_/¯</a>
         <a class="text-1xl" style="color: white;">hello, im corpse</a>
-        <a class="text-1xl text-center" style="color: white;">
-          my life consists of either watching anime, sitting at my desk, playing
-          games or listening to music
-        </a>
+        <a
+          class="text-1xl text-center"
+          style="color: white;"
+        >my life consists of either watching anime, sitting at my desk, playing
+          games or listening to music</a>
         <span class="w-full h-px bg-white"></span>
         <div
           class="w-full glass rounded-2xl p-[10px] flex flex-row gap-[10px] items-center"
@@ -165,36 +177,25 @@
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- Bottom Right Audio Player -->
-    <div id="audio-player-container" class="glass">
-      <img
-        src="album.png"
-        alt="Album Cover"
-      />
-      <div id="audio-info">
-        <div class="title">Brain Stew</div>
-        <div class="artist">Green Day</div>
-        <audio id="bottom-audio" controls autoplay loop>
-          <source src="audio.mp3" type="audio/mp3" />
-        </audio>
+      <!-- Custom Audio Player -->
+      <div class="audio-player glass">
+        <img src="https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228" alt="Album Art" />
+        <div class="info">
+          <strong class="text-sm">Agoraphobic</strong>
+          <span class="text-xs">CORPSE</span>
+          <audio controls>
+            <source src="audio.mp3" type="audio/mp3" />
+            Your browser does not support the audio element.
+          </audio>
+        </div>
       </div>
     </div>
 
     <script>
       const cover = $("#cover");
-      const bottomAudio = document.getElementById("bottom-audio");
-
       cover.on("click", function () {
         cover.hide(200);
-        bottomAudio.play().catch(() => {});
-      });
-
-      window.addEventListener("load", () => {
-        bottomAudio.play().catch(() => {
-          console.log("Autoplay was prevented.");
-        });
       });
     </script>
   </body>
