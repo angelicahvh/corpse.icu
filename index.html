@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <title>corpse.skid.larper.lol</title>
+    <title></title>
     <style>
       :root {
         padding: 0;
@@ -51,19 +51,28 @@
       }
     </style>
     <script>
-      // Typewriter Effect for Document Title
-      const fullTitle = document.title;
+      // Infinite Typewriter Effect for Document Title
+      const fullTitle = "corpse.skid.larper.lol";
       let index = 0;
+      let direction = 1; // 1 = typing, -1 = deleting
+      const speed = 150;
 
-      function typeTitle() {
-        if (index <= fullTitle.length) {
-          document.title = fullTitle.substring(0, index);
-          index++;
-          setTimeout(typeTitle, 150); // Adjust typing speed here
+      function typewriterLoop() {
+        document.title = fullTitle.substring(0, index);
+
+        if (direction === 1 && index === fullTitle.length) {
+          direction = -1;
+          setTimeout(typewriterLoop, 1000); // pause before deleting
+        } else if (direction === -1 && index === 0) {
+          direction = 1;
+          setTimeout(typewriterLoop, 500); // pause before typing again
+        } else {
+          index += direction;
+          setTimeout(typewriterLoop, speed);
         }
       }
 
-      window.onload = typeTitle;
+      window.onload = typewriterLoop;
     </script>
   </head>
   <body>
