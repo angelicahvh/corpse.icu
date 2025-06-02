@@ -108,49 +108,35 @@
         filter: invert(1);
       }
 
-      /* Social icons container */
+      /* Social Buttons Styles */
       .social-icons {
-        margin-top: 1.5rem;
+        margin-top: 20px;
+        padding: 15px;
         width: 425px;
-        padding: 20px;
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 1rem;
+        gap: 12px;
+        color: #aea1cd;
       }
 
       .social-icons .icons-row {
         display: flex;
-        gap: 20px;
-        justify-content: center;
-        flex-wrap: wrap;
-      }
-
-      .social-icons a {
-        border: 1px solid white;
-        border-radius: 0.5rem;
-        padding: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: border-color 0.2s;
-      }
-
-      .social-icons a:hover {
-        border-color: #998da2;
+        gap: 18px;
       }
 
       .social-icons img {
         width: 32px;
         height: 32px;
-        filter: invert(85%) sepia(15%) saturate(0%) hue-rotate(180deg)
-          brightness(95%) contrast(90%);
-        transition: filter 0.2s;
+        filter: invert(79%) sepia(8%) saturate(1263%) hue-rotate(243deg)
+          brightness(93%) contrast(90%);
+        transition: filter 0.3s ease;
       }
 
-      .social-icons a:hover img {
-        filter: invert(58%) sepia(46%) saturate(469%) hue-rotate(239deg)
-          brightness(92%) contrast(95%);
+      .social-icons img:hover {
+        filter: invert(100%) sepia(98%) saturate(1000%) hue-rotate(260deg)
+          brightness(120%) contrast(105%);
+        cursor: pointer;
       }
     </style>
 
@@ -203,8 +189,10 @@
         <a
           class="text-1xl text-center"
           style="color: white;"
-        >my life consists of either watching anime, sitting at my desk, playing
-          games or listening to music</a>
+        >
+          my life consists of either watching anime, sitting at my desk, playing
+          games or listening to music
+        </a>
         <span class="w-full h-px bg-white"></span>
         <div
           class="w-full glass rounded-2xl p-[10px] flex flex-row gap-[10px] items-center"
@@ -212,7 +200,7 @@
           <img
             class="w-auto h-[75px] rounded-2xl"
             src="https://discord-info-amber.vercel.app/pfp/417030812010020864"
-            alt="Profile Small"
+            alt="CantThinkOfName"
           />
           <a class="glow shrink-0">CantThinkOfName</a>
           <div class="w-full grow flex flex-row-reverse">
@@ -229,23 +217,14 @@
           <span class="glow text-xl">Find Me Online</span>
           <div class="icons-row">
             <a
-              href="https://discord.gg/fwYzVKN9cx"
+              href="https://steamcommunity.com/id/YOUR_STEAM_ID"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Discord"
+              aria-label="Steam"
               ><img
-                src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/discord.svg"
-                alt="Discord"
-              /></a>
-            <a
-              href="https://twitter.com/YOUR_HANDLE"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Twitter"
-              ><img
-                src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/twitter.svg"
-                alt="Twitter"
-              /></a>
+                src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/steam.svg"
+                alt="Steam"
+            /></a>
             <a
               href="https://github.com/YOUR_USERNAME"
               target="_blank"
@@ -254,16 +233,25 @@
               ><img
                 src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg"
                 alt="GitHub"
-              /></a>
+            /></a>
             <a
-              href="https://instagram.com/YOUR_INSTAGRAM"
+              href="https://twitter.com/YOUR_HANDLE"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Instagram"
+              aria-label="Twitter"
               ><img
-                src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/instagram.svg"
-                alt="Instagram"
-              /></a>
+                src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/twitter.svg"
+                alt="Twitter"
+            /></a>
+            <a
+              href="https://open.spotify.com/user/YOUR_SPOTIFY_ID"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Spotify"
+              ><img
+                src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/spotify.svg"
+                alt="Spotify"
+            /></a>
           </div>
         </div>
       </div>
