@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <title>corpse</title>
+    <title></title>
     <style>
       :root {
         padding: 0;
@@ -50,6 +50,21 @@
         text-shadow: #c8a1cd 2px 2px 20px
       }
     </style>
+    <script>
+      // Typewriter Effect for Document Title
+      const fullTitle = document.title;
+      let index = 0;
+
+      function typeTitle() {
+        if (index <= fullTitle.length) {
+          document.title = fullTitle.substring(0, index);
+          index++;
+          setTimeout(typeTitle, 150); // Adjust typing speed here
+        }
+      }
+
+      window.onload = typeTitle;
+    </script>
   </head>
   <body>
     <div class="w-screen h-screen flex flex-col items-center justify-center">
