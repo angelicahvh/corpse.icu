@@ -11,7 +11,7 @@
       href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet"
     />
-    <title>c</title>
+    <title>corpse killed you</title>
     <style>
       :root {
         padding: 0;
@@ -55,28 +55,34 @@
     </style>
 
     <script>
-      // Typewriter Effect that never fully clears the title
-      const fullTitle = "corpse.skid.larper.lol";
+      const fullTitle = document.title;
       let index = 1;
       let direction = 1; // 1 = typing, -1 = deleting
-      const speed = 150;
+      let delayCounter = 0;
 
-      function typewriterLoop() {
-        document.title = fullTitle.substring(0, index);
+      const speed = 150; // typing speed
+      const delayBeforeDelete = 1000 / speed; // ~6-7 frames
+      const delayBeforeType = 500 / speed;
 
+      setInterval(() => {
         if (direction === 1 && index === fullTitle.length) {
-          direction = -1;
-          setTimeout(typewriterLoop, 1000);
+          delayCounter++;
+          if (delayCounter >= delayBeforeDelete) {
+            direction = -1;
+            delayCounter = 0;
+          }
         } else if (direction === -1 && index === 1) {
-          direction = 1;
-          setTimeout(typewriterLoop, 500);
+          delayCounter++;
+          if (delayCounter >= delayBeforeType) {
+            direction = 1;
+            delayCounter = 0;
+          }
         } else {
           index += direction;
-          setTimeout(typewriterLoop, speed);
         }
-      }
 
-      window.onload = typewriterLoop;
+        document.title = fullTitle.substring(0, index);
+      }, speed);
     </script>
   </head>
   <body>
