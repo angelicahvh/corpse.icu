@@ -3,20 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
-      rel="stylesheet"
-    />
     <title>corpse</title>
     <style>
       :root {
         padding: 0;
         margin: 0;
-        font-family: "Roboto";
+        font-family: "Roboto", sans-serif;
         overflow: hidden;
         color: #fab7be;
         box-sizing: border-box;
@@ -87,26 +81,6 @@
         margin-top: 0.5rem;
       }
 
-      audio::-webkit-media-controls-panel {
-        background-color: transparent;
-      }
-
-      audio::-webkit-media-controls-timeline {
-        background: #fdc8ce;
-        border-radius: 10px;
-      }
-
-      audio::-webkit-media-controls-current-time-display,
-      audio::-webkit-media-controls-time-remaining-display {
-        color: white;
-      }
-
-      audio::-webkit-media-controls-play-button,
-      audio::-webkit-media-controls-volume-slider,
-      audio::-webkit-media-controls-mute-button {
-        filter: invert(1);
-      }
-
       .social-icons {
         margin-top: 30px;
         padding: 20px;
@@ -125,44 +99,27 @@
         height: 48px;
         cursor: pointer;
         filter: invert(94%) sepia(8%) saturate(376%) hue-rotate(305deg) brightness(108%) contrast(96%);
+        transition: transform 0.1s ease;
       }
 
-      .discord-status {
+      .social-icons img:active {
+        transform: scale(0.85);
+      }
+
+      #discord-status-box {
         position: fixed;
         bottom: 20px;
         left: 20px;
-        background: rgba(20, 20, 20, 0.75);
+        background-color: rgba(20, 20, 20, 0.85);
         color: white;
-        padding: 10px 20px;
-        border-radius: 1rem;
+        padding: 10px 15px;
+        border-radius: 0.75rem;
         font-size: 14px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
         z-index: 50;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        font-family: "Roboto", sans-serif;
       }
     </style>
-
-    <script>
-      const fullTitle = document.title;
-      let index = 1;
-      let direction = 1;
-      const speed = 150;
-
-      function typewriterLoop() {
-        document.title = fullTitle.substring(0, index);
-        if (direction === 1 && index === fullTitle.length) {
-          direction = -1;
-          setTimeout(typewriterLoop, 1000);
-        } else if (direction === -1 && index === 1) {
-          direction = 1;
-          setTimeout(typewriterLoop, 500);
-        } else {
-          index += direction;
-          setTimeout(typewriterLoop, speed);
-        }
-      }
-
-      window.onload = typewriterLoop;
-    </script>
   </head>
 
   <body>
@@ -173,6 +130,7 @@
       >
         <a class="glow text-3xl">𝒞𝒪𝑅𝒫𝒮𝐸</a>
       </div>
+
       <div
         class="glass rounded-2xl w-[425px] h-fit flex flex-col items-center p-[25px] gap-[10px]"
       >
@@ -183,13 +141,11 @@
         />
         <a class="glow text-3xl">CORPSE</a>
         <a class="text-2xl">𝐇𝐄𝐑𝐌𝐈𝐓 | 𝐍𝐎𝐋𝐈𝐅𝐄 | 𝐕𝐈𝐊𝐈𝐍𝐆</a>
+        <a class="glow text-2xl"></a>
         <span class="w-full h-px bg-white"></span>
         <a class="text-1xl">¯\_(ツ)_/¯</a>
         <a class="text-1xl" style="color: white;">hello, im corpse</a>
-        <a
-          class="text-1xl text-center"
-          style="color: white;"
-        >
+        <a class="text-1xl text-center" style="color: white;">
           my life consists of either watching anime, sitting at my desk, playing
           games or listening to music
         </a>
@@ -214,44 +170,12 @@
         </div>
       </div>
 
-      <!-- Social Icons With Click Animation -->
+      <!-- Social Buttons -->
       <div class="social-icons">
-        <a
-          href="https://steamcommunity.com/id/captainflames"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Steam"
-          class="transition transform duration-150 active:scale-90"
-        >
-          <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/steam.svg" alt="Steam" />
-        </a>
-        <a
-          href="https://github.com/rabbitcorpse"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="GitHub"
-          class="transition transform duration-150 active:scale-90"
-        >
-          <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" alt="GitHub" />
-        </a>
-        <a
-          href="https://twitter.com/bloodcorpse7"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Twitter"
-          class="transition transform duration-150 active:scale-90"
-        >
-          <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/twitter.svg" alt="Twitter" />
-        </a>
-        <a
-          href="https://open.spotify.com/user/31mf24d6tezrz57jrn57ogv4uguq?si=9ddeec8e8c0a49b5"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Spotify"
-          class="transition transform duration-150 active:scale-90"
-        >
-          <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/spotify.svg" alt="Spotify" />
-        </a>
+        <a href="https://steamcommunity.com/id/captainflames" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/steam.svg" alt="Steam" /></a>
+        <a href="https://github.com/rabbitcorpse" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" alt="GitHub" /></a>
+        <a href="https://twitter.com/bloodcorpse7" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/twitter.svg" alt="Twitter" /></a>
+        <a href="https://open.spotify.com/user/31mf24d6tezrz57jrn57ogv4uguq?si=9ddeec8e8c0a49b5" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/spotify.svg" alt="Spotify" /></a>
       </div>
 
       <!-- Audio Player -->
@@ -267,31 +191,52 @@
         </div>
       </div>
 
-      <!-- Discord Status (Bottom Left) -->
-      <div class="discord-status" id="discord-status">Loading Discord status...</div>
+      <!-- Discord Status -->
+      <div id="discord-status-box">
+        <span id="discord-status">Loading Discord status...</span>
+      </div>
     </div>
 
     <script>
-      const cover = $("#cover");
-      cover.on("click", function () {
-        cover.hide(200);
-      });
-
-      // Fetch Discord Status
-      fetch("https://discord-info-amber.vercel.app/status/417030812010020864")
+      // Discord status using Lanyard API
+      fetch("https://api.lanyard.rest/v1/users/417030812010020864")
         .then((res) => res.json())
         .then((data) => {
-          const statusDiv = document.getElementById("discord-status");
-          if (data.status) {
-            statusDiv.textContent = `Status: ${data.status.toUpperCase()}`;
-          } else {
-            statusDiv.textContent = "Status: Unknown";
-          }
+          const status = data?.data?.discord_status;
+          const statusText = status
+            ? `Status: ${status.charAt(0).toUpperCase() + status.slice(1)}`
+            : "Status: Unknown";
+          document.getElementById("discord-status").textContent = statusText;
         })
-        .catch(() => {
-          document.getElementById(417030812010020864).textContent =
-            "Status: Unavailable";
+        .catch((error) => {
+          document.getElementById("discord-status").textContent = "Status: Unavailable";
+          console.error("Failed to load Discord status", error);
         });
+
+      // Title typing effect
+      const fullTitle = document.title;
+      let index = 1;
+      let direction = 1;
+      const speed = 150;
+      function typewriterLoop() {
+        document.title = fullTitle.substring(0, index);
+        if (direction === 1 && index === fullTitle.length) {
+          direction = -1;
+          setTimeout(typewriterLoop, 1000);
+        } else if (direction === -1 && index === 1) {
+          direction = 1;
+          setTimeout(typewriterLoop, 500);
+        } else {
+          index += direction;
+          setTimeout(typewriterLoop, speed);
+        }
+      }
+      window.onload = typewriterLoop;
+
+      // Cover click hide
+      $("#cover").on("click", function () {
+        $(this).fadeOut(200);
+      });
     </script>
   </body>
 </html>
