@@ -107,7 +107,6 @@
         filter: invert(1);
       }
 
-      /* Social Buttons Styles */
       .social-icons {
         margin-top: 30px;
         padding: 20px;
@@ -125,12 +124,20 @@
         width: 48px;
         height: 48px;
         cursor: pointer;
-        /* Baby pink color filter */
         filter: invert(94%) sepia(8%) saturate(376%) hue-rotate(305deg) brightness(108%) contrast(96%);
       }
 
-      .social-icons img:hover {
-        filter: invert(94%) sepia(8%) saturate(376%) hue-rotate(305deg) brightness(108%) contrast(96%);
+      .discord-status {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        background: rgba(20, 20, 20, 0.75);
+        color: white;
+        padding: 10px 20px;
+        border-radius: 1rem;
+        font-size: 14px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        z-index: 50;
       }
     </style>
 
@@ -176,7 +183,6 @@
         />
         <a class="glow text-3xl">CORPSE</a>
         <a class="text-2xl">𝐇𝐄𝐑𝐌𝐈𝐓 | 𝐍𝐎𝐋𝐈𝐅𝐄 | 𝐕𝐈𝐊𝐈𝐍𝐆</a>
-        <a class="glow text-2xl"></a>
         <span class="w-full h-px bg-white"></span>
         <a class="text-1xl">¯\_(ツ)_/¯</a>
         <a class="text-1xl" style="color: white;">hello, im corpse</a>
@@ -208,47 +214,47 @@
         </div>
       </div>
 
-      <!-- Social Buttons Section Separate Box -->
+      <!-- Social Icons With Click Animation -->
       <div class="social-icons">
         <a
           href="https://steamcommunity.com/id/captainflames"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Steam"
-        ><img
-            src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/steam.svg"
-            alt="Steam"
-        /></a>
+          class="transition transform duration-150 active:scale-90"
+        >
+          <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/steam.svg" alt="Steam" />
+        </a>
         <a
           href="https://github.com/rabbitcorpse"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="GitHub"
-        ><img
-            src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg"
-            alt="GitHub"
-        /></a>
+          class="transition transform duration-150 active:scale-90"
+        >
+          <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" alt="GitHub" />
+        </a>
         <a
           href="https://twitter.com/bloodcorpse7"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Twitter"
-        ><img
-            src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/twitter.svg"
-            alt="Twitter"
-        /></a>
+          class="transition transform duration-150 active:scale-90"
+        >
+          <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/twitter.svg" alt="Twitter" />
+        </a>
         <a
           href="https://open.spotify.com/user/31mf24d6tezrz57jrn57ogv4uguq?si=9ddeec8e8c0a49b5"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Spotify"
-        ><img
-            src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/spotify.svg"
-            alt="Spotify"
-        /></a>
+          class="transition transform duration-150 active:scale-90"
+        >
+          <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/spotify.svg" alt="Spotify" />
+        </a>
       </div>
 
-      <!-- Custom Audio Player -->
+      <!-- Audio Player -->
       <div class="audio-player glass">
         <img src="album.png" alt="Album Art" />
         <div class="info">
@@ -260,6 +266,9 @@
           </audio>
         </div>
       </div>
+
+      <!-- Discord Status (Bottom Left) -->
+      <div class="discord-status" id="discord-status">Loading Discord status...</div>
     </div>
 
     <script>
@@ -267,6 +276,22 @@
       cover.on("click", function () {
         cover.hide(200);
       });
+
+      // Fetch Discord Status
+      fetch("https://discord-info-amber.vercel.app/status/417030812010020864")
+        .then((res) => res.json())
+        .then((data) => {
+          const statusDiv = document.getElementById("discord-status");
+          if (data.status) {
+            statusDiv.textContent = `Status: ${data.status.toUpperCase()}`;
+          } else {
+            statusDiv.textContent = "Status: Unknown";
+          }
+        })
+        .catch(() => {
+          document.getElementById("discord-status").textContent =
+            "Status: Unavailable";
+        });
     </script>
   </body>
 </html>
