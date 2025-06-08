@@ -131,7 +131,6 @@
         filter: invert(94%) sepia(8%) saturate(376%) hue-rotate(305deg) brightness(108%) contrast(96%);
       }
 
-      /* Click animation */
       @keyframes click-pop {
         0% {
           transform: scale(1);
@@ -146,26 +145,6 @@
 
       .click-animate {
         animation: click-pop 0.3s ease;
-      }
-
-      /* Cursor Trail */
-      .trail {
-        position: fixed;
-        pointer-events: none;
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background-color: #fdc8ce;
-        opacity: 0.8;
-        z-index: 9999;
-        animation: fadeOut 0.6s forwards;
-      }
-
-      @keyframes fadeOut {
-        to {
-          opacity: 0;
-          transform: scale(1.5);
-        }
       }
     </style>
 
@@ -215,10 +194,7 @@
         <span class="w-full h-px bg-white"></span>
         <a class="text-1xl">¯\_(ツ)_/¯</a>
         <a class="text-1xl" style="color: white;">hello, im corpse</a>
-        <a
-          class="text-1xl text-center"
-          style="color: white;"
-        >
+        <a class="text-1xl text-center" style="color: white;">
           my life consists of either watching anime, sitting at my desk, playing
           games or listening to music
         </a>
@@ -243,7 +219,6 @@
         </div>
       </div>
 
-      <!-- Social Buttons Section -->
       <div class="social-icons">
         <a href="https://steamcommunity.com/id/captainflames" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/steam.svg" alt="Steam" /></a>
         <a href="https://github.com/rabbitcorpse" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" alt="GitHub" /></a>
@@ -251,7 +226,6 @@
         <a href="https://open.spotify.com/user/31mf24d6tezrz57jrn57ogv4uguq?si=9ddeec8e8c0a49b5" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/spotify.svg" alt="Spotify" /></a>
       </div>
 
-      <!-- Audio Player -->
       <div class="audio-player glass">
         <img src="album.png" alt="Album Art" />
         <div class="info">
@@ -265,6 +239,26 @@
       </div>
     </div>
 
+    <!-- Unique Visitor Counter -->
+    <div
+      id="visitor-count"
+      style="
+        position: fixed;
+        bottom: 10px;
+        left: 10px;
+        background: rgba(20, 20, 20, 0.75);
+        color: white;
+        padding: 8px 14px;
+        border-radius: 12px;
+        font-family: Roboto, sans-serif;
+        font-size: 14px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        z-index: 9999;
+      "
+    >
+      Visitors: ...
+    </div>
+
     <script>
       // Hide cover on click
       const cover = $("#cover");
@@ -272,7 +266,7 @@
         cover.hide(200);
       });
 
-      // Add click animation to buttons and icons
+      // Click animation
       function addClickAnimation(selector) {
         document.querySelectorAll(selector).forEach((el) => {
           el.addEventListener("click", () => {
@@ -286,15 +280,29 @@
       addClickAnimation(".button");
       addClickAnimation(".social-icons img");
 
-      // Cursor trail
-      document.addEventListener("mousemove", function (e) {
-        const dot = document.createElement("div");
-        dot.className = "trail";
-        dot.style.left = e.pageX + "px";
-        dot.style.top = e.pageY + "px";
-        document.body.appendChild(dot);
-        setTimeout(() => dot.remove(), 600);
-      });
+      // Unique Visitor Counter
+      const COUNT_KEY = "corpse-visitor-tracked";
+      const API_URL = "https://api.countapi.xyz";
+      const NAMESPACE = "corpse-home";
+
+      function updateCounter() {
+        fetch(`${API_URL}/get/${NAMESPACE}/visitors`)
+          .then(res => res.json())
+          .then(data => {
+            document.getElementById("visitor-count").textContent = `Visitors: ${data.value}`;
+          });
+      }
+
+      if (!localStorage.getItem(COUNT_KEY)) {
+        fetch(`${API_URL}/hit/${NAMESPACE}/visitors`)
+          .then(res => res.json())
+          .then(data => {
+            localStorage.setItem(COUNT_KEY, "true");
+            document.getElementById("visitor-count").textContent = `Visitors: ${data.value}`;
+          });
+      } else {
+        updateCounter();
+      }
     </script>
   </body>
 </html>
