@@ -87,26 +87,6 @@
         margin-top: 0.5rem;
       }
 
-      audio::-webkit-media-controls-panel {
-        background-color: transparent;
-      }
-
-      audio::-webkit-media-controls-timeline {
-        background: #fdc8ce;
-        border-radius: 10px;
-      }
-
-      audio::-webkit-media-controls-current-time-display,
-      audio::-webkit-media-controls-time-remaining-display {
-        color: white;
-      }
-
-      audio::-webkit-media-controls-play-button,
-      audio::-webkit-media-controls-volume-slider,
-      audio::-webkit-media-controls-mute-button {
-        filter: invert(1);
-      }
-
       .social-icons {
         margin-top: 30px;
         padding: 20px;
@@ -131,20 +111,17 @@
         filter: invert(94%) sepia(8%) saturate(376%) hue-rotate(305deg) brightness(108%) contrast(96%);
       }
 
-      @keyframes click-pop {
-        0% {
-          transform: scale(1);
-        }
-        50% {
-          transform: scale(0.85);
-        }
-        100% {
-          transform: scale(1);
-        }
-      }
-
-      .click-animate {
-        animation: click-pop 0.3s ease;
+      .visitor-counter {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        background-color: rgba(20, 20, 20, 0.85);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: white;
+        padding: 0.6rem 1rem;
+        border-radius: 1rem;
+        font-size: 14px;
+        z-index: 50;
       }
     </style>
 
@@ -180,45 +157,29 @@
       >
         <a class="glow text-3xl">𝒞𝒪𝑅𝒫𝒮𝐸</a>
       </div>
-      <div
-        class="glass rounded-2xl w-[425px] h-fit flex flex-col items-center p-[25px] gap-[10px]"
-      >
-        <img
-          class="w-auto h-[125px] rounded-2xl"
-          src="https://discord-info-amber.vercel.app/pfp/417030812010020864"
-          alt="Profile"
-        />
+
+      <div class="glass rounded-2xl w-[425px] h-fit flex flex-col items-center p-[25px] gap-[10px]">
+        <img class="w-auto h-[125px] rounded-2xl" src="https://discord-info-amber.vercel.app/pfp/417030812010020864" alt="Profile" />
         <a class="glow text-3xl">CORPSE</a>
         <a class="text-2xl">𝐇𝐄𝐑𝐌𝐈𝐓 | 𝐍𝐎𝐋𝐈𝐅𝐄 | 𝐕𝐈𝐊𝐈𝐍𝐆</a>
-        <a class="glow text-2xl"></a>
         <span class="w-full h-px bg-white"></span>
         <a class="text-1xl">¯\_(ツ)_/¯</a>
         <a class="text-1xl" style="color: white;">hello, im corpse</a>
         <a class="text-1xl text-center" style="color: white;">
-          my life consists of either watching anime, sitting at my desk, playing
-          games or listening to music
+          my life consists of either watching anime, sitting at my desk, playing games or listening to music
         </a>
         <span class="w-full h-px bg-white"></span>
         <a class="glow text-2xl">My Discord Server</a>
-        <div
-          class="w-full glass rounded-2xl p-[10px] flex flex-row gap-[10px] items-center"
-        >
-          <img
-            class="w-auto h-[75px] rounded-2xl"
-            src="discord.png"
-            alt="CantThinkOfName"
-          />
+        <div class="w-full glass rounded-2xl p-[10px] flex flex-row gap-[10px] items-center">
+          <img class="w-auto h-[75px] rounded-2xl" src="discord.png" alt="CantThinkOfName" />
           <a class="glow shrink-0">CantThinkOfName</a>
           <div class="w-full grow flex flex-row-reverse">
-            <a
-              href="https://discord.gg/fwYzVKN9cx"
-              class="glow cursor-pointer rounded-md button py-[6px]"
-              >ᴊᴏɪɴ :3</a
-            >
+            <a href="https://discord.gg/fwYzVKN9cx" class="glow cursor-pointer rounded-md button py-[6px]">ᴊᴏɪɴ :3</a>
           </div>
         </div>
       </div>
 
+      <!-- Social Buttons -->
       <div class="social-icons">
         <a href="https://steamcommunity.com/id/captainflames" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/steam.svg" alt="Steam" /></a>
         <a href="https://github.com/rabbitcorpse" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" alt="GitHub" /></a>
@@ -226,6 +187,7 @@
         <a href="https://open.spotify.com/user/31mf24d6tezrz57jrn57ogv4uguq?si=9ddeec8e8c0a49b5" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/spotify.svg" alt="Spotify" /></a>
       </div>
 
+      <!-- Audio Player -->
       <div class="audio-player glass">
         <img src="album.png" alt="Album Art" />
         <div class="info">
@@ -237,26 +199,9 @@
           </audio>
         </div>
       </div>
-    </div>
 
-    <!-- Unique Visitor Counter -->
-    <div
-      id="visitor-count"
-      style="
-        position: fixed;
-        bottom: 10px;
-        left: 10px;
-        background: rgba(20, 20, 20, 0.75);
-        color: white;
-        padding: 8px 14px;
-        border-radius: 12px;
-        font-family: Roboto, sans-serif;
-        font-size: 14px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        z-index: 9999;
-      "
-    >
-      Visitors: ...
+      <!-- Visitor Counter -->
+      <div class="visitor-counter" id="visitor-count">Visitors: ...</div>
     </div>
 
     <script>
@@ -266,7 +211,7 @@
         cover.hide(200);
       });
 
-      // Click animation
+      // Add click animation to buttons and icons
       function addClickAnimation(selector) {
         document.querySelectorAll(selector).forEach((el) => {
           el.addEventListener("click", () => {
@@ -280,29 +225,39 @@
       addClickAnimation(".button");
       addClickAnimation(".social-icons img");
 
-      // Unique Visitor Counter
+      // Visitor counter
       const COUNT_KEY = "corpse-visitor-tracked";
       const API_URL = "https://api.countapi.xyz";
       const NAMESPACE = "corpse-home";
+      const KEY = "visitors";
 
-      function updateCounter() {
-        fetch(`${API_URL}/get/${NAMESPACE}/visitors`)
-          .then(res => res.json())
-          .then(data => {
-            document.getElementById("visitor-count").textContent = `Visitors: ${data.value}`;
-          });
+      function updateCounter(value) {
+        document.getElementById("visitor-count").textContent = `Visitors: ${value}`;
       }
 
-      if (!localStorage.getItem(COUNT_KEY)) {
-        fetch(`${API_URL}/hit/${NAMESPACE}/visitors`)
-          .then(res => res.json())
-          .then(data => {
-            localStorage.setItem(COUNT_KEY, "true");
-            document.getElementById("visitor-count").textContent = `Visitors: ${data.value}`;
-          });
-      } else {
-        updateCounter();
+      async function ensureKeyExists() {
+        const res = await fetch(`${API_URL}/get/${NAMESPACE}/${KEY}`);
+        if (res.ok) {
+          const data = await res.json();
+          updateCounter(data.value);
+        } else {
+          await fetch(`${API_URL}/create?namespace=${NAMESPACE}&key=${KEY}&value=1`);
+          updateCounter(1);
+        }
       }
+
+      async function handleVisitor() {
+        if (!localStorage.getItem(COUNT_KEY)) {
+          const res = await fetch(`${API_URL}/hit/${NAMESPACE}/${KEY}`);
+          const data = await res.json();
+          localStorage.setItem(COUNT_KEY, "true");
+          updateCounter(data.value);
+        } else {
+          await ensureKeyExists();
+        }
+      }
+
+      handleVisitor();
     </script>
   </body>
 </html>
