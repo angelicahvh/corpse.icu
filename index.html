@@ -3,9 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="particles.min.js"></script> <!-- particles.js -->
+    <script src="particles.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -32,7 +33,7 @@
       }
 
       .glass {
-        backdrop-filter: blur(5px) saturate(180%);
+        backdrop-filter: blur(10px) saturate(180%);
         background-color: rgba(20, 20, 20, 0.75);
         border: 1px solid rgba(255, 255, 255, 0.1);
       }
@@ -148,7 +149,6 @@
         animation: click-pop 0.3s ease;
       }
 
-      /* NEW for particles.js */
       #particles-js {
         position: fixed;
         width: 100%;
@@ -189,12 +189,6 @@
 
     <div class="w-screen h-screen flex flex-col items-center justify-center">
       <div
-        id="cover"
-        class="cursor-pointer fixed w-full h-full z-9999 bg-black flex flex-col items-center justify-center"
-      >
-        <a class="glow text-3xl">𝒞𝒪𝑅𝒫𝒮𝐸</a>
-      </div>
-      <div
         class="glass rounded-2xl w-[425px] h-fit flex flex-col items-center p-[25px] gap-[10px]"
       >
         <img
@@ -207,17 +201,12 @@
         <span class="w-full h-px bg-white"></span>
         <a class="text-1xl">its pronounced rip-lum</a>
         <a class="text-1xl" style="color: #87b7e0;">hello, im rwplm</a>
-        <a
-          class="text-1xl text-center"
-          style="color: #87b7e0;"
-        >
+        <a class="text-1xl text-center" style="color: #87b7e0;">
           i am a hermit and a fan of fantasy and scifi films such as LOTR, TheDarkCrystal, StarWars etc. i also play a range of games and listen to alot of music.
         </a>
         <span class="w-full h-px bg-white"></span>
         <a class="glow text-2xl">My Discord Server</a>
-        <div
-          class="w-full glass rounded-2xl p-[10px] flex flex-row gap-[10px] items-center"
-        >
+        <div class="w-full glass rounded-2xl p-[10px] flex flex-row gap-[10px] items-center">
           <img
             class="w-auto h-[75px] rounded-2xl"
             src="discord.png"
@@ -248,7 +237,7 @@
         <div class="info">
           <strong class="text-sm">Scourge Of Iron</strong>
           <span class="text-xs">Cannibal Corpse</span>
-          <audio id="bg-audio" controls autoplay muted>
+          <audio id="bg-audio" controls autoplay>
             <source src="audio.mp3" type="audio/mp3" />
             Your browser does not support the audio element.
           </audio>
@@ -260,18 +249,6 @@
     <script>
       particlesJS.load('particles-js', 'particles.json', function () {
         console.log('particles.js config loaded');
-      });
-    </script>
-
-    <script>
-      const cover = $("#cover");
-      cover.on("click", function () {
-        cover.hide(200);
-        const audio = document.getElementById("bg-audio");
-        if (audio) {
-          audio.muted = false;
-          audio.play().catch((e) => console.warn("Autoplay failed:", e));
-        }
       });
 
       function addClickAnimation(selector) {
