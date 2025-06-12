@@ -36,7 +36,6 @@
         backdrop-filter: blur(10px) saturate(180%);
         background-color: rgba(20, 20, 20, 0.75);
         border: 2px solid rgba(255, 255, 255, 0.6);
-        box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
       }
 
       .button {
@@ -60,7 +59,7 @@
         position: fixed;
         bottom: 20px;
         right: 20px;
-        background: rgba(20, 20, 20, 0.85);
+        background: rgba(20, 20, 20, 0.75);
         border: 2px solid rgba(255, 255, 255, 0.6);
         border-radius: 1rem;
         padding: 1rem;
@@ -70,6 +69,7 @@
         color: white;
         width: 300px;
         z-index: 50;
+        backdrop-filter: blur(10px) saturate(180%);
       }
 
       .audio-player img {
@@ -111,7 +111,7 @@
       }
 
       .social-icons {
-        margin-top: 30px;
+        margin-top: 10px; /* reduced from 30px */
         padding: 20px;
         width: 425px;
         display: flex;
@@ -120,6 +120,8 @@
         border: 2px solid rgba(255, 255, 255, 0.6);
         border-radius: 1rem;
         box-shadow: 0 8px 24px rgba(164, 161, 205, 0.3);
+        backdrop-filter: blur(10px) saturate(180%);
+        background-color: rgba(20, 20, 20, 0.75);
       }
 
       .social-icons img {
@@ -224,7 +226,7 @@
       </div>
 
       <!-- Social Buttons -->
-      <div class="social-icons glass">
+      <div class="social-icons">
         <a href="https://steamcommunity.com/id/captainflames" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/steam.svg" alt="Steam" /></a>
         <a href="https://github.com/rabbitcorpse" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" alt="GitHub" /></a>
         <a href="https://twitter.com/bloodcorpse7" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/twitter.svg" alt="Twitter" /></a>
