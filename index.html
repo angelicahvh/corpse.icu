@@ -3,33 +3,41 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>corpse</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet"
     />
-    <title>corpse</title>
     <style>
       :root {
-        padding: 0;
-        margin: 0;
-        font-family: "Roboto";
+        font-family: "Roboto", sans-serif;
         overflow: hidden;
         color: #838ac9;
         box-sizing: border-box;
       }
 
       body {
-        background-color: white;
+        margin: 0;
+        background-color: #141414;
         background-image: url(bg.png);
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
+      }
+
+      #particles-js {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: -1;
       }
 
       .glass {
@@ -41,10 +49,9 @@
       .button {
         display: flex;
         align-items: center;
-        padding-left: 12px;
-        padding-right: 12px;
-        transition-duration: 0.2s;
+        padding: 6px 12px;
         border: 1px solid white;
+        transition: border-color 0.2s;
       }
 
       .button:hover {
@@ -69,7 +76,6 @@
         color: white;
         width: 300px;
         z-index: 50;
-        backdrop-filter: blur(10px) saturate(180%);
       }
 
       .audio-player img {
@@ -90,28 +96,8 @@
         margin-top: 0.5rem;
       }
 
-      audio::-webkit-media-controls-panel {
-        background-color: transparent;
-      }
-
-      audio::-webkit-media-controls-timeline {
-        background: #fdc8ce;
-        border-radius: 10px;
-      }
-
-      audio::-webkit-media-controls-current-time-display,
-      audio::-webkit-media-controls-time-remaining-display {
-        color: white;
-      }
-
-      audio::-webkit-media-controls-play-button,
-      audio::-webkit-media-controls-volume-slider,
-      audio::-webkit-media-controls-mute-button {
-        filter: invert(1);
-      }
-
       .social-icons {
-        margin-top: 10px; /* reduced from 30px */
+        margin-top: 10px;
         padding: 20px;
         width: 425px;
         display: flex;
@@ -128,11 +114,12 @@
         width: 48px;
         height: 48px;
         cursor: pointer;
-        filter: invert(94%) sepia(8%) saturate(376%) hue-rotate(305deg) brightness(108%) contrast(96%);
+        filter: invert(94%) sepia(8%) saturate(376%) hue-rotate(305deg)
+          brightness(108%) contrast(96%);
       }
 
-      .social-icons img:hover {
-        filter: invert(94%) sepia(8%) saturate(376%) hue-rotate(305deg) brightness(108%) contrast(96%);
+      .click-animate {
+        animation: click-pop 0.3s ease;
       }
 
       @keyframes click-pop {
@@ -147,17 +134,16 @@
         }
       }
 
-      .click-animate {
-        animation: click-pop 0.3s ease;
-      }
-
-      #particles-js {
+      #cover {
         position: fixed;
         width: 100%;
         height: 100%;
-        top: 0;
-        left: 0;
-        z-index: -1;
+        background: black;
+        z-index: 9999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
       }
     </style>
 
@@ -186,13 +172,15 @@
   </head>
 
   <body>
-    <!-- PARTICLES BACKGROUND -->
     <div id="particles-js"></div>
 
+    <!-- Click-to-start overlay -->
+    <div id="cover">
+      <a class="glow text-3xl">𝒞𝒪𝑅𝒫𝒮𝐸</a>
+    </div>
+
     <div class="w-screen h-screen flex flex-col items-center justify-center">
-      <div
-        class="glass rounded-2xl w-[425px] h-fit flex flex-col items-center p-[25px] gap-[10px]"
-      >
+      <div class="glass rounded-2xl w-[425px] h-fit flex flex-col items-center p-[25px] gap-[10px]">
         <img
           class="w-auto h-[125px] rounded-2xl"
           src="https://discord-info-amber.vercel.app/pfp/417030812010020864"
@@ -209,23 +197,14 @@
         <span class="w-full h-px bg-white"></span>
         <a class="glow text-2xl">My Discord Server</a>
         <div class="w-full glass rounded-2xl p-[10px] flex flex-row gap-[10px] items-center">
-          <img
-            class="w-auto h-[75px] rounded-2xl"
-            src="discord.png"
-            alt="CantThinkOfName"
-          />
+          <img class="w-auto h-[75px] rounded-2xl" src="discord.png" alt="CantThinkOfName" />
           <a class="glow shrink-0">CantThinkOfName</a>
           <div class="w-full grow flex flex-row-reverse">
-            <a
-              href="https://discord.gg/fwYzVKN9cx"
-              class="glow cursor-pointer rounded-md button py-[6px]"
-              >ᴊᴏɪɴ :3</a
-            >
+            <a href="https://discord.gg/fwYzVKN9cx" class="glow cursor-pointer rounded-md button">ᴊᴏɪɴ :3</a>
           </div>
         </div>
       </div>
 
-      <!-- Social Buttons -->
       <div class="social-icons">
         <a href="https://steamcommunity.com/id/captainflames" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/steam.svg" alt="Steam" /></a>
         <a href="https://github.com/rabbitcorpse" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" alt="GitHub" /></a>
@@ -233,13 +212,12 @@
         <a href="https://open.spotify.com/user/31mf24d6tezrz57jrn57ogv4uguq?si=9ddeec8e8c0a49b5" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/spotify.svg" alt="Spotify" /></a>
       </div>
 
-      <!-- Audio Player -->
       <div class="audio-player glass">
         <img src="album.png" alt="Album Art" />
         <div class="info">
           <strong class="text-sm">Scourge Of Iron</strong>
           <span class="text-xs">Cannibal Corpse</span>
-          <audio id="bg-audio" controls autoplay>
+          <audio id="bg-audio" controls autoplay muted>
             <source src="audio.mp3" type="audio/mp3" />
             Your browser does not support the audio element.
           </audio>
@@ -247,12 +225,19 @@
       </div>
     </div>
 
-    <!-- Particle Config Loader -->
     <script>
-      particlesJS.load('particles-js', 'particles.json', function () {
-        console.log('particles.js config loaded');
+      // Cover click handler
+      const cover = $("#cover");
+      cover.on("click", function () {
+        cover.fadeOut(300);
+        const audio = document.getElementById("bg-audio");
+        if (audio) {
+          audio.muted = false;
+          audio.play().catch((e) => console.warn("Autoplay failed:", e));
+        }
       });
 
+      // Click animation
       function addClickAnimation(selector) {
         document.querySelectorAll(selector).forEach((el) => {
           el.addEventListener("click", () => {
@@ -265,6 +250,46 @@
 
       addClickAnimation(".button");
       addClickAnimation(".social-icons img");
+
+      // Particles config
+      particlesJS("particles-js", {
+        particles: {
+          number: { value: 80, density: { enable: true, value_area: 800 } },
+          color: { value: "#838ac9" },
+          shape: { type: "circle" },
+          opacity: { value: 0.5 },
+          size: { value: 3, random: true },
+          line_linked: {
+            enable: true,
+            distance: 150,
+            color: "#838ac9",
+            opacity: 0.4,
+            width: 1,
+          },
+          move: {
+            enable: true,
+            speed: 6,
+            direction: "none",
+            random: false,
+            straight: false,
+            out_mode: "out",
+            bounce: false,
+          },
+        },
+        interactivity: {
+          detect_on: "canvas",
+          events: {
+            onhover: { enable: true, mode: "grab" },
+            onclick: { enable: true, mode: "push" },
+            resize: true,
+          },
+          modes: {
+            grab: { distance: 140, line_linked: { opacity: 1 } },
+            push: { particles_nb: 4 },
+          },
+        },
+        retina_detect: true,
+      });
     </script>
   </body>
 </html>
