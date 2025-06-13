@@ -7,7 +7,6 @@
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -18,25 +17,23 @@
       :root {
         font-family: "Roboto", sans-serif;
         overflow: hidden;
-        color: #c3c4da;
+        color: #838ac9;
         box-sizing: border-box;
       }
 
       body {
         margin: 0;
-        background-color: #141414;
-        background-image: url("bg.png");
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
+        overflow: hidden;
       }
 
-      #particles-js {
+      /* Video background */
+      #bg-video {
         position: fixed;
-        width: 100%;
-        height: 100%;
         top: 0;
         left: 0;
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover;
         z-index: -1;
       }
 
@@ -134,7 +131,6 @@
     </style>
 
     <script>
-      // Typewriter effect for title
       const fullTitle = document.title;
       let index = 1;
       let direction = 1;
@@ -159,7 +155,11 @@
   </head>
 
   <body>
-    <div id="particles-js"></div>
+    <!-- 🎞️ Fullscreen Background Video -->
+    <video id="bg-video" autoplay muted loop playsinline>
+      <source src="background.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
 
     <div class="w-screen h-screen flex flex-col items-center justify-center">
       <div class="glass rounded-2xl w-[425px] h-fit flex flex-col items-center p-[25px] gap-[10px]">
@@ -172,8 +172,8 @@
         <a class="text-2xl">𝐇𝐄𝐑𝐌𝐈𝐓 | 𝐍𝐎𝐋𝐈𝐅𝐄 | 𝐕𝐈𝐊𝐈𝐍𝐆</a>
         <span class="w-full h-px bg-white"></span>
         <a class="text-1xl">its pronounced rip-lum</a>
-        <a class="text-1xl" style="color: #c3d1da;">hello, im rwplm</a>
-        <a class="text-1xl text-center" style="color: #c3d1da;">
+        <a class="text-1xl" style="color: #87b7e0;">hello, im rwplm</a>
+        <a class="text-1xl text-center" style="color: #87b7e0;">
           i am a hermit and a fan of fantasy and scifi films such as LOTR, TheDarkCrystal, StarWars etc. i also play a range of games and listen to alot of music.
         </a>
         <span class="w-full h-px bg-white"></span>
@@ -220,45 +220,6 @@
 
       addClickAnimation(".button");
       addClickAnimation(".social-icons img");
-
-      particlesJS("particles-js", {
-        particles: {
-          number: { value: 80, density: { enable: true, value_area: 800 } },
-          color: { value: "#ffffff" },
-          shape: { type: "circle" },
-          opacity: { value: 0.5 },
-          size: { value: 3, random: true },
-          line_linked: {
-            enable: true,
-            distance: 150,
-            color: "#ffffff",
-            opacity: 0.4,
-            width: 1,
-          },
-          move: {
-            enable: true,
-            speed: 6,
-            direction: "none",
-            random: false,
-            straight: false,
-            out_mode: "out",
-            bounce: false,
-          },
-        },
-        interactivity: {
-          detect_on: "canvas",
-          events: {
-            onhover: { enable: true, mode: "grab" },
-            onclick: { enable: true, mode: "push" },
-            resize: true,
-          },
-          modes: {
-            grab: { distance: 140, line_linked: { opacity: 1 } },
-            push: { particles_nb: 4 },
-          },
-        },
-        retina_detect: true,
-      });
     </script>
   </body>
 </html>
