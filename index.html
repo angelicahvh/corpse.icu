@@ -104,9 +104,9 @@
         gap: 24px;
         border: 2px solid rgba(255, 255, 255, 0.6);
         border-radius: 1rem;
-        box-shadow: 0 8px 24px rgba(164, 161, 205, 0.3);
         backdrop-filter: blur(10px) saturate(180%);
         background-color: rgba(20, 20, 20, 0.75);
+        /* Removed box-shadow */
       }
 
       .social-icons img {
@@ -229,41 +229,4 @@
       particlesJS("particles-js", {
         particles: {
           number: { value: 80, density: { enable: true, value_area: 800 } },
-          color: { value: "#ffffff" }, // White particles
-          shape: { type: "circle" },
-          opacity: { value: 0.5 },
-          size: { value: 3, random: true },
-          line_linked: {
-            enable: true,
-            distance: 150,
-            color: "#ffffff", // White lines
-            opacity: 0.4,
-            width: 1,
-          },
-          move: {
-            enable: true,
-            speed: 6,
-            direction: "none",
-            random: false,
-            straight: false,
-            out_mode: "out",
-            bounce: false,
-          },
-        },
-        interactivity: {
-          detect_on: "canvas",
-          events: {
-            onhover: { enable: true, mode: "grab" },
-            onclick: { enable: true, mode: "push" },
-            resize: true,
-          },
-          modes: {
-            grab: { distance: 140, line_linked: { opacity: 1 } },
-            push: { particles_nb: 4 },
-          },
-        },
-        retina_detect: true,
-      });
-    </script>
-  </body>
-</html>
+          color:
