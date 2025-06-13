@@ -114,8 +114,7 @@
         width: 48px;
         height: 48px;
         cursor: pointer;
-        filter: invert(94%) sepia(8%) saturate(376%) hue-rotate(305deg)
-          brightness(108%) contrast(96%);
+        filter: invert(100%);
       }
 
       .click-animate {
@@ -132,18 +131,6 @@
         100% {
           transform: scale(1);
         }
-      }
-
-      #cover {
-        position: fixed;
-        width: 100%;
-        height: 100%;
-        background: black;
-        z-index: 9999;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
       }
     </style>
 
@@ -173,11 +160,6 @@
 
   <body>
     <div id="particles-js"></div>
-
-    <!-- Click-to-start overlay -->
-    <div id="cover">
-      <a class="glow text-3xl">𝒞𝒪𝑅𝒫𝒮𝐸</a>
-    </div>
 
     <div class="w-screen h-screen flex flex-col items-center justify-center">
       <div class="glass rounded-2xl w-[425px] h-fit flex flex-col items-center p-[25px] gap-[10px]">
@@ -217,7 +199,7 @@
         <div class="info">
           <strong class="text-sm">Scourge Of Iron</strong>
           <span class="text-xs">Cannibal Corpse</span>
-          <audio id="bg-audio" controls autoplay muted>
+          <audio id="bg-audio" controls autoplay>
             <source src="audio.mp3" type="audio/mp3" />
             Your browser does not support the audio element.
           </audio>
@@ -226,18 +208,6 @@
     </div>
 
     <script>
-      // Cover click handler
-      const cover = $("#cover");
-      cover.on("click", function () {
-        cover.fadeOut(300);
-        const audio = document.getElementById("bg-audio");
-        if (audio) {
-          audio.muted = false;
-          audio.play().catch((e) => console.warn("Autoplay failed:", e));
-        }
-      });
-
-      // Click animation
       function addClickAnimation(selector) {
         document.querySelectorAll(selector).forEach((el) => {
           el.addEventListener("click", () => {
@@ -251,18 +221,17 @@
       addClickAnimation(".button");
       addClickAnimation(".social-icons img");
 
-      // Particles config
       particlesJS("particles-js", {
         particles: {
           number: { value: 80, density: { enable: true, value_area: 800 } },
-          color: { value: "#838ac9" },
+          color: { value: "#ffffff" }, // White particles
           shape: { type: "circle" },
           opacity: { value: 0.5 },
           size: { value: 3, random: true },
           line_linked: {
             enable: true,
             distance: 150,
-            color: "#838ac9",
+            color: "#ffffff", // White lines
             opacity: 0.4,
             width: 1,
           },
