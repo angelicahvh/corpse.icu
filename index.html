@@ -7,6 +7,7 @@
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -23,17 +24,19 @@
 
       body {
         margin: 0;
-        overflow: hidden;
+        background-color: #141414;
+        background-image: url("bg.png");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
       }
 
-      /* Video background */
-      #bg-video {
+      #particles-js {
         position: fixed;
+        width: 100%;
+        height: 100%;
         top: 0;
         left: 0;
-        width: 100vw;
-        height: 100vh;
-        object-fit: cover;
         z-index: -1;
       }
 
@@ -131,6 +134,7 @@
     </style>
 
     <script>
+      // Typewriter effect for title
       const fullTitle = document.title;
       let index = 1;
       let direction = 1;
@@ -155,11 +159,7 @@
   </head>
 
   <body>
-    <!-- 🎞️ Fullscreen Background Video -->
-    <video id="bg-video" autoplay muted loop playsinline>
-      <source src="background.mp4" type="video/mp4" />
-      Your browser does not support the video tag.
-    </video>
+    <div id="particles-js"></div>
 
     <div class="w-screen h-screen flex flex-col items-center justify-center">
       <div class="glass rounded-2xl w-[425px] h-fit flex flex-col items-center p-[25px] gap-[10px]">
@@ -220,6 +220,45 @@
 
       addClickAnimation(".button");
       addClickAnimation(".social-icons img");
+
+      particlesJS("particles-js", {
+        particles: {
+          number: { value: 80, density: { enable: true, value_area: 800 } },
+          color: { value: "#ffffff" },
+          shape: { type: "circle" },
+          opacity: { value: 0.5 },
+          size: { value: 3, random: true },
+          line_linked: {
+            enable: true,
+            distance: 150,
+            color: "#ffffff",
+            opacity: 0.4,
+            width: 1,
+          },
+          move: {
+            enable: true,
+            speed: 6,
+            direction: "none",
+            random: false,
+            straight: false,
+            out_mode: "out",
+            bounce: false,
+          },
+        },
+        interactivity: {
+          detect_on: "canvas",
+          events: {
+            onhover: { enable: true, mode: "grab" },
+            onclick: { enable: true, mode: "push" },
+            resize: true,
+          },
+          modes: {
+            grab: { distance: 140, line_linked: { opacity: 1 } },
+            push: { particles_nb: 4 },
+          },
+        },
+        retina_detect: true,
+      });
     </script>
   </body>
 </html>
