@@ -25,7 +25,6 @@
       body {
         margin: 0;
         background-color: #141414;
-        background-image: url(bg.png);
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
@@ -135,6 +134,7 @@
     </style>
 
     <script>
+      // Typewriter effect for title
       const fullTitle = document.title;
       let index = 1;
       let direction = 1;
@@ -155,6 +155,11 @@
       }
 
       window.onload = typewriterLoop;
+
+      // Random background image
+      const bgImages = ["bg1.png", "bg2.png", "bg3.png", "bg4.png", "bg5.png"];
+      const selectedBg = bgImages[Math.floor(Math.random() * bgImages.length)];
+      document.body.style.backgroundImage = `url('${selectedBg}')`;
     </script>
   </head>
 
