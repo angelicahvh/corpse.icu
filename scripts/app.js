@@ -118,3 +118,62 @@ if (window.location.pathname.endsWith('profile.html')) {
     document.body.innerHTML = `<h2>User "${username}" not found.</h2>`;
   }
 }
+
+
+
+const CHAT_KEY = 'corpsechat_messages';
+
+function getChatMessages() {
+  return JSON.parse(localStorage.getItem(CHAT_KEY)) || [];
+}
+
+function saveChatMessages(messages) {
+  localStorage.setItem(CHAT_KEY, JSON.stringify(messages));
+}
+
+function sendChat() {
+  const input = document.getElementById('chat-input');
+  const text = input.value.trim();
+  if (!text) return;
+
+  const user = getLoggedInUser();
+  const time = new Date();
+  const timestamp = time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+  const message = { user, text, time: timestamp };
+  const messages = getChatMessages();
+  messages.push(message);
+  saveChatMessages(messages);
+  input.value = '';
+  renderMessages();
+}
+
+function renderMessages() {
+  const chatBox = document.getElementById('chat-box');
+  if (!chatBox) return;
+  chatBox.innerHTML = '';
+  const messages = getChatMessages();
+  messages.forEach(msg => {
+    const msgEl = document.createElement('div');
+    msgEl.textContent = `[${msg.time}] ${msg.user}: ${msg.text}`;
+    chatBox.appendChild(msgEl);
+  });
+  chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+function editProfile() {
+  const user = getLoggedInUser();
+  const users = getUsers();
+  const newUsername = prompt("Enter new username:", user);
+  if (newUsername && newUsername !== user) {
+    users[newUsername] = users[user];
+    delete users[user];
+    saveUsers(users);
+    setLoggedInUser(newUsername);
+    alert("Username updated to " + newUsername);
+    renderMessages(); // Optional: update name in history
+  }
+}
+
+// Load chat on startup
+window.addEventListener('DOMContentLoaded', renderMessages);

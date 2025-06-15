@@ -4,47 +4,105 @@
   <meta charset="UTF-8" />
   <title>CorpseChat Room</title>
   <script defer src="scripts/app.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    #chat-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+    }
+    #chat-box {
+      width: 70%;
+      max-width: 800px;
+      height: 70vh;
+      border: 1px solid #ccc;
+      padding: 10px;
+      background: #f9f9f9;
+      overflow-y: auto;
+      margin-bottom: 10px;
+    }
+    #chat-input {
+      width: 60%;
+      padding: 8px;
+    }
+    #chat-controls {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+    #dark-mode-toggle {
+      position: fixed;
+      bottom: 10px;
+      left: 10px;
+    }
+    #profile-edit {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+    }
+    .dark-mode {
+      background-color: #121212;
+      color: white;
+    }
+    .dark-mode #chat-box {
+      background-color: #1f1f1f;
+      color: white;
+      border-color: #444;
+    }
+    .dark-mode input, .dark-mode button {
+      background-color: #2c2c2c;
+      color: white;
+      border: 1px solid #444;
+    }
+  </style>
 </head>
 <body>
-  <h2 id="room-title"></h2>
-  <div id="chat-box">
-    <div id="chat-log"></div>
-    <input type="text" id="chat-input" placeholder="Type..." />
-    <button onclick="sendChat()">Send</button>
+  <button id="profile-edit" onclick="editProfile()">Edit Profile</button>
+  <div id="chat-container">
+    <div id="chat-box"></div>
+    <div id="chat-controls">
+      <input type="text" id="chat-input" placeholder="Type a message..." />
+      <button onclick="sendChat()">Send</button>
+    </div>
   </div>
+
+  <!-- Spotify Embed -->
   <div style="position:fixed;bottom:10px;right:10px;">
     <iframe style="border-radius:12px"
-      src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M?utm_source=generator&theme=0"
+      src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M?utm_source=generator"
       width="250" height="80" frameBorder="0"
-      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+      loading="lazy"></iframe>
   </div>
 
-<button id="dark-mode-toggle" style="position: fixed; top: 10px; right: 10px;">Toggle Dark Mode</button>
-<script>
-  if (localStorage.getItem("darkMode") === "enabled") {
-    document.body.classList.add("dark-mode");
-  }
+  <!-- Dark Mode Toggle Switch -->
+  <label id="dark-mode-toggle">
+    <input type="checkbox" id="darkSwitch" />
+    Dark Mode
+  </label>
 
-  document.getElementById("dark-mode-toggle").onclick = function () {
-    document.body.classList.toggle("dark-mode");
-    if (document.body.classList.contains("dark-mode")) {
-      localStorage.setItem("darkMode", "enabled");
-    } else {
-      localStorage.setItem("darkMode", "disabled");
+  <script>
+    const darkSwitch = document.getElementById("darkSwitch");
+    const darkMode = localStorage.getItem("darkMode");
+    if (darkMode === "enabled") {
+      document.body.classList.add("dark-mode");
+      darkSwitch.checked = true;
     }
-  };
-</script>
-<style>
-  .dark-mode {
-    background-color: #121212;
-    color: white;
-  }
-  .dark-mode input, .dark-mode button {
-    background-color: #1f1f1f;
-    color: white;
-    border: 1px solid #444;
-  }
-</style>
-
+    darkSwitch.addEventListener("change", function() {
+      if (this.checked) {
+        document.body.classList.add("dark-mode");
+        localStorage.setItem("darkMode", "enabled");
+      } else {
+        document.body.classList.remove("dark-mode");
+        localStorage.setItem("darkMode", "disabled");
+      }
+    });
+  </script>
 </body>
 </html>
