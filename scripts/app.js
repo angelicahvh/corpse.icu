@@ -164,16 +164,77 @@ function renderMessages() {
 function editProfile() {
   const user = getLoggedInUser();
   const users = getUsers();
-  const newUsername = prompt("Enter new username:", user);
-  if (newUsername && newUsername !== user) {
-    users[newUsername] = users[user];
-    delete users[user];
-    saveUsers(users);
-    setLoggedInUser(newUsername);
-    alert("Username updated to " + newUsername);
-    renderMessages(); // Optional: update name in history
+  const userData = users[user];
+
+  const password = prompt("Enter your password to edit profile:");
+  if (!password || password !== userData.password) {
+    alert("Incorrect password.");
+    return;
   }
+
+  const newUsername = prompt("Enter new username:", user);
+  const newAvatar = prompt("Enter new profile picture URL (leave blank to keep current):", userData.avatar || "");
+
+  if (newUsername && newUsername !== user) {
+    users[newUsername] = { ...userData };
+    delete users[user];
+    setLoggedInUser(newUsername);
+  }
+
+  if (newAvatar) {
+    const updatedUser = getLoggedInUser();
+    users[updatedUser].avatar = newAvatar;
+  }
+
+  saveUsers(users);
+  alert("Profile updated successfully.");
+  renderMessages(); // Update displayed name if needed
 }
 
 // Load chat on startup
 window.addEventListener('DOMContentLoaded', renderMessages);
+
+
+function createSubchat() {
+  const user = getLoggedInUser();
+  const users = getUsers();
+  if (!users[user]) return alert("Please log in.");
+
+  if (users[user].createdSubchat) {
+    alert("You already created a subchat: " + users[user].createdSubchat);
+    return;
+  }
+
+  const subchatName = prompt("Enter a name for your subchat:");
+  if (!subchatName || subchatName.trim() === '') return;
+
+  const tabId = subchatName.toLowerCase().replace(/[^a-z0-9]/g, '_');
+  const sidebar = document.getElementById('subchat-tabs');
+  if (document.getElementById('tab-' + tabId)) {
+    alert("Subchat already exists.");
+    return;
+  }
+
+  const tabBtn = document.createElement('div');
+  tabBtn.innerHTML = `<button id="tab-${tabId}" onclick="switchChat('${tabId}')"># ${subchatName}</button>`;
+  sidebar.appendChild(tabBtn);
+
+  users[user].createdSubchat = tabId;
+  saveUsers(users);
+  switchChat(tabId);
+  alert("Subchat created: " + subchatName);
+}
+
+function searchSubchat() {
+  const input = document.getElementById('search-bar');
+  const term = input.value.toLowerCase().replace(/[^a-z0-9]/g, '_');
+  if (!term) return;
+
+  const sidebar = document.getElementById('subchat-tabs');
+  if (document.getElementById('tab-' + term)) {
+    switchChat(term);
+    return;
+  }
+
+  alert("Subchat not found.");
+}

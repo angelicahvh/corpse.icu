@@ -63,11 +63,26 @@
   </style>
 </head>
 <body>
-  <button id="profile-edit" onclick="editProfile()">Edit Profile</button>
-  <div id="chat-container">
+  
+    <div style="position: fixed; top: 10px; left: 50%; transform: translateX(-50%);">
+      <input type="text" id="search-bar" placeholder="Search subchats..." onkeydown="if(event.key === 'Enter') searchSubchat();" />
+      <button onclick="searchSubchat()">Search</button>
+    </div>
+    <button id="profile-edit" onclick="editProfile()">Edit Profile</button>
+    <button style="position: fixed; top: 10px; right: 120px;" onclick="createSubchat()">Create Subchat</button>
+    
+  
+<div style="display: flex; height: 100vh;">
+  <div id="subchat-tabs" style="width: 200px; background: #eee; padding: 10px;">
+    <div><button onclick="switchChat('general')"># General</button></div>
+    <div><button onclick="switchChat('music')"># Music</button></div>
+    <div><button onclick="switchChat('games')"># Games</button></div>
+  </div>
+  <div id="chat-container" style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+
     <div id="chat-box"></div>
     <div id="chat-controls">
-      <input type="text" id="chat-input" placeholder="Type a message..." />
+      <input type="text" id="chat-input" placeholder="Type a message..." onkeydown="if(event.key === 'Enter') sendChat();" />
       <button onclick="sendChat()">Send</button>
     </div>
   </div>
@@ -77,7 +92,7 @@
     <iframe style="border-radius:12px"
       src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M?utm_source=generator"
       width="250" height="80" frameBorder="0"
-      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+      allow="autoplay; encrypted-media" allowtransparency="true"
       loading="lazy"></iframe>
   </div>
 
