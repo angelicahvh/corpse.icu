@@ -1,120 +1,158 @@
-const USERS_KEY = 'corpsechat_users';
-const LOGGED_IN_KEY = 'corpsechat_logged_user';
+// Firebase imports and initialization
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+import { getFirestore, collection, addDoc, doc, setDoc, getDoc, getDocs, onSnapshot, updateDoc, deleteDoc, query, where } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
 
-function getUsers() {
-  return JSON.parse(localStorage.getItem(USERS_KEY)) || {};
-}
+const firebaseConfig = {
+  apiKey: "AIzaSyAqfHWI-CGAgahKJXqeCqhdh4qpS3mxW0A",
+  authDomain: "corpsechat.firebaseapp.com",
+  projectId: "corpsechat",
+  storageBucket: "corpsechat.firebasestorage.app",
+  messagingSenderId: "1087838804413",
+  appId: "1:1087838804413:web:912de84f47c9055c3a9ad4",
+  measurementId: "G-48K3FMN2ZV"
+};
 
-function saveUsers(users) {
-  localStorage.setItem(USERS_KEY, JSON.stringify(users));
-}
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth();
 
-function getLoggedInUser() {
-  return localStorage.getItem(LOGGED_IN_KEY);
-}
+window.onload = () => {
+  const sendBtn = document.getElementById("send-btn");
+  if (sendBtn) sendBtn.onclick = sendMessage;
 
-function setLoggedInUser(username) {
-  localStorage.setItem(LOGGED_IN_KEY, username);
-}
+  const msgInput = document.getElementById("chat-input");
+  if (msgInput) {
+    msgInput.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") sendMessage();
+    });
+  }
 
-function login() {
-  const user = document.getElementById('login-user').value;
-  const pass = document.getElementById('login-pass').value;
-  const users = getUsers();
-  if (users[user] && users[user].password === pass) {
-    setLoggedInUser(user);
-    window.location.href = 'chat.html?s=main';
-  } else {
-    document.getElementById('login-error').textContent = 'Invalid username or password.';
+  if (document.getElementById("login-btn")) {
+    document.getElementById("login-btn").onclick = loginUser;
+    document.getElementById("register-btn").onclick = registerUser;
+  }
+
+  onAuthStateChanged(auth, user => {
+    if (user) {
+      document.body.dataset.user = user.uid;
+      loadMessages("general");
+      listenToSubchats();
+    }
+  });
+};
+
+async function registerUser() {
+  const email = document.getElementById("email").value;
+  const pass = document.getElementById("password").value;
+  try {
+    await createUserWithEmailAndPassword(auth, email, pass);
+    alert("Registered!");
+    window.location.href = "home.html";
+  } catch (e) {
+    alert(e.message);
   }
 }
 
-function register() {
-  const user = document.getElementById('reg-user').value;
-  const pass = document.getElementById('reg-pass').value;
-  const avatarInput = document.getElementById('reg-avatar');
-  const users = getUsers();
+async function loginUser() {
+  const email = document.getElementById("email").value;
+  const pass = document.getElementById("password").value;
+  try {
+    await signInWithEmailAndPassword(auth, email, pass);
+    alert("Logged in!");
+    window.location.href = "home.html";
+  } catch (e) {
+    alert(e.message);
+  }
+}
 
-  if (users[user]) {
-    alert('Username taken');
+async function sendMessage() {
+  const input = document.getElementById("chat-input");
+  const text = input.value;
+  if (!text.trim()) return;
+  const user = auth.currentUser;
+  if (!user) return;
+
+  const subchat = document.body.dataset.subchat || "general";
+  await addDoc(collection(db, "subchats", subchat, "messages"), {
+    uid: user.uid,
+    text: text,
+    timestamp: Date.now()
+  });
+  input.value = "";
+}
+
+function loadMessages(subchatId) {
+  const chatBox = document.getElementById("chat-box");
+  chatBox.innerHTML = "";
+  document.body.dataset.subchat = subchatId;
+
+  const msgRef = collection(db, "subchats", subchatId, "messages");
+  onSnapshot(msgRef, snapshot => {
+    chatBox.innerHTML = "";
+    snapshot.forEach(doc => {
+      const msg = doc.data();
+      const time = new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      const div = document.createElement("div");
+      div.textContent = `[${time}] ${msg.text}`;
+      chatBox.appendChild(div);
+    });
+  });
+}
+
+async function createSubchat() {
+  const user = auth.currentUser;
+  if (!user) return;
+
+  const name = prompt("Enter subchat name:");
+  if (!name) return;
+
+  const subchatId = name.toLowerCase().replace(/[^a-z0-9]/g, "_");
+  const ref = doc(db, "subchats", subchatId);
+  const snap = await getDoc(ref);
+
+  if (snap.exists()) {
+    alert("Subchat already exists.");
     return;
   }
 
-  const reader = new FileReader();
-  reader.onload = () => {
-    users[user] = {
-      password: pass,
-      friends: [],
-      avatar: reader.result
-    };
-    saveUsers(users);
-    document.getElementById('register-msg').textContent = 'Registered successfully. You can now login.';
-  };
+  await setDoc(ref, {
+    creator: user.uid,
+    name: name,
+    members: [user.uid]
+  });
 
-  if (avatarInput.files[0]) {
-    reader.readAsDataURL(avatarInput.files[0]);
-  } else {
-    users[user] = { password: pass, friends: [], avatar: null };
-    saveUsers(users);
-    document.getElementById('register-msg').textContent = 'Registered successfully. You can now login.';
+  loadMessages(subchatId);
+}
+
+async function deleteSubchat() {
+  const user = auth.currentUser;
+  const subchatId = document.body.dataset.subchat;
+  const ref = doc(db, "subchats", subchatId);
+  const snap = await getDoc(ref);
+  if (!snap.exists()) return;
+
+  if (snap.data().creator !== user.uid) {
+    alert("Only the creator can delete this subchat.");
+    return;
   }
+
+  await deleteDoc(ref);
+  alert("Subchat deleted.");
+  loadMessages("general");
 }
 
-// Chat rendering
-if (window.location.pathname.endsWith('chat.html')) {
-  const params = new URLSearchParams(window.location.search);
-  const room = params.get('s') || 'main';
-  document.getElementById('room-title').textContent = `Subchat: ${room}`;
+function listenToSubchats() {
+  const tabArea = document.getElementById("subchat-tabs");
+  const q = collection(db, "subchats");
 
-  const users = getUsers();
-  const currentUser = getLoggedInUser();
-  const avatar = users[currentUser]?.avatar;
-
-  window.sendChat = () => {
-    const input = document.getElementById('chat-input');
-    const chat = document.getElementById('chat-log');
-    if (input.value.trim()) {
-      const msgDiv = document.createElement('div');
-      if (avatar) {
-        const img = document.createElement('img');
-        img.src = avatar;
-        img.style.height = '24px';
-        img.style.width = '24px';
-        img.style.borderRadius = '50%';
-        img.style.marginRight = '8px';
-        msgDiv.appendChild(img);
-      }
-      msgDiv.appendChild(document.createTextNode(`${currentUser}: ${input.value}`));
-      chat.appendChild(msgDiv);
-      input.value = '';
-    }
-  };
-}
-
-// Profile rendering
-if (window.location.pathname.endsWith('profile.html')) {
-  const params = new URLSearchParams(window.location.search);
-  const username = params.get('user');
-  const users = getUsers();
-
-  if (users[username]) {
-    document.getElementById('profile-header').textContent = `Profile of ${username}`;
-    document.getElementById('profile-username').textContent = username;
-    if (users[username].avatar) {
-      const img = document.createElement('img');
-      img.src = users[username].avatar;
-      img.style.height = '100px';
-      img.style.borderRadius = '12px';
-      document.body.insertBefore(img, document.getElementById('profile-header').nextSibling);
-    }
-
-    const friendList = document.getElementById('friend-list');
-    users[username].friends.forEach(friend => {
-      const li = document.createElement('li');
-      li.textContent = friend;
-      friendList.appendChild(li);
+  onSnapshot(q, snapshot => {
+    tabArea.innerHTML = "";
+    snapshot.forEach(docSnap => {
+      const subchat = docSnap.data();
+      const div = document.createElement("div");
+      div.innerHTML = `<button onclick="loadMessages('${docSnap.id}')"># ${subchat.name}</button>`;
+      tabArea.appendChild(div);
     });
-  } else {
-    document.body.innerHTML = `<h2>User "${username}" not found.</h2>`;
-  }
+  });
 }
