@@ -1,23 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <title>CorpseChat - Login</title>
-  <script defer src="scripts/app.js"></script>
+  <title>CorpseChat Login</title>
 </head>
 <body>
-  <img src="assets/logo.png" alt="Logo" style="height:60px;margin:20px auto;display:block;">
-  <h2>Login</h2>
-  <input id="login-user" placeholder="Username">
-  <input id="login-pass" placeholder="Password" type="password">
-  <button onclick="login()">Login</button>
-  <p id="login-error" style="color:red;"></p>
-
-  <h3>Register</h3>
-  <input id="reg-user" placeholder="Username">
-  <input id="reg-pass" placeholder="Password" type="password">
-  <input type="file" id="reg-avatar" accept="image/*">
-  <button onclick="register()">Register</button>
-  <p id="register-msg" style="color:green;"></p>
+  <h1>Welcome to CorpseChat</h1>
+  <input type="email" id="email" placeholder="Email"><br>
+  <input type="password" id="password" placeholder="Password"><br>
+  <button id="login-btn">Login</button>
+  <button id="register-btn">Register</button>
+  <script type="module" src="app.js"></script>
 </body>
 </html>
