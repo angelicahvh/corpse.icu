@@ -25,41 +25,73 @@ function login() {
     setLoggedInUser(user);
     window.location.href = 'chat.html?s=main';
   } else {
-    alert('Invalid login');
+    document.getElementById('login-error').textContent = 'Invalid username or password.';
   }
 }
 
 function register() {
   const user = document.getElementById('reg-user').value;
   const pass = document.getElementById('reg-pass').value;
+  const avatarInput = document.getElementById('reg-avatar');
   const users = getUsers();
-  if (!users[user]) {
-    users[user] = { password: pass, friends: [] };
-    saveUsers(users);
-    alert('Registered. Now login.');
-  } else {
+
+  if (users[user]) {
     alert('Username taken');
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = () => {
+    users[user] = {
+      password: pass,
+      friends: [],
+      avatar: reader.result
+    };
+    saveUsers(users);
+    document.getElementById('register-msg').textContent = 'Registered successfully. You can now login.';
+  };
+
+  if (avatarInput.files[0]) {
+    reader.readAsDataURL(avatarInput.files[0]);
+  } else {
+    users[user] = { password: pass, friends: [], avatar: null };
+    saveUsers(users);
+    document.getElementById('register-msg').textContent = 'Registered successfully. You can now login.';
   }
 }
 
+// Chat rendering
 if (window.location.pathname.endsWith('chat.html')) {
   const params = new URLSearchParams(window.location.search);
   const room = params.get('s') || 'main';
   document.getElementById('room-title').textContent = `Subchat: ${room}`;
 
+  const users = getUsers();
+  const currentUser = getLoggedInUser();
+  const avatar = users[currentUser]?.avatar;
+
   window.sendChat = () => {
-    const user = getLoggedInUser();
     const input = document.getElementById('chat-input');
     const chat = document.getElementById('chat-log');
     if (input.value.trim()) {
-      const msg = document.createElement('div');
-      msg.textContent = `${user}: ${input.value}`;
-      chat.appendChild(msg);
+      const msgDiv = document.createElement('div');
+      if (avatar) {
+        const img = document.createElement('img');
+        img.src = avatar;
+        img.style.height = '24px';
+        img.style.width = '24px';
+        img.style.borderRadius = '50%';
+        img.style.marginRight = '8px';
+        msgDiv.appendChild(img);
+      }
+      msgDiv.appendChild(document.createTextNode(`${currentUser}: ${input.value}`));
+      chat.appendChild(msgDiv);
       input.value = '';
     }
   };
 }
 
+// Profile rendering
 if (window.location.pathname.endsWith('profile.html')) {
   const params = new URLSearchParams(window.location.search);
   const username = params.get('user');
@@ -68,6 +100,14 @@ if (window.location.pathname.endsWith('profile.html')) {
   if (users[username]) {
     document.getElementById('profile-header').textContent = `Profile of ${username}`;
     document.getElementById('profile-username').textContent = username;
+    if (users[username].avatar) {
+      const img = document.createElement('img');
+      img.src = users[username].avatar;
+      img.style.height = '100px';
+      img.style.borderRadius = '12px';
+      document.body.insertBefore(img, document.getElementById('profile-header').nextSibling);
+    }
+
     const friendList = document.getElementById('friend-list');
     users[username].friends.forEach(friend => {
       const li = document.createElement('li');
