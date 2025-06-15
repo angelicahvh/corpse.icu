@@ -1,104 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Retro Chatroom</title>
-  <style>
-    body {
-      background-color: #f0f0f0;
-      font-family: Verdana, Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-    }
-    #header {
-      background-color: #333;
-      color: white;
-      padding: 20px;
-      text-align: center;
-      font-size: 24px;
-      text-shadow: 2px 2px 4px #000;
-    }
-    #login-box, #chat-box {
-      width: 400px;
-      margin: 50px auto;
-      padding: 20px;
-      border: 2px solid #ccc;
-      background: #fff;
-      box-shadow: 5px 5px 10px #aaa;
-    }
-    input[type="text"], input[type="password"] {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border: 1px solid #999;
-    }
-    input[type="submit"] {
-      background-color: #0066cc;
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      cursor: pointer;
-    }
-    input[type="submit"]:hover {
-      background-color: #004d99;
-    }
-    #chat {
-      height: 200px;
-      overflow-y: scroll;
-      border: 1px solid #ccc;
-      padding: 10px;
-      background: #fafafa;
-      margin-bottom: 10px;
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <title>CorpseChat - Login</title>
+  <script defer src="scripts/app.js"></script>
 </head>
 <body>
-  <div id="header">Retro Chatroom 2012</div>
-
-  <div id="login-box">
-    <form onsubmit="login(event)">
-      <h2>Login</h2>
-      <input type="text" id="username" placeholder="Username" required>
-      <input type="password" id="password" placeholder="Password" required>
-      <input type="submit" value="Login">
-    </form>
-  </div>
-
-  <div id="chat-box" style="display: none;">
-    <h2>Welcome, <span id="user-label"></span>!</h2>
-    <div id="chat"></div>
-    <input type="text" id="message" placeholder="Type your message...">
-    <input type="submit" value="Send" onclick="sendMessage()">
-  </div>
-
-  <script>
-    function login(e) {
-      e.preventDefault();
-      const user = document.getElementById('username').value;
-      const pass = document.getElementById('password').value;
-      // Simple local check (mock auth)
-      if (user && pass) {
-        document.getElementById('login-box').style.display = 'none';
-        document.getElementById('chat-box').style.display = 'block';
-        document.getElementById('user-label').textContent = user;
-      } else {
-        alert("Invalid login.");
-      }
-    }
-
-    function sendMessage() {
-      const msgBox = document.getElementById('message');
-      const msg = msgBox.value;
-      if (msg.trim()) {
-        const chat = document.getElementById('chat');
-        const user = document.getElementById('user-label').textContent;
-        const newMsg = document.createElement('div');
-        newMsg.textContent = user + ': ' + msg;
-        chat.appendChild(newMsg);
-        msgBox.value = '';
-        chat.scrollTop = chat.scrollHeight;
-      }
-    }
-  </script>
+  <img src="assets/logo.png" alt="Logo" style="height:60px;margin:20px auto;display:block;">
+  <h2>Login</h2>
+  <input id="login-user" placeholder="Username">
+  <input id="login-pass" placeholder="Password" type="password">
+  <button onclick="login()">Login</button>
+  <h3>Register</h3>
+  <input id="reg-user" placeholder="Username">
+  <input id="reg-pass" placeholder="Password" type="password">
+  <button onclick="register()">Register</button>
 </body>
 </html>

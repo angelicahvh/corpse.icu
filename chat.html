@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CorpseChat Room</title>
+  <script defer src="scripts/app.js"></script>
+</head>
+<body>
+  <h2 id="room-title"></h2>
+  <div id="chat-box">
+    <div id="chat-log"></div>
+    <input type="text" id="chat-input" placeholder="Type..." />
+    <button onclick="sendChat()">Send</button>
+  </div>
+  <div style="position:fixed;bottom:10px;right:10px;">
+    <iframe style="border-radius:12px"
+      src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M?utm_source=generator&theme=0"
+      width="250" height="80" frameBorder="0"
+      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+  </div>
+</body>
+</html>
