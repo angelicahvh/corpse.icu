@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CorpseChat Room</title>
+  <script defer src="scripts/app.js"></script>
+</head>
+<body>
+  <h2 id="room-title"></h2>
+  <div id="chat-box">
+    <div id="chat-log"></div>
+    <input type="text" id="chat-input" placeholder="Type..." />
+    <button onclick="sendChat()">Send</button>
+  </div>
+  <div style="position:fixed;bottom:10px;right:10px;">
+    <iframe style="border-radius:12px"
+      src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M?utm_source=generator&theme=0"
+      width="250" height="80" frameBorder="0"
+      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+  </div>
+
+<button id="dark-mode-toggle" style="position: fixed; top: 10px; right: 10px;">Toggle Dark Mode</button>
+<script>
+  if (localStorage.getItem("darkMode") === "enabled") {
+    document.body.classList.add("dark-mode");
+  }
+
+  document.getElementById("dark-mode-toggle").onclick = function () {
+    document.body.classList.toggle("dark-mode");
+    if (document.body.classList.contains("dark-mode")) {
+      localStorage.setItem("darkMode", "enabled");
+    } else {
+      localStorage.setItem("darkMode", "disabled");
+    }
+  };
+</script>
+<style>
+  .dark-mode {
+    background-color: #121212;
+    color: white;
+  }
+  .dark-mode input, .dark-mode button {
+    background-color: #1f1f1f;
+    color: white;
+    border: 1px solid #444;
+  }
+</style>
+
+</body>
+</html>
