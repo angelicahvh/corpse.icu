@@ -107,7 +107,6 @@
         border-radius: 1rem;
         backdrop-filter: blur(10px) saturate(180%);
         background-color: rgba(20, 20, 20, 0.75);
-        height: 100%;
       }
 
       .social-icons-vertical img {
@@ -167,11 +166,12 @@
     <div id="particles-js"></div>
 
     <div class="w-screen h-screen flex items-center justify-center">
-      <!-- Layout with profile card on left and social icons on right -->
+      <!-- Parent container with fixed height -->
       <div class="flex items-stretch justify-center gap-6" style="height: 425px;">
         <!-- Profile Card -->
         <div
-          class="glass rounded-2xl w-[425px] h-full flex flex-col items-center p-[25px] gap-[10px]"
+          class="glass rounded-2xl w-[425px] flex flex-col items-center p-[25px] gap-[10px]"
+          style="height: 425px;"
         >
           <img
             class="w-auto h-[125px] rounded-2xl"
@@ -197,8 +197,11 @@
           </div>
         </div>
 
-        <!-- Social Icons on the RIGHT -->
-        <div class="social-icons-vertical glass h-full">
+        <!-- Social Icons Vertical, stretched height -->
+        <div
+          class="social-icons-vertical glass flex flex-col items-center gap-6 p-[20px]"
+          style="height: 100%;"
+        >
           <a href="https://steamcommunity.com/id/captainflames" target="_blank">
             <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/steam.svg" alt="Steam" />
           </a>
@@ -211,9 +214,10 @@
           <a href="https://open.spotify.com/user/31mf24d6tezrz57jrn57ogv4uguq?si=9ddeec8e8c0a49b5" target="_blank">
             <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/spotify.svg" alt="Spotify" />
           </a>
-          <a href="https://discord.com/users/327589528384831489" target="_blank">
+          <a href="https://discord.gg/fwYzVKN9cx" target="_blank">
             <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/discord.svg" alt="Discord" />
           </a>
+          <div class="h-[100px]"></div>
         </div>
       </div>
 
