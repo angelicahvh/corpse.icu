@@ -63,6 +63,7 @@
         text-shadow: #9ea4d9 1px 1px 10px;
       }
 
+      /* Audio Player restored to original style */
       .audio-player {
         position: fixed;
         bottom: 20px;
@@ -70,38 +71,55 @@
         background: rgba(20, 20, 20, 0.75);
         border: 2px solid rgba(255, 255, 255, 0.6);
         border-radius: 1rem;
-        padding: 1rem;
+        padding: 0.5rem 1rem;
         display: flex;
         align-items: center;
-        gap: 1rem;
-        color: white;
-        width: 300px;
+        gap: 12px;
+        color: #838ac9;
+        width: 250px;
         z-index: 50;
       }
 
       .audio-player img {
-        width: 60px;
-        height: 60px;
+        width: 50px;
+        height: 50px;
         object-fit: cover;
         border-radius: 0.5rem;
+        box-shadow: 0 0 10px #9ea4d9;
       }
 
       .audio-player .info {
         display: flex;
         flex-direction: column;
+        justify-content: center;
         width: 100%;
+      }
+
+      .audio-player .title {
+        font-weight: 700;
+        font-size: 1rem;
+        text-shadow: 0 0 10px #9ea4d9;
+      }
+
+      .audio-player .artist {
+        font-size: 0.8rem;
+        color: #b0b5d1;
       }
 
       .audio-player audio {
         width: 100%;
-        margin-top: 0.5rem;
+        margin-top: 0.3rem;
+        background: transparent;
+        outline: none;
+        cursor: pointer;
       }
 
+      /* Increase gap between social icons for better fit */
       .social-icons-vertical {
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 24px;
+        gap: 32px; /* increased from 24px */
         padding: 20px;
         border: 2px solid rgba(255, 255, 255, 0.6);
         border-radius: 1rem;
@@ -231,7 +249,6 @@
               alt="Twitter"
             />
           </a>
-
           <a
             href="https://open.spotify.com/user/31mf24d6tezrz57jrn57ogv4uguq?si=9ddeec8e8c0a49b5"
             target="_blank"
