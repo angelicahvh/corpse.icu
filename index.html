@@ -1,19 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>corpse</title>
-    <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
-      rel="stylesheet"
-    />
+    <!-- ... keep all your existing head content unchanged ... -->
     <style>
       :root {
         font-family: "Roboto", sans-serif;
@@ -97,6 +85,7 @@
         margin-top: 0.5rem;
       }
 
+      /* Social icons container moved to right side */
       .social-icons-vertical {
         display: flex;
         flex-direction: column;
@@ -107,6 +96,9 @@
         border-radius: 1rem;
         backdrop-filter: blur(10px) saturate(180%);
         background-color: rgba(20, 20, 20, 0.75);
+
+        /* Make height dynamic by JS */
+        height: auto; /* fallback */
       }
 
       .social-icons-vertical img {
@@ -188,7 +180,24 @@
         }
       }
 
-      window.onload = typewriterLoop;
+      window.onload = () => {
+        typewriterLoop();
+
+        // Set social icons container height to match profile card
+        const profileCard = document.querySelector(".glass.rounded-2xl.w-[425px]");
+        const socialIcons = document.querySelector(".social-icons-vertical");
+        if (profileCard && socialIcons) {
+          // Use ResizeObserver to dynamically sync height if profile card changes size
+          const resizeObserver = new ResizeObserver((entries) => {
+            for (let entry of entries) {
+              socialIcons.style.height = entry.contentRect.height + "px";
+            }
+          });
+          resizeObserver.observe(profileCard);
+          // Initial set
+          socialIcons.style.height = profileCard.offsetHeight + "px";
+        }
+      };
     </script>
   </head>
 
@@ -196,33 +205,9 @@
     <div id="particles-js"></div>
 
     <div class="w-screen h-screen flex items-center justify-center">
-      <!-- Layout with vertical icons + profile card -->
-      <div class="flex items-start justify-center gap-6">
-        <!-- Vertical Social Icons -->
-        <div class="social-icons-vertical glass">
-          <a href="https://steamcommunity.com/id/captainflames" target="_blank">
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/steam.svg" alt="Steam" />
-          </a>
-          <a href="https://github.com/rabbitcorpse" target="_blank">
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" alt="GitHub" />
-          </a>
-          <a href="https://twitter.com/bloodcorpse7" target="_blank">
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/twitter.svg" alt="Twitter" />
-          </a>
-          <a href="https://open.spotify.com/user/31mf24d6tezrz57jrn57ogv4uguq?si=9ddeec8e8c0a49b5" target="_blank">
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/spotify.svg" alt="Spotify" />
-          </a>
-
-          <!-- Placeholder for more -->
-          <div class="h-[100px]"></div>
-
-          <!-- Discord icon at the very bottom -->
-          <a href="https://discord.gg/fwYzVKN9cx" target="_blank" aria-label="Discord">
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/discord.svg" alt="Discord" />
-          </a>
-        </div>
-
-        <!-- Profile Card -->
+      <!-- Layout with main box on left and social icons on right -->
+      <div class="flex items-start justify-center gap-6" style="align-items: stretch;">
+        <!-- Profile Card (unchanged) -->
         <div
           class="glass rounded-2xl w-[425px] h-full flex flex-col items-center p-[25px] gap-[10px]"
           style="height: 100%"
@@ -253,6 +238,30 @@
               >
             </div>
           </div>
+        </div>
+
+        <!-- Social Icons on the RIGHT side -->
+        <div class="social-icons-vertical glass" style="align-self: stretch;">
+          <a href="https://steamcommunity.com/id/captainflames" target="_blank">
+            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/steam.svg" alt="Steam" />
+          </a>
+          <a href="https://github.com/rabbitcorpse" target="_blank">
+            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" alt="GitHub" />
+          </a>
+          <a href="https://twitter.com/bloodcorpse7" target="_blank">
+            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/twitter.svg" alt="Twitter" />
+          </a>
+          <a href="https://open.spotify.com/user/31mf24d6tezrz57jrn57ogv4uguq?si=9ddeec8e8c0a49b5" target="_blank">
+            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/spotify.svg" alt="Spotify" />
+          </a>
+
+          <!-- Spacer -->
+          <div style="flex-grow: 1;"></div>
+
+          <!-- Discord icon at the very bottom -->
+          <a href="https://discord.gg/fwYzVKN9cx" target="_blank" aria-label="Discord">
+            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/discord.svg" alt="Discord" />
+          </a>
         </div>
       </div>
 
