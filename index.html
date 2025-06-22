@@ -166,12 +166,11 @@
     <div id="particles-js"></div>
 
     <div class="w-screen h-screen flex items-center justify-center">
-      <!-- Parent container with fixed height -->
-      <div class="flex items-stretch justify-center gap-6" style="height: 425px;">
-        <!-- Profile Card -->
+      <!-- Layout with profile card left, socials right -->
+      <div class="flex items-start justify-center gap-6">
+        <!-- Profile Card (LEFT) -->
         <div
-          class="glass rounded-2xl w-[425px] flex flex-col items-center p-[25px] gap-[10px]"
-          style="height: 425px;"
+          class="glass rounded-2xl w-[425px] h-full flex flex-col items-center p-[25px] gap-[10px]"
         >
           <img
             class="w-auto h-[125px] rounded-2xl"
@@ -183,40 +182,72 @@
           <span class="w-full h-px bg-white"></span>
           <a class="text-1xl">its pronounced rip-lum</a>
           <a class="text-1xl" style="color: #87b7e0;">hello, im rwplm</a>
-          <a class="text-1xl text-center" style="color: #87b7e0;">
-            i am a hermit and a fan of fantasy and scifi films such as LOTR, TheDarkCrystal, StarWars etc. i also play a range of games and listen to alot of music.
+          <a
+            class="text-1xl text-center"
+            style="color: #87b7e0;"
+          >
+            i am a hermit and a fan of fantasy and scifi films such as LOTR,
+            TheDarkCrystal, StarWars etc. i also play a range of games and listen
+            to alot of music.
           </a>
           <span class="w-full h-px bg-white"></span>
           <a class="glow text-2xl">My Discord Server</a>
-          <div class="w-full glass rounded-2xl p-[10px] flex flex-row gap-[10px] items-center">
-            <img class="w-auto h-[75px] rounded-2xl" src="discord.png" alt="CantThinkOfName" />
+          <div
+            class="w-full glass rounded-2xl flex flex-row gap-[10px] items-center"
+          >
+            <img
+              class="w-auto h-[75px] rounded-2xl"
+              src="discord.png"
+              alt="CantThinkOfName"
+            />
             <a class="glow shrink-0">CantThinkOfName</a>
             <div class="w-full grow flex flex-row-reverse">
-              <a href="https://discord.gg/fwYzVKN9cx" class="glow cursor-pointer rounded-md button">ᴊᴏɪɴ :3</a>
+              <a
+                href="https://discord.gg/fwYzVKN9cx"
+                class="glow cursor-pointer rounded-md button"
+                >ᴊᴏɪɴ :3</a
+              >
             </div>
           </div>
         </div>
 
-        <!-- Social Icons Vertical, stretched height -->
-        <div
-          class="social-icons-vertical glass flex flex-col items-center gap-6 p-[20px]"
-          style="height: 100%;"
-        >
+        <!-- Social Icons (RIGHT) -->
+        <div class="social-icons-vertical glass">
           <a href="https://steamcommunity.com/id/captainflames" target="_blank">
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/steam.svg" alt="Steam" />
+            <img
+              src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/steam.svg"
+              alt="Steam"
+            />
           </a>
           <a href="https://github.com/rabbitcorpse" target="_blank">
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" alt="GitHub" />
+            <img
+              src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg"
+              alt="GitHub"
+            />
           </a>
           <a href="https://twitter.com/bloodcorpse7" target="_blank">
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/twitter.svg" alt="Twitter" />
+            <img
+              src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/twitter.svg"
+              alt="Twitter"
+            />
           </a>
-          <a href="https://open.spotify.com/user/31mf24d6tezrz57jrn57ogv4uguq?si=9ddeec8e8c0a49b5" target="_blank">
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/spotify.svg" alt="Spotify" />
+          <a
+            href="https://open.spotify.com/user/31mf24d6tezrz57jrn57ogv4uguq?si=9ddeec8e8c0a49b5"
+            target="_blank"
+          >
+            <img
+              src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/spotify.svg"
+              alt="Spotify"
+            />
           </a>
           <a href="https://discord.gg/fwYzVKN9cx" target="_blank">
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/discord.svg" alt="Discord" />
+            <img
+              src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/discord.svg"
+              alt="Discord"
+            />
           </a>
+
+          <!-- Placeholder for more -->
           <div class="h-[100px]"></div>
         </div>
       </div>
