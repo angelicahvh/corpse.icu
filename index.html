@@ -1,287 +1,86 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>corpse</title>
-    <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      :root {
-        font-family: "Roboto", sans-serif;
-        overflow: hidden;
-        color: #838ac9;
-        box-sizing: border-box;
-      }
+<body>
+  <div id="particles-js"></div>
 
-      body {
-        margin: 0;
-        background-color: #141414;
-        background-image: url("bg.png");
-        background-position: center center;
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-attachment: fixed;
-      }
-
-      #particles-js {
-        position: fixed;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        z-index: -1;
-      }
-
-      .glass {
-        backdrop-filter: blur(10px) saturate(180%);
-        background-color: rgba(20, 20, 20, 0.75);
-        border: 2px solid rgba(255, 255, 255, 0.6);
-      }
-
-      .button {
-        display: flex;
-        align-items: center;
-        padding: 6px 12px;
-        border: 1px solid white;
-        transition: border-color 0.2s;
-      }
-
-      .button:hover {
-        border-color: white;
-      }
-
-      .glow {
-        text-shadow: #9ea4d9 1px 1px 10px;
-      }
-
-      .audio-player {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        background: rgba(20, 20, 20, 0.75);
-        border: 2px solid rgba(255, 255, 255, 0.6);
-        border-radius: 1rem;
-        padding: 1rem;
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        color: white;
-        width: 300px;
-        z-index: 50;
-      }
-
-      .audio-player img {
-        width: 60px;
-        height: 60px;
-        object-fit: cover;
-        border-radius: 0.5rem;
-      }
-
-      .audio-player .info {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-      }
-
-      .audio-player audio {
-        width: 100%;
-        margin-top: 0.5rem;
-      }
-
-      .social-icons-vertical {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 24px;
-        padding: 20px;
-        border: 2px solid rgba(255, 255, 255, 0.6);
-        border-radius: 1rem;
-        backdrop-filter: blur(10px) saturate(180%);
-        background-color: rgba(20, 20, 20, 0.75);
-      }
-
-      .social-icons-vertical img {
-        width: 40px;
-        height: 40px;
-        cursor: pointer;
-        filter: invert(100%);
-        transition: transform 0.2s;
-      }
-
-      .social-icons-vertical img:hover {
-        transform: scale(1.1);
-      }
-
-      .click-animate {
-        animation: click-pop 0.3s ease;
-      }
-
-      @keyframes click-pop {
-        0% {
-          transform: scale(1);
-        }
-        50% {
-          transform: scale(0.85);
-        }
-        100% {
-          transform: scale(1);
-        }
-      }
-
-      #discord-bot-button {
-        position: fixed;
-        bottom: 20px;
-        left: 20px;
-        background: rgba(20, 20, 20, 0.75);
-        border: 2px solid rgba(255, 255, 255, 0.6);
-        border-radius: 1rem;
-        padding: 0.5rem 1rem;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        color: white;
-        cursor: pointer;
-        font-weight: 600;
-        font-family: "Roboto", sans-serif;
-        text-decoration: none;
-        z-index: 50;
-        transition: border-color 0.2s;
-      }
-
-      #discord-bot-button:hover {
-        border-color: #7289da;
-      }
-
-      #discord-bot-button img {
-        width: 24px;
-        height: 24px;
-        filter: invert(100%);
-      }
-    </style>
-
-    <script>
-      const fullTitle = document.title;
-      let index = 1;
-      let direction = 1;
-      const speed = 150;
-
-      function typewriterLoop() {
-        document.title = fullTitle.substring(0, index);
-        if (direction === 1 && index === fullTitle.length) {
-          direction = -1;
-          setTimeout(typewriterLoop, 1000);
-        } else if (direction === -1 && index === 1) {
-          direction = 1;
-          setTimeout(typewriterLoop, 500);
-        } else {
-          index += direction;
-          setTimeout(typewriterLoop, speed);
-        }
-      }
-
-      window.onload = typewriterLoop;
-    </script>
-  </head>
-
-  <body>
-    <div id="particles-js"></div>
-
-    <div class="w-screen h-screen flex items-center justify-center">
-      <!-- Layout with vertical icons + profile card -->
-      <div class="flex items-start justify-center gap-6">
-        <!-- Vertical Social Icons -->
-        <div class="social-icons-vertical glass">
-          <a href="https://steamcommunity.com/id/captainflames" target="_blank">
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/steam.svg" alt="Steam" />
-          </a>
-          <a href="https://github.com/rabbitcorpse" target="_blank">
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" alt="GitHub" />
-          </a>
-          <a href="https://twitter.com/bloodcorpse7" target="_blank">
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/twitter.svg" alt="Twitter" />
-          </a>
-          <a href="https://open.spotify.com/user/31mf24d6tezrz57jrn57ogv4uguq?si=9ddeec8e8c0a49b5" target="_blank">
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/spotify.svg" alt="Spotify" />
-          </a>
-
-          <!-- Placeholder for more -->
-          <div class="h-[100px]"></div>
-        </div>
-
-        <!-- Profile Card -->
-        <div class="glass rounded-2xl w-[425px] h-fit flex flex-col items-center p-[25px] gap-[10px]">
-          <img
-            class="w-auto h-[125px] rounded-2xl"
-            src="https://discord-info-amber.vercel.app/pfp/327589528384831489"
-            alt="Profile"
-          />
-          <a class="glow text-3xl">RWPLM</a>
-          <a class="text-2xl">𝐇𝐄𝐑𝐌𝐈𝐓 | 𝐍𝐎𝐋𝐈𝐅𝐄 | 𝐕𝐈𝐊𝐈𝐍𝐆</a>
-          <span class="w-full h-px bg-white"></span>
-          <a class="text-1xl">its pronounced rip-lum</a>
-          <a class="text-1xl" style="color: #87b7e0;">hello, im rwplm</a>
-          <a class="text-1xl text-center" style="color: #87b7e0;">
-            i am a hermit and a fan of fantasy and scifi films such as LOTR, TheDarkCrystal, StarWars etc. i also play a range of games and listen to alot of music.
-          </a>
-          <span class="w-full h-px bg-white"></span>
-          <a class="glow text-2xl">My Discord Server</a>
-          <div class="w-full glass rounded-2xl p-[10px] flex flex-row gap-[10px] items-center">
-            <img class="w-auto h-[75px] rounded-2xl" src="discord.png" alt="CantThinkOfName" />
-            <a class="glow shrink-0">CantThinkOfName</a>
-            <div class="w-full grow flex flex-row-reverse">
-              <a href="https://discord.gg/fwYzVKN9cx" class="glow cursor-pointer rounded-md button">ᴊᴏɪɴ :3</a>
-            </div>
+  <div class="w-screen h-screen flex items-center justify-center">
+    <div class="flex items-center justify-center gap-6">
+      <!-- Profile Card -->
+      <div id="profile-card" class="glass rounded-2xl w-[425px] flex flex-col items-center p-[25px] gap-[10px]">
+        <img
+          class="w-auto h-[125px] rounded-2xl"
+          src="https://discord-info-amber.vercel.app/pfp/327589528384831489"
+          alt="Profile"
+        />
+        <a class="glow text-3xl">RWPLM</a>
+        <a class="text-2xl">𝐇𝐄𝐑𝐌𝐈𝐓 | 𝐍𝐎𝐋𝐈𝐅𝐄 | 𝐕𝐈𝐊𝐈𝐍𝐆</a>
+        <span class="w-full h-px bg-white"></span>
+        <a class="text-1xl">its pronounced rip-lum</a>
+        <a class="text-1xl" style="color: #87b7e0;">hello, im rwplm</a>
+        <a class="text-1xl text-center" style="color: #87b7e0;">
+          i am a hermit and a fan of fantasy and scifi films such as LOTR, TheDarkCrystal, StarWars etc. i also play a range of games and listen to alot of music.
+        </a>
+        <span class="w-full h-px bg-white"></span>
+        <a class="glow text-2xl">My Discord Server</a>
+        <div class="w-full glass rounded-2xl p-[10px] flex flex-row gap-[10px] items-center">
+          <img class="w-auto h-[75px] rounded-2xl" src="discord.png" alt="CantThinkOfName" />
+          <a class="glow shrink-0">CantThinkOfName</a>
+          <div class="w-full grow flex flex-row-reverse">
+            <a href="https://discord.gg/fwYzVKN9cx" class="glow cursor-pointer rounded-md button">ᴊᴏɪɴ :3</a>
           </div>
         </div>
       </div>
 
-      <!-- Audio Player -->
-      <div class="audio-player glass">
-        <img src="album.png" alt="Album Art" />
-        <div class="info">
-          <strong class="text-sm">Scourge Of Iron</strong>
-          <span class="text-xs">Cannibal Corpse</span>
-          <audio id="bg-audio" controls autoplay>
-            <source src="audio.mp3" type="audio/mp3" />
-            Your browser does not support the audio element.
-          </audio>
-        </div>
+      <!-- Social Icons Vertical -->
+      <div
+        class="glass rounded-2xl flex flex-col justify-between items-center px-4 py-6 gap-6"
+        style="height: 100%; max-height: 630px;"
+      >
+        <a href="https://steamcommunity.com/id/captainflames" target="_blank" title="Steam">
+          <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/steam.svg"
+               class="w-8 h-8 hover:scale-110 transition transform duration-200 hover:drop-shadow-[0_0_5px_white] cursor-pointer" />
+        </a>
+        <a href="https://github.com/rabbitcorpse" target="_blank" title="GitHub">
+          <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg"
+               class="w-8 h-8 hover:scale-110 transition transform duration-200 hover:drop-shadow-[0_0_5px_white] cursor-pointer" />
+        </a>
+        <a href="https://twitter.com/bloodcorpse7" target="_blank" title="Twitter">
+          <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/twitter.svg"
+               class="w-8 h-8 hover:scale-110 transition transform duration-200 hover:drop-shadow-[0_0_5px_white] cursor-pointer" />
+        </a>
+        <a href="https://open.spotify.com/user/31mf24d6tezrz57jrn57ogv4uguq?si=9ddeec8e8c0a49b5"
+           target="_blank" title="Spotify">
+          <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/spotify.svg"
+               class="w-8 h-8 hover:scale-110 transition transform duration-200 hover:drop-shadow-[0_0_5px_white] cursor-pointer" />
+        </a>
+        <!-- Room for more icons -->
+        <div class="flex-1"></div>
       </div>
     </div>
 
-    <!-- Discord Bot Button -->
-    <a
-      id="discord-bot-button"
-      href="https://discord.com/oauth2/authorize?client_id=1386310429957029969"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/discord.svg" alt="Discord Logo" />
-      Discord Bot
-    </a>
+    <!-- Audio Player -->
+    <div class="audio-player glass">
+      <img src="album.png" alt="Album Art" />
+      <div class="info">
+        <strong class="text-sm">Scourge Of Iron</strong>
+        <span class="text-xs">Cannibal Corpse</span>
+        <audio id="bg-audio" controls autoplay>
+          <source src="audio.mp3" type="audio/mp3" />
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+    </div>
+  </div>
 
-    <script>
-      function addClickAnimation(selector) {
-        document.querySelectorAll(selector).forEach((el) => {
-          el.addEventListener("click", () => {
-            el.classList.remove("click-animate");
-            void el.offsetWidth;
-            el.classList.add("click-animate");
-          });
-        });
-      }
-
-      addClickAnimation(".button");
-      addClickAnimation(".social-icons-vertical img");
-    </script>
-  </body>
-</html>
+  <!-- Discord Bot Button -->
+  <a
+    id="discord-bot-button"
+    href="https://discord.com/oauth2/authorize?client_id=1386310429957029969"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <img
+      src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/discord.svg"
+      alt="Discord Logo"
+    />
+    Discord Bot
+  </a>
+</body>
