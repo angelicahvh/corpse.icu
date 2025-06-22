@@ -100,7 +100,6 @@
       .social-icons-vertical {
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
         align-items: center;
         gap: 24px;
         padding: 20px;
@@ -168,7 +167,7 @@
 
     <div class="w-screen h-screen flex items-center justify-center">
       <!-- Layout with profile card left, socials right -->
-      <div class="flex items-start justify-center gap-6">
+      <div class="flex items-stretch justify-center gap-6">
         <!-- Profile Card (LEFT) -->
         <div
           class="glass rounded-2xl w-[425px] h-full flex flex-col items-center p-[25px] gap-[10px]"
@@ -213,36 +212,62 @@
         </div>
 
         <!-- Social Icons (RIGHT) -->
-        <div class="social-icons-vertical glass flex flex-col justify-between">
-          <div>
-            <a href="https://steamcommunity.com/id/captainflames" target="_blank">
-              <img
-                src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/steam.svg"
-                alt="Steam"
-              />
-            </a>
-            <a href="https://github.com/rabbitcorpse" target="_blank">
-              <img
-                src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg"
-                alt="GitHub"
-              />
-            </a>
-            <a href="https://twitter.com/bloodcorpse7" target="_blank">
-              <img
-                src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/twitter.svg"
-                alt="Twitter"
-              />
-            </a>
-            <a
-              href="https://open.spotify.com/user/31mf24d6tezrz57jrn57ogv4uguq?si=9ddeec8e8c0a49b5"
-              target="_blank"
-            >
-              <img
-                src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/spotify.svg"
-                alt="Spotify"
-              />
-            </a>
-          </div>
+        <div class="social-icons-vertical glass">
+          <a href="https://steamcommunity.com/id/captainflames" target="_blank">
+            <img
+              src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/steam.svg"
+              alt="Steam"
+            />
+          </a>
+          <a href="https://github.com/rabbitcorpse" target="_blank">
+            <img
+              src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg"
+              alt="GitHub"
+            />
+          </a>
+          <a href="https://twitter.com/bloodcorpse7" target="_blank">
+            <img
+              src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/twitter.svg"
+              alt="Twitter"
+            />
+          </a>
+
+          <a
+            href="https://open.spotify.com/user/31mf24d6tezrz57jrn57ogv4uguq?si=9ddeec8e8c0a49b5"
+            target="_blank"
+          >
+            <img
+              src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/spotify.svg"
+              alt="Spotify"
+            />
+          </a>
+
+          <a href="https://www.instagram.com/yourprofile" target="_blank">
+            <img
+              src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/instagram.svg"
+              alt="Instagram"
+            />
+          </a>
+          <a href="https://www.twitch.tv/yourchannel" target="_blank">
+            <img
+              src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/twitch.svg"
+              alt="Twitch"
+            />
+          </a>
+
+          <a href="https://www.reddit.com/user/yourusername" target="_blank">
+            <img
+              src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/reddit.svg"
+              alt="Reddit"
+            />
+          </a>
+
+          <a href="https://www.youtube.com/channel/yourchannel" target="_blank">
+            <img
+              src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/youtube.svg"
+              alt="YouTube"
+            />
+          </a>
 
           <a href="https://discord.gg/fwYzVKN9cx" target="_blank">
             <img
@@ -256,30 +281,8 @@
       <!-- Audio Player -->
       <div class="audio-player glass">
         <img src="album.png" alt="Album Art" />
-        <div class="info">
-          <strong class="text-sm">Scourge Of Iron</strong>
-          <span class="text-xs">Cannibal Corpse</span>
-          <audio id="bg-audio" controls autoplay>
-            <source src="audio.mp3" type="audio/mp3" />
-            Your browser does not support the audio element.
-          </audio>
-        </div>
+        <!-- Your audio player content goes here -->
       </div>
     </div>
-
-    <script>
-      function addClickAnimation(selector) {
-        document.querySelectorAll(selector).forEach((el) => {
-          el.addEventListener("click", () => {
-            el.classList.remove("click-animate");
-            void el.offsetWidth;
-            el.classList.add("click-animate");
-          });
-        });
-      }
-
-      addClickAnimation(".button");
-      addClickAnimation(".social-icons-vertical img");
-    </script>
   </body>
 </html>
