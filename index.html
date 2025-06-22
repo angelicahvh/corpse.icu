@@ -167,7 +167,7 @@
 
     <div class="w-screen h-screen flex items-center justify-center">
       <!-- Layout with profile card left, socials right -->
-      <div class="flex items-start justify-center gap-6">
+      <div class="flex items-stretch justify-center gap-6">
         <!-- Profile Card (LEFT) -->
         <div
           class="glass rounded-2xl w-[425px] h-full flex flex-col items-center p-[25px] gap-[10px]"
@@ -254,31 +254,4 @@
 
       <!-- Audio Player -->
       <div class="audio-player glass">
-        <img src="album.png" alt="Album Art" />
-        <div class="info">
-          <strong class="text-sm">Scourge Of Iron</strong>
-          <span class="text-xs">Cannibal Corpse</span>
-          <audio id="bg-audio" controls autoplay>
-            <source src="audio.mp3" type="audio/mp3" />
-            Your browser does not support the audio element.
-          </audio>
-        </div>
-      </div>
-    </div>
-
-    <script>
-      function addClickAnimation(selector) {
-        document.querySelectorAll(selector).forEach((el) => {
-          el.addEventListener("click", () => {
-            el.classList.remove("click-animate");
-            void el.offsetWidth;
-            el.classList.add("click-animate");
-          });
-        });
-      }
-
-      addClickAnimation(".button");
-      addClickAnimation(".social-icons-vertical img");
-    </script>
-  </body>
-</html>
+        <img src="album.png" alt="Album Art"
