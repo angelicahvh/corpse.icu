@@ -63,63 +63,12 @@
         text-shadow: #9ea4d9 1px 1px 10px;
       }
 
-      /* Audio Player restored to original style */
-      .audio-player {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        background: rgba(20, 20, 20, 0.75);
-        border: 2px solid rgba(255, 255, 255, 0.6);
-        border-radius: 1rem;
-        padding: 0.5rem 1rem;
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        color: #838ac9;
-        width: 250px;
-        z-index: 50;
-      }
-
-      .audio-player img {
-        width: 50px;
-        height: 50px;
-        object-fit: cover;
-        border-radius: 0.5rem;
-        box-shadow: 0 0 10px #9ea4d9;
-      }
-
-      .audio-player .info {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        width: 100%;
-      }
-
-      .audio-player .title {
-        font-weight: 700;
-        font-size: 1rem;
-        text-shadow: 0 0 10px #9ea4d9;
-      }
-
-      .audio-player .artist {
-        font-size: 0.8rem;
-        color: #b0b5d1;
-      }
-
-      .audio-player audio {
-        width: 100%;
-        margin-top: 0.3rem;
-        background: transparent;
-        outline: none;
-        cursor: pointer;
-      }
-
       /* Slightly reduced gap between social icons */
       .social-icons-vertical {
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 28px; /* updated gap */
+        gap: 28px; /* reduced from 32px */
         padding: 20px;
         border: 2px solid rgba(255, 255, 255, 0.6);
         border-radius: 1rem;
@@ -153,6 +102,17 @@
         100% {
           transform: scale(1);
         }
+      }
+
+      /* Spotify Player */
+      .spotify-player {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        border-radius: 1rem;
+        overflow: hidden;
+        box-shadow: 0 0 10px #9ea4d9;
+        z-index: 50;
       }
     </style>
 
@@ -289,17 +249,17 @@
         </div>
       </div>
 
-      <!-- Audio Player -->
-      <div class="audio-player glass">
-        <img src="album.png" alt="Album Art" />
-        <div class="info">
-          <div class="title">Song Title</div>
-          <div class="artist">Artist Name</div>
-          <audio controls>
-            <source src="song.mp3" type="audio/mpeg" />
-            Your browser does not support the audio element.
-          </audio>
-        </div>
+      <!-- Spotify Playlist Player -->
+      <div class="spotify-player glass">
+        <iframe
+          src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M"
+          width="300"
+          height="380"
+          frameborder="0"
+          allowtransparency="true"
+          allow="encrypted-media"
+          style="border-radius: 1rem;"
+        ></iframe>
       </div>
     </div>
   </body>
