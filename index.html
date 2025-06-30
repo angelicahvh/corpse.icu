@@ -45,6 +45,7 @@
         backdrop-filter: blur(10px) saturate(180%);
         background-color: rgba(20, 20, 20, 0.75);
         border: 2px solid rgba(255, 255, 255, 0.6);
+        border-radius: 0 !important;
       }
 
       .button {
@@ -63,15 +64,14 @@
         text-shadow: #9ea4d9 1px 1px 10px;
       }
 
-      /* Slightly reduced gap between social icons */
       .social-icons-vertical {
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 28px; /* reduced from 32px */
+        gap: 28px;
         padding: 20px;
         border: 2px solid rgba(255, 255, 255, 0.6);
-        border-radius: 1rem;
+        border-radius: 0 !important;
         backdrop-filter: blur(10px) saturate(180%);
         background-color: rgba(20, 20, 20, 0.75);
       }
@@ -104,12 +104,11 @@
         }
       }
 
-      /* Spotify Player */
       .spotify-player {
         position: fixed;
         bottom: 20px;
         right: 20px;
-        border-radius: 1rem;
+        border-radius: 0 !important;
         overflow: hidden;
         box-shadow: 0 0 10px #9ea4d9;
         z-index: 50;
@@ -148,11 +147,11 @@
       <div class="flex items-stretch justify-center gap-6">
         <!-- Profile Card (LEFT) -->
         <div
-          class="glass rounded-2xl w-[425px] h-full flex flex-col items-center p-[25px] gap-[10px]"
+          class="glass w-[425px] h-full flex flex-col items-center p-[25px] gap-[10px]"
         >
           <img
-            class="w-auto h-[125px] rounded-2xl"
-            src="https://discord-info-amber.vercel.app/pfp/327589528384831489"
+            class="w-auto h-[125px]"
+            src="pfp.png"
             alt="Profile"
           />
           <a class="glow text-3xl">Cinnamon</a>
@@ -171,22 +170,21 @@
           <span class="w-full h-px bg-white"></span>
           <a class="glow text-2xl">My Discord Server</a>
           <div
-            class="w-full glass rounded-2xl flex flex-row gap-[10px] items-center"
+            class="w-full glass flex flex-row gap-[10px] items-center"
           >
             <img
-              class="w-auto h-[75px] rounded-2xl"
+              class="w-auto h-[75px]"
               src="discord.png"
               alt="CantThinkOfName"
             />
             <a class="glow shrink-0">CantThinkOfName</a>
-           <div class="w-full grow flex flex-row-reverse pr-4">
-  <a
-    href="https://discord.gg/fwYzVKN9cx"
-    class="glow cursor-pointer rounded-md button"
-    >ᴊᴏɪɴ :3</a
-  >
-</div>
-
+            <div class="w-full grow flex flex-row-reverse pr-4">
+              <a
+                href="https://discord.gg/fwYzVKN9cx"
+                class="glow cursor-pointer rounded-md button"
+                >ᴊᴏɪɴ :3</a
+              >
+            </div>
           </div>
         </div>
 
@@ -219,28 +217,24 @@
               alt="Spotify"
             />
           </a>
-
           <a href="https://www.twitch.tv/cinnamon475" target="_blank">
             <img
               src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/twitch.svg"
               alt="Twitch"
             />
           </a>
-
           <a href="https://www.youtube.com/channel/rabbit.corpse" target="_blank">
             <img
               src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/youtube.svg"
               alt="YouTube"
             />
           </a>
-
           <a href="https://www.reddit.com/user/shallum1" target="_blank">
             <img
               src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/reddit.svg"
               alt="Reddit"
             />
           </a>
-
           <a href="https://discord.com/oauth2/authorize?client_id=1386310429957029969&permissions=8&integration_type=0&scope=bot+applications.commands" target="_blank">
             <img
               src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/discord.svg"
