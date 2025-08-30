@@ -34,6 +34,7 @@
         backdrop-filter: blur(5px) saturate(180%);
         background-color: rgba(20, 20, 20, 0.75);
         border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 0; /* square corners */
       }
 
       .glow {
@@ -46,7 +47,7 @@
         right: 20px;
         background: rgba(20, 20, 20, 0.85);
         border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 1rem;
+        border-radius: 0; /* square corners */
         padding: 1rem;
         display: flex;
         align-items: center;
@@ -60,31 +61,20 @@
         width: 60px;
         height: 60px;
         object-fit: cover;
-        border-radius: 0.5rem;
-      }
-
-      .audio-player .info {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-      }
-
-      .audio-player audio {
-        width: 100%;
-        margin-top: 0.5rem;
+        border-radius: 0; /* square corners */
       }
 
       /* Social Box Styles */
       .social-box {
-        margin-left: 30px;
+        margin-left: 40px;
         display: flex;
         flex-direction: column;
-        align-items: center;
-        gap: 16px;
+        justify-content: flex-end; /* align bottom with main box */
+        gap: 28px; /* more space between icons */
         padding: 20px;
         background-color: rgba(20, 20, 20, 0.75);
         border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 1rem;
+        border-radius: 0; /* square corners */
         box-shadow: 0 8px 24px rgba(164, 161, 205, 0.3);
       }
 
@@ -101,29 +91,6 @@
         transform: scale(1.2);
       }
     </style>
-
-    <script>
-      const fullTitle = document.title;
-      let index = 1;
-      let direction = 1;
-      const speed = 150;
-
-      function typewriterLoop() {
-        document.title = fullTitle.substring(0, index);
-        if (direction === 1 && index === fullTitle.length) {
-          direction = -1;
-          setTimeout(typewriterLoop, 1000);
-        } else if (direction === -1 && index === 1) {
-          direction = 1;
-          setTimeout(typewriterLoop, 500);
-        } else {
-          index += direction;
-          setTimeout(typewriterLoop, speed);
-        }
-      }
-
-      window.onload = typewriterLoop;
-    </script>
   </head>
 
   <body>
@@ -135,14 +102,14 @@
         <a class="glow text-3xl">𝒞𝒪𝑅𝒫𝒮𝐸</a>
       </div>
 
-      <!-- Main content + Social Box side by side -->
-      <div class="flex flex-row items-start">
+      <!-- Main content + Social Box side by side, centered -->
+      <div class="flex flex-row items-end justify-center">
         <!-- Main Glass Card -->
         <div
-          class="glass rounded-2xl w-[425px] h-fit flex flex-col items-center p-[25px] gap-[10px]"
+          class="glass w-[425px] h-fit flex flex-col items-center p-[25px] gap-[10px]"
         >
           <img
-            class="w-auto h-[125px] rounded-2xl"
+            class="w-auto h-[125px]"
             src="pfp.png"
             alt="Profile"
           />
@@ -158,10 +125,10 @@
           <span class="w-full h-px bg-white"></span>
           <a class="glow text-2xl">My Discord Server</a>
           <div
-            class="w-full glass rounded-2xl p-[10px] flex flex-row gap-[10px] items-center"
+            class="w-full glass p-[10px] flex flex-row gap-[10px] items-center"
           >
             <img
-              class="w-auto h-[75px] rounded-2xl"
+              class="w-auto h-[75px]"
               src="discord.png"
               alt="CantThinkOfName"
             />
@@ -169,7 +136,7 @@
             <div class="w-full grow flex flex-row-reverse">
               <a
                 href="https://discord.gg/fwYzVKN9cx"
-                class="glow-hover clickable transition-transform transform hover:scale-105 cursor-pointer rounded-md button py-[6px]"
+                class="glow-hover clickable transition-transform transform hover:scale-105 cursor-pointer border border-white py-[6px] px-[12px]"
                 >ᴊᴏɪɴ :3</a
               >
             </div>
@@ -219,7 +186,7 @@
         cover.hide(200);
       });
 
-      // Auto play music when page loads
+      // Try autoplay when page loads
       window.addEventListener("load", () => {
         const audio = document.getElementById("bg-music");
         audio.play().catch(() => {
