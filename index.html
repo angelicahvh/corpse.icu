@@ -16,18 +16,18 @@
       :root {
         padding: 0;
         margin: 0;
-        font-family: "Roboto";
-        overflow: hidden;
+        font-family: "Roboto", sans-serif;
         color: #fab7be;
         box-sizing: border-box;
       }
 
       body {
-        background-color: white;
-        background-image: url(bg.png);
-        background-position: center;
-        background-repeat: no-repeat;
+        margin: 0;
+        height: 100vh;
+        width: 100vw;
+        background: url("bg.png") no-repeat center center fixed;
         background-size: cover;
+        overflow: hidden;
       }
 
       .glass {
@@ -41,41 +41,68 @@
         text-shadow: #fdc8ce 2px 2px 20px;
       }
 
+      /* Audio Player */
       .audio-player {
         position: fixed;
         bottom: 20px;
         right: 20px;
         background: rgba(20, 20, 20, 0.85);
         border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 0; /* square corners */
-        padding: 1rem;
+        border-radius: 0;
+        padding: 12px;
         display: flex;
         align-items: center;
-        gap: 1rem;
+        gap: 12px;
         color: white;
-        width: 300px;
-        z-index: 50;
+        width: 320px;
+        box-sizing: border-box;
       }
 
       .audio-player img {
-        width: 60px;
-        height: 60px;
+        width: 64px;
+        height: 64px;
         object-fit: cover;
-        border-radius: 0; /* square corners */
+        border-radius: 0;
+        flex-shrink: 0;
       }
 
-      /* Social Box Styles */
-      .social-box {
-        margin-left: 40px;
+      .audio-player .info {
         display: flex;
         flex-direction: column;
-        justify-content: flex-end; /* align bottom with main box */
-        gap: 28px; /* more space between icons */
-        padding: 20px;
+        flex: 1;
+        min-width: 0;
+      }
+
+      .audio-player strong {
+        font-size: 14px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .audio-player span {
+        font-size: 12px;
+        color: #ddd;
+      }
+
+      .audio-player audio {
+        width: 100%;
+        margin-top: 4px;
+      }
+
+      /* Social Icons Left Side */
+      .social-box {
+        position: fixed;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        padding: 20px 10px;
         background-color: rgba(20, 20, 20, 0.75);
         border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 0; /* square corners */
-        box-shadow: 0 8px 24px rgba(164, 161, 205, 0.3);
+        border-radius: 0;
       }
 
       .social-box img {
@@ -94,89 +121,76 @@
   </head>
 
   <body>
-    <div class="w-screen h-screen flex flex-col items-center justify-center">
-      <div
-        id="cover"
-        class="cursor-pointer fixed w-full h-full z-9999 bg-black flex flex-col items-center justify-center"
-      >
-        <a class="glow text-3xl">𝒞𝒪𝑅𝒫𝒮𝐸</a>
-      </div>
+    <div
+      id="cover"
+      class="cursor-pointer fixed w-full h-full z-50 bg-black flex flex-col items-center justify-center"
+    >
+      <a class="glow text-3xl">𝒞𝒪𝑅𝒫𝒮𝐸</a>
+    </div>
 
-      <!-- Main content + Social Box side by side, centered -->
-      <div class="flex flex-row items-end justify-center">
-        <!-- Main Glass Card -->
-        <div
-          class="glass w-[425px] h-fit flex flex-col items-center p-[25px] gap-[10px]"
-        >
-          <img
-            class="w-auto h-[125px]"
-            src="pfp.png"
-            alt="Profile"
-          />
-          <a class="glow text-3xl">CORPSE</a>
-          <a class="text-2xl">𝐇𝐄𝐑𝐌𝐈𝐓 | 𝐍𝐎𝐋𝐈𝐅𝐄 | 𝐕𝐈𝐊𝐈𝐍𝐆</a>
-          <span class="w-full h-px bg-white"></span>
-          <a class="text-1xl">¯\_(ツ)_/¯</a>
-          <a class="text-1xl" style="color: white;">hello, im corpse</a>
-          <a class="text-1xl text-center" style="color: white;">
-            my life consists of either watching anime, sitting at my desk, playing
-            games or listening to music
-          </a>
-          <span class="w-full h-px bg-white"></span>
-          <a class="glow text-2xl">My Discord Server</a>
-          <div
-            class="w-full glass p-[10px] flex flex-row gap-[10px] items-center"
-          >
-            <img
-              class="w-auto h-[75px]"
-              src="discord.png"
-              alt="CantThinkOfName"
-            />
-            <a class="glow shrink-0">CantThinkOfName</a>
-            <div class="w-full grow flex flex-row-reverse">
-              <a
-                href="https://discord.gg/fwYzVKN9cx"
-                class="glow-hover clickable transition-transform transform hover:scale-105 cursor-pointer border border-white py-[6px] px-[12px]"
-                >ᴊᴏɪɴ :3</a
-              >
-            </div>
+    <!-- Social Icons Left -->
+    <div class="social-box">
+      <a href="https://steamcommunity.com/id/captainflames" target="_blank">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/steam.svg" alt="Steam"/>
+      </a>
+      <a href="https://github.com/rabbitcorpse" target="_blank">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" alt="GitHub"/>
+      </a>
+      <a href="https://twitter.com/bloodcorpse7" target="_blank">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/twitter.svg" alt="Twitter"/>
+      </a>
+      <a href="https://open.spotify.com/user/31mf24d6tezrz57jrn57ogv4uguq" target="_blank">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/spotify.svg" alt="Spotify"/>
+      </a>
+      <a href="https://discord.com" target="_blank">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/discord.svg" alt="Discord"/>
+      </a>
+      <a href="https://youtube.com" target="_blank">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/youtube.svg" alt="YouTube"/>
+      </a>
+    </div>
+
+    <!-- Main Box Centered -->
+    <div class="w-screen h-screen flex items-center justify-center">
+      <div
+        class="glass w-[425px] h-fit flex flex-col items-center p-[25px] gap-[10px]"
+      >
+        <img class="w-auto h-[125px]" src="pfp.png" alt="Profile" />
+        <a class="glow text-3xl">CORPSE</a>
+        <a class="text-2xl">𝐇𝐄𝐑𝐌𝐈𝐓 | 𝐍𝐎𝐋𝐈𝐅𝐄 | 𝐕𝐈𝐊𝐈𝐍𝐆</a>
+        <span class="w-full h-px bg-white"></span>
+        <a class="text-1xl">¯\_(ツ)_/¯</a>
+        <a class="text-1xl" style="color: white;">hello, im corpse</a>
+        <a class="text-1xl text-center" style="color: white;">
+          my life consists of either watching anime, sitting at my desk, playing
+          games or listening to music
+        </a>
+        <span class="w-full h-px bg-white"></span>
+        <a class="glow text-2xl">My Discord Server</a>
+        <div class="w-full glass p-[10px] flex flex-row gap-[10px] items-center">
+          <img class="w-auto h-[75px]" src="discord.png" alt="CantThinkOfName" />
+          <a class="glow shrink-0">CantThinkOfName</a>
+          <div class="w-full grow flex flex-row-reverse">
+            <a
+              href="https://discord.gg/fwYzVKN9cx"
+              class="glow-hover transition-transform transform hover:scale-105 cursor-pointer border border-white py-[6px] px-[12px]"
+              >ᴊᴏɪɴ :3</a
+            >
           </div>
         </div>
-
-        <!-- Social Icons Box -->
-        <div class="social-box">
-          <a href="https://steamcommunity.com/id/captainflames" target="_blank">
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/steam.svg" alt="Steam"/>
-          </a>
-          <a href="https://github.com/rabbitcorpse" target="_blank">
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" alt="GitHub"/>
-          </a>
-          <a href="https://twitter.com/bloodcorpse7" target="_blank">
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/twitter.svg" alt="Twitter"/>
-          </a>
-          <a href="https://open.spotify.com/user/31mf24d6tezrz57jrn57ogv4uguq" target="_blank">
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/spotify.svg" alt="Spotify"/>
-          </a>
-          <a href="https://discord.com" target="_blank">
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/discord.svg" alt="Discord"/>
-          </a>
-          <a href="https://youtube.com" target="_blank">
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/youtube.svg" alt="YouTube"/>
-          </a>
-        </div>
       </div>
+    </div>
 
-      <!-- Custom Audio Player -->
-      <div class="audio-player glass">
-        <img src="album.png" alt="Album Art" />
-        <div class="info">
-          <strong class="text-sm">Scourge Of Iron</strong>
-          <span class="text-xs">Cannibal Corpse</span>
-          <audio id="bg-music" autoplay controls>
-            <source src="audio.mp3" type="audio/mp3" />
-            Your browser does not support the audio element.
-          </audio>
-        </div>
+    <!-- Audio Player -->
+    <div class="audio-player">
+      <img src="album.png" alt="Album Art" />
+      <div class="info">
+        <strong>Scourge Of Iron</strong>
+        <span>Cannibal Corpse</span>
+        <audio id="bg-music" autoplay controls>
+          <source src="audio.mp3" type="audio/mp3" />
+          Your browser does not support the audio element.
+        </audio>
       </div>
     </div>
 
@@ -184,13 +198,9 @@
       const cover = $("#cover");
       cover.on("click", function () {
         cover.hide(200);
-      });
-
-      // Try autoplay when page loads
-      window.addEventListener("load", () => {
         const audio = document.getElementById("bg-music");
         audio.play().catch(() => {
-          console.log("Autoplay blocked by browser until user interacts.");
+          console.log("Autoplay blocked until user interaction.");
         });
       });
     </script>
