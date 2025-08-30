@@ -1,205 +1,243 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Corpse | Personal Website</title>
-  <style>
-    /* Reset & Font */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <title>corpse</title>
+    <style>
+      :root {
+        padding: 0;
+        margin: 0;
+        font-family: "Roboto", sans-serif;
+        color: #fab7be;
+        box-sizing: border-box;
+      }
 
-    body {
-      background: url('your-wallpaper.jpg') no-repeat center center fixed;
-      background-size: cover;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      color: white;
-    }
+      body {
+        margin: 0;
+        height: 100vh;
+        width: 100vw;
+        background: url("bg.png") no-repeat center center fixed;
+        background-size: cover;
+        overflow: hidden;
+      }
 
-    /* Neutral Frosted Glass Effect */
-    .glass {
-      backdrop-filter: blur(20px) saturate(180%);
-      -webkit-backdrop-filter: blur(20px) saturate(180%);
-      background-color: rgba(255, 255, 255, 0.1); /* Pure neutral glass, no blue */
-      border-radius: 18px;
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-      transition: all 0.3s ease-in-out;
-    }
+      /* Normal Transparent Glass */
+      .glass {
+        background-color: rgba(255, 255, 255, 0.08); /* Subtle transparency */
+        border-radius: 18px;
+        border: 1px solid rgba(255, 255, 255, 0.15); /* Light glass-like border */
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25); /* Gentle shadow */
+        transition: all 0.3s ease-in-out;
+      }
 
-    .glass:hover {
-      background-color: rgba(255, 255, 255, 0.15); /* Slightly brighter on hover */
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
-    }
+      .glass:hover {
+        background-color: rgba(255, 255, 255, 0.12);
+        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
+      }
 
-    /* Profile Card */
-    .profile-card {
-      width: 360px;
-      padding: 20px;
-      text-align: center;
-      margin-top: 50px;
-    }
+      .glow {
+        text-shadow: #fdc8ce 2px 2px 20px;
+      }
 
-    .profile-card img {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      margin-bottom: 15px;
-      border: 3px solid rgba(255, 255, 255, 0.6);
-    }
+      /* Audio Player */
+      .audio-player {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        padding: 12px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: white;
+        width: 320px;
+        box-sizing: border-box;
+      }
 
-    .profile-card h1 {
-      font-size: 24px;
-      margin-bottom: 8px;
-      color: #ff7b7b;
-    }
+      .audio-player img {
+        width: 64px;
+        height: 64px;
+        object-fit: cover;
+        border-radius: 12px;
+        flex-shrink: 0;
+      }
 
-    .profile-card h2 {
-      font-size: 14px;
-      margin-bottom: 10px;
-      color: #ffbebe;
-      letter-spacing: 1px;
-    }
+      .audio-player .info {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        min-width: 0;
+      }
 
-    /* Social Icons Sidebar */
-    .social-icons {
-      position: fixed;
-      top: 50%;
-      left: 20px;
-      transform: translateY(-50%);
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      padding: 10px;
-    }
+      .audio-player strong {
+        font-size: 14px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
 
-    .social-icons a {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 48px;
-      height: 48px;
-      border-radius: 12px;
-      text-decoration: none;
-      font-size: 20px;
-      color: white;
-      transition: all 0.3s ease-in-out;
-    }
+      .audio-player span {
+        font-size: 12px;
+        color: #ddd;
+      }
 
-    .social-icons a:hover {
-      transform: scale(1.1);
-    }
+      .audio-player audio {
+        width: 100%;
+        margin-top: 4px;
+      }
 
-    /* Discord Invite */
-    .discord-box {
-      position: fixed;
-      bottom: 20px;
-      left: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 12px 16px;
-      width: 250px;
-    }
+      /* Social Icons */
+      .social-box {
+        position: fixed;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        display: flex;
+        flex-direction: column;
+        gap: 50px;
+        padding: 20px 10px;
+        border-radius: 18px;
+      }
 
-    .discord-box img {
-      width: 40px;
-      height: 40px;
-      border-radius: 8px;
-      margin-right: 10px;
-    }
+      .social-box img {
+        width: 48px;
+        height: 48px;
+        cursor: pointer;
+        transition: transform 0.2s ease;
+        filter: invert(94%) sepia(8%) saturate(376%) hue-rotate(305deg)
+          brightness(108%) contrast(96%);
+      }
 
-    .discord-info {
-      display: flex;
-      flex-direction: column;
-    }
+      .social-box img:hover {
+        transform: scale(1.2);
+      }
 
-    .discord-info span {
-      font-weight: bold;
-      font-size: 14px;
-    }
+      /* Discord Invite */
+      .discord-invite {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        width: 360px;
+      }
+    </style>
 
-    .discord-button {
-      background-color: rgba(255, 255, 255, 0.15);
-      padding: 6px 12px;
-      border-radius: 8px;
-      font-size: 12px;
-      color: white;
-      text-decoration: none;
-      border: 1px solid rgba(255, 255, 255, 0.4);
-      transition: all 0.3s ease;
-    }
+    <script>
+      // Animated Title Script
+      const fullTitle = "corpse";
+      let index = 1;
+      let direction = 1;
+      const speed = 150;
 
-    .discord-button:hover {
-      background-color: rgba(255, 255, 255, 0.25);
-    }
+      function typewriterLoop() {
+        document.title = fullTitle.substring(0, index);
+        if (direction === 1 && index === fullTitle.length) {
+          direction = -1;
+          setTimeout(typewriterLoop, 1000);
+        } else if (direction === -1 && index === 1) {
+          direction = 1;
+          setTimeout(typewriterLoop, 500);
+        } else {
+          index += direction;
+          setTimeout(typewriterLoop, speed);
+        }
+      }
 
-    /* Audio Player */
-    .audio-player {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      width: 300px;
-      padding: 12px;
-      display: flex;
-      align-items: center;
-    }
+      window.addEventListener("load", () => {
+        typewriterLoop();
+      });
+    </script>
+  </head>
 
-    .audio-player img {
-      width: 48px;
-      height: 48px;
-      border-radius: 8px;
-      margin-right: 12px;
-    }
-
-    audio {
-      width: 100%;
-    }
-  </style>
-</head>
-<body>
-  <!-- Social Icons -->
-  <div class="social-icons glass">
-    <a href="#"><img src="steam-icon.png" alt="Steam"></a>
-    <a href="#"><img src="github-icon.png" alt="GitHub"></a>
-    <a href="#"><img src="spotify-icon.png" alt="Spotify"></a>
-    <a href="#"><img src="youtube-icon.png" alt="YouTube"></a>
-    <a href="#"><img src="twitter-icon.png" alt="Twitter"></a>
-    <a href="#"><img src="discord-icon.png" alt="Discord"></a>
-  </div>
-
-  <!-- Profile Card -->
-  <div class="profile-card glass">
-    <img src="pfp.jpg" alt="Profile Picture" />
-    <h1>CORPSE</h1>
-    <h2>HERMIT | NOLIFE | VIKING</h2>
-    <p>hello, im corpse<br>my life consists of either watching anime, sitting at my desk, playing games or listening to music</p>
-  </div>
-
-  <!-- Discord Invite -->
-  <div class="discord-box glass">
-    <img src="server-icon.png" alt="Discord Server" />
-    <div class="discord-info">
-      <span>Can'tThinkOfName</span>
+  <body>
+    <div
+      id="cover"
+      class="cursor-pointer fixed w-full h-full z-50 bg-black flex flex-col items-center justify-center"
+    >
+      <a class="glow text-3xl">𝒞𝒪𝑅𝒫𝒮𝐸</a>
     </div>
-    <a href="#" class="discord-button">JOIN :3</a>
-  </div>
 
-  <!-- Audio Player -->
-  <div class="audio-player glass">
-    <img src="album-cover.jpg" alt="Album Cover" />
-    <audio controls>
-      <source src="song.mp3" type="audio/mpeg" />
-      Your browser does not support the audio element.
-    </audio>
-  </div>
-</body>
+    <!-- Social Icons Left -->
+    <div class="social-box glass">
+      <a href="https://steamcommunity.com/id/captainflames" target="_blank">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/steam.svg" alt="Steam"/>
+      </a>
+      <a href="https://github.com/rabbitcorpse" target="_blank">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" alt="GitHub"/>
+      </a>
+      <a href="https://open.spotify.com/user/31mf24d6tezrz57jrn57ogv4uguq" target="_blank">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/spotify.svg" alt="Spotify"/>
+      </a>
+      <a href="https://youtube.com" target="_blank">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/youtube.svg" alt="YouTube"/>
+      </a>
+      <a href="https://twitter.com/bloodcorpse7" target="_blank">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/twitter.svg" alt="Twitter"/>
+      </a>
+      <a href="https://discord.com" target="_blank">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/discord.svg" alt="Discord"/>
+      </a>
+    </div>
+
+    <!-- Main Box Centered -->
+    <div class="w-screen h-screen flex items-center justify-center">
+      <div class="glass w-[425px] h-fit flex flex-col items-center p-[25px] gap-[10px]">
+        <img class="w-auto h-[125px]" src="pfp.png" alt="Profile" />
+        <a class="glow text-3xl">CORPSE</a>
+        <a class="text-2xl">𝐇𝐄𝐑𝐌𝐈𝐓 | 𝐍𝐎𝐋𝐈𝐅𝐄 | 𝐕𝐈𝐊𝐈𝐍𝐆</a>
+        <span class="w-full h-px bg-white"></span>
+        <a class="text-1xl">¯\_(ツ)_/¯</a>
+        <a class="text-1xl" style="color: white;">hello, im corpse</a>
+        <a class="text-1xl text-center" style="color: white;">
+          my life consists of either watching anime, sitting at my desk, playing
+          games or listening to music
+        </a>
+        <span class="w-full h-px bg-white"></span>
+      </div>
+    </div>
+
+    <!-- Discord Server Invite Bottom Left -->
+    <div class="discord-invite glass p-[10px] flex flex-row gap-[10px] items-center">
+      <img class="w-auto h-[75px]" src="discord.png" alt="CantThinkOfName" />
+      <a class="glow shrink-0">CantThinkOfName</a>
+      <div class="w-full grow flex flex-row-reverse">
+        <a
+          href="https://discord.gg/fwYzVKN9cx"
+          class="glow-hover transition-transform transform hover:scale-105 cursor-pointer border border-white py-[6px] px-[12px]"
+          >ᴊᴏɪɴ :3</a
+        >
+      </div>
+    </div>
+
+    <!-- Audio Player with Glass -->
+    <div class="audio-player glass">
+      <img src="album.png" alt="Album Art" />
+      <div class="info">
+        <strong>Scourge Of Iron</strong>
+        <span>Cannibal Corpse</span>
+        <audio id="bg-music" autoplay controls>
+          <source src="audio.mp3" type="audio/mp3" />
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+    </div>
+
+    <script>
+      const cover = $("#cover");
+      cover.on("click", function () {
+        cover.hide(200);
+        const audio = document.getElementById("bg-music");
+        audio.play().catch(() => {
+          console.log("Autoplay blocked until user interaction.");
+        });
+      });
+    </script>
+  </body>
 </html>
