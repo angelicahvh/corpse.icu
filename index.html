@@ -1,208 +1,287 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
-      rel="stylesheet"
-    />
-    <title>corpse</title>
-    <style>
-      :root {
-        padding: 0;
-        margin: 0;
-        font-family: "Roboto", sans-serif;
-        color: #fab7be;
-        box-sizing: border-box;
-      }
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"/>
+<title>corpse</title>
+<style>
+:root {
+  padding: 0;
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  color: #fab7be;
+  box-sizing: border-box;
+}
 
-      body {
-        margin: 0;
-        height: 100vh;
-        width: 100vw;
-        background: url("bg.png") no-repeat center center fixed;
-        background-size: cover;
-        overflow: hidden;
-      }
+body {
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+  background: url("bg.png") no-repeat center center fixed;
+  background-size: cover;
+  overflow: hidden;
+}
 
-      .glass {
-        backdrop-filter: blur(5px) saturate(180%);
-        background-color: rgba(20, 20, 20, 0.75);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 0; /* square corners */
-      }
+.glass {
+  backdrop-filter: blur(5px) saturate(180%);
+  background-color: rgba(20, 20, 20, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0; /* square corners */
+}
 
-      .glow {
-        text-shadow: #fdc8ce 2px 2px 20px;
-      }
+.glow {
+  text-shadow: #fdc8ce 2px 2px 20px;
+}
 
-      /* Audio Player */
-      .audio-player {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        background: rgba(20, 20, 20, 0.85);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 0;
-        padding: 12px;
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        color: white;
-        width: 320px;
-        box-sizing: border-box;
-      }
+/* Audio Player */
+.audio-player {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(20, 20, 20, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: white;
+  width: 320px;
+  box-sizing: border-box;
+}
 
-      .audio-player img {
-        width: 64px;
-        height: 64px;
-        object-fit: cover;
-        border-radius: 0;
-        flex-shrink: 0;
-      }
+.audio-player img {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 0;
+  flex-shrink: 0;
+}
 
-      .audio-player .info {
-        display: flex;
-        flex-direction: column;
-        flex: 1;
-        min-width: 0;
-      }
+.audio-player .info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
 
-      .audio-player strong {
-        font-size: 14px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
+.audio-player strong {
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
-      .audio-player span {
-        font-size: 12px;
-        color: #ddd;
-      }
+.audio-player span {
+  font-size: 12px;
+  color: #ddd;
+}
 
-      .audio-player audio {
-        width: 100%;
-        margin-top: 4px;
-      }
+.audio-player audio {
+  width: 100%;
+  margin-top: 4px;
+}
 
-      /* Social Icons Left Side */
-      .social-box {
-        position: fixed;
-        top: 50%;
-        left: 0;
-        transform: translateY(-50%);
-        display: flex;
-        flex-direction: column;
-        gap: 30px;
-        padding: 20px 10px;
-        background-color: rgba(20, 20, 20, 0.75);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 0;
-      }
+/* Social Icons Left Side */
+.social-box {
+  position: fixed;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 50px; /* spacing between icons */
+  padding: 20px 10px;
+  background-color: rgba(20, 20, 20, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0;
+}
 
-      .social-box img {
-        width: 48px;
-        height: 48px;
-        cursor: pointer;
-        transition: transform 0.2s ease;
-        filter: invert(94%) sepia(8%) saturate(376%) hue-rotate(305deg)
+.social-box img {
+  width: 48px;
+  height: 48px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  filter: invert(94%) sepia(8%) saturate(376%) hue-rotate(305deg)
           brightness(108%) contrast(96%);
-      }
+}
 
-      .social-box img:hover {
-        transform: scale(1.2);
-      }
-    </style>
-  </head>
+.social-box img:hover {
+  transform: scale(1.2);
+}
 
-  <body>
-    <div
-      id="cover"
-      class="cursor-pointer fixed w-full h-full z-50 bg-black flex flex-col items-center justify-center"
-    >
-      <a class="glow text-3xl">𝒞𝒪𝑅𝒫𝒮𝐸</a>
-    </div>
+/* Discord Invite Bottom Left */
+#discord-invite {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  background: rgba(20,20,20,0.75);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 10px 15px;
+  border-radius: 0;
+  font-weight: bold;
+  cursor: pointer;
+  color: #fab7be;
+  text-decoration: none;
+  transition: transform 0.2s ease;
+}
 
-    <!-- Social Icons Left -->
-    <div class="social-box">
-      <a href="https://steamcommunity.com/id/captainflames" target="_blank">
-        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/steam.svg" alt="Steam"/>
-      </a>
-      <a href="https://github.com/rabbitcorpse" target="_blank">
-        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" alt="GitHub"/>
-      </a>
-      <a href="https://twitter.com/bloodcorpse7" target="_blank">
-        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/twitter.svg" alt="Twitter"/>
-      </a>
-      <a href="https://open.spotify.com/user/31mf24d6tezrz57jrn57ogv4uguq" target="_blank">
-        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/spotify.svg" alt="Spotify"/>
-      </a>
-      <a href="https://discord.com" target="_blank">
-        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/discord.svg" alt="Discord"/>
-      </a>
-      <a href="https://youtube.com" target="_blank">
-        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/youtube.svg" alt="YouTube"/>
-      </a>
-    </div>
+#discord-invite:hover {
+  transform: scale(1.05);
+}
 
-    <!-- Main Box Centered -->
-    <div class="w-screen h-screen flex items-center justify-center">
-      <div
-        class="glass w-[425px] h-fit flex flex-col items-center p-[25px] gap-[10px]"
-      >
-        <img class="w-auto h-[125px]" src="pfp.png" alt="Profile" />
-        <a class="glow text-3xl">CORPSE</a>
-        <a class="text-2xl">𝐇𝐄𝐑𝐌𝐈𝐓 | 𝐍𝐎𝐋𝐈𝐅𝐄 | 𝐕𝐈𝐊𝐈𝐍𝐆</a>
-        <span class="w-full h-px bg-white"></span>
-        <a class="text-1xl">¯\_(ツ)_/¯</a>
-        <a class="text-1xl" style="color: white;">hello, im corpse</a>
-        <a class="text-1xl text-center" style="color: white;">
-          my life consists of either watching anime, sitting at my desk, playing
-          games or listening to music
-        </a>
-        <span class="w-full h-px bg-white"></span>
-        <a class="glow text-2xl">My Discord Server</a>
-        <div class="w-full glass p-[10px] flex flex-row gap-[10px] items-center">
-          <img class="w-auto h-[75px]" src="discord.png" alt="CantThinkOfName" />
-          <a class="glow shrink-0">CantThinkOfName</a>
-          <div class="w-full grow flex flex-row-reverse">
-            <a
-              href="https://discord.gg/fwYzVKN9cx"
-              class="glow-hover transition-transform transform hover:scale-105 cursor-pointer border border-white py-[6px] px-[12px]"
-              >ᴊᴏɪɴ :3</a
-            >
-          </div>
-        </div>
-      </div>
-    </div>
+/* Cursor Trail */
+.cursor-dot {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  background-color: #fdc8ce;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.8;
+  transition: transform 0.15s ease, opacity 0.4s ease;
+}
 
-    <!-- Audio Player -->
-    <div class="audio-player">
-      <img src="album.png" alt="Album Art" />
-      <div class="info">
-        <strong>Scourge Of Iron</strong>
-        <span>Cannibal Corpse</span>
-        <audio id="bg-music" autoplay controls>
-          <source src="audio.mp3" type="audio/mp3" />
-          Your browser does not support the audio element.
-        </audio>
-      </div>
-    </div>
+/* Responsive Design for Mobile */
+@media screen and (max-width: 480px) {
+  .glass {
+    width: 90%;
+    padding: 15px;
+    gap: 8px;
+  }
 
-    <script>
-      const cover = $("#cover");
-      cover.on("click", function () {
-        cover.hide(200);
-        const audio = document.getElementById("bg-music");
-        audio.play().catch(() => {
-          console.log("Autoplay blocked until user interaction.");
-        });
-      });
-    </script>
-  </body>
+  .glass img {
+    height: 100px;
+  }
+
+  .audio-player {
+    width: 90%;
+    bottom: 10px;
+    right: 5%;
+    padding: 8px;
+    gap: 8px;
+  }
+
+  .audio-player img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .audio-player strong {
+    font-size: 12px;
+  }
+
+  .audio-player span {
+    font-size: 10px;
+  }
+
+  .social-box {
+    gap: 35px;
+    padding: 10px 5px;
+  }
+
+  .social-box img {
+    width: 36px;
+    height: 36px;
+  }
+
+  #discord-invite {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+
+  a, .text-1xl, .text-2xl, .text-3xl {
+    font-size: smaller;
+  }
+}
+</style>
+
+<script>
+  // Animated Title
+  const fullTitle = "corpse";
+  let index = 1, direction = 1, speed = 150;
+  function typewriterLoop() {
+    document.title = fullTitle.substring(0, index);
+    if(direction===1 && index===fullTitle.length){ direction=-1; setTimeout(typewriterLoop,1000);}
+    else if(direction===-1 && index===1){ direction=1; setTimeout(typewriterLoop,500);}
+    else{ index+=direction; setTimeout(typewriterLoop,speed);}
+  }
+  window.addEventListener("load", () => { typewriterLoop(); });
+</script>
+</head>
+<body>
+
+<div id="cover" class="cursor-pointer fixed w-full h-full z-50 bg-black flex flex-col items-center justify-center">
+  <a class="glow text-3xl">𝒞𝒪𝑅𝒫𝒮𝐸</a>
+</div>
+
+<!-- Social Icons Left -->
+<div class="social-box">
+  <a href="https://steamcommunity.com/id/captainflames" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/steam.svg" alt="Steam"/></a>
+  <a href="https://github.com/rabbitcorpse" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" alt="GitHub"/></a>
+  <a href="https://open.spotify.com/user/31mf24d6tezrz57jrn57ogv4uguq" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/spotify.svg" alt="Spotify"/></a>
+  <a href="https://youtube.com" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/youtube.svg" alt="YouTube"/></a>
+  <a href="https://twitter.com/bloodcorpse7" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/twitter.svg" alt="Twitter"/></a>
+  <a href="https://discord.com" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/discord.svg" alt="Discord"/></a>
+</div>
+
+<!-- Main Box Centered -->
+<div class="w-screen h-screen flex items-center justify-center">
+  <div class="glass w-[425px] h-fit flex flex-col items-center p-[25px] gap-[10px]">
+    <img class="w-auto h-[125px]" src="pfp.png" alt="Profile"/>
+    <a class="glow text-3xl">CORPSE</a>
+    <a class="text-2xl">𝐇𝐄𝐑𝐌𝐈𝐓 | 𝐍𝐎𝐋𝐈𝐅𝐄 | 𝐕𝐈𝐊𝐈𝐍𝐆</a>
+    <span class="w-full h-px bg-white"></span>
+    <a class="text-1xl">¯\_(ツ)_/¯</a>
+    <a class="text-1xl" style="color: white;">hello, im corpse</a>
+    <a class="text-1xl text-center" style="color: white;">
+      my life consists of either watching anime, sitting at my desk, playing games or listening to music
+    </a>
+    <span class="w-full h-px bg-white"></span>
+  </div>
+</div>
+
+<!-- Audio Player -->
+<div class="audio-player">
+  <img src="album.png" alt="Album Art"/>
+  <div class="info">
+    <strong>Scourge Of Iron</strong>
+    <span>Cannibal Corpse</span>
+    <audio id="bg-music" autoplay controls>
+      <source src="audio.mp3" type="audio/mp3"/>
+      Your browser does not support the audio element.
+    </audio>
+  </div>
+</div>
+
+<!-- Discord Invite Bottom Left -->
+<a href="https://discord.gg/fwYzVKN9cx" target="_blank" id="discord-invite">Join My Discord</a>
+
+<script>
+const cover = $("#cover");
+cover.on("click", function () {
+  cover.hide(200);
+  const audio = document.getElementById("bg-music");
+  audio.play().catch(() => { console.log("Autoplay blocked until user interaction."); });
+});
+
+// Smooth Mouse Cursor Trail
+document.addEventListener('mousemove', e => {
+  const dot = document.createElement('div');
+  dot.classList.add('cursor-dot');
+  dot.style.left = `${e.clientX - 4}px`;
+  dot.style.top = `${e.clientY - 4}px`;
+  document.body.appendChild(dot);
+  requestAnimationFrame(() => dot.style.transform = 'scale(0)');
+  setTimeout(() => dot.remove(), 400);
+});
+</script>
+
+</body>
 </html>
