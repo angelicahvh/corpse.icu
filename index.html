@@ -22,7 +22,7 @@
         padding: 0;
         margin: 0;
         font-family: "Roboto", sans-serif;
-        color: #fab7be;
+        color: #e6e6e6; /* Changed default text color from pink to light grey */
         box-sizing: border-box;
       }
 
@@ -35,7 +35,7 @@
         overflow: hidden;
       }
 
-      /* Normal Glass Effect (no hover shadow increase) */
+      /* Glass Effect */
       .glass {
         backdrop-filter: blur(6px);
         -webkit-backdrop-filter: blur(6px);
@@ -50,11 +50,12 @@
         background-color: rgba(255, 255, 255, 0.12);
       }
 
+      /* Glow Effect */
       .glow {
-        text-shadow: #fdc8ce 2px 2px 20px;
+        text-shadow: #ffffff 2px 2px 20px; /* Updated from pink glow to white glow */
       }
 
-      /* Audio Player with Glass */
+      /* Audio Player */
       .audio-player {
         position: fixed;
         bottom: 20px;
@@ -63,7 +64,7 @@
         display: flex;
         align-items: center;
         gap: 12px;
-        color: white;
+        color: #e6e6e6;
         width: 320px;
         box-sizing: border-box;
       }
@@ -92,7 +93,7 @@
 
       .audio-player span {
         font-size: 12px;
-        color: #ddd;
+        color: #cccccc; /* Light grey instead of pink */
       }
 
       .audio-player audio {
@@ -100,7 +101,7 @@
         margin-top: 4px;
       }
 
-      /* Social Icons Left Side with Glass */
+      /* Social Icons */
       .social-box {
         position: fixed;
         top: 50%;
@@ -108,7 +109,7 @@
         transform: translateY(-50%);
         display: flex;
         flex-direction: column;
-        gap: 35px; /* Perfect spacing between icons */
+        gap: 35px; /* Midpoint spacing between previous and original */
         padding: 20px 10px;
         border-radius: 18px;
       }
@@ -118,15 +119,14 @@
         height: 48px;
         cursor: pointer;
         transition: transform 0.2s ease;
-        filter: invert(94%) sepia(8%) saturate(376%) hue-rotate(305deg)
-          brightness(108%) contrast(96%);
+        filter: invert(100%) brightness(100%); /* Forces white icons */
       }
 
       .social-box img:hover {
         transform: scale(1.2);
       }
 
-      /* Discord Server Invite Bottom Left */
+      /* Discord Invite */
       .discord-invite {
         position: fixed;
         bottom: 20px;
@@ -200,8 +200,8 @@
         <a class="text-2xl">𝐇𝐄𝐑𝐌𝐈𝐓 | 𝐍𝐎𝐋𝐈𝐅𝐄 | 𝐕𝐈𝐊𝐈𝐍𝐆</a>
         <span class="w-full h-px bg-white"></span>
         <a class="text-1xl">¯\_(ツ)_/¯</a>
-        <a class="text-1xl" style="color: white;">hello, im corpse</a>
-        <a class="text-1xl text-center" style="color: white;">
+        <a class="text-1xl" style="color: #e6e6e6;">hello, im corpse</a>
+        <a class="text-1xl text-center" style="color: #e6e6e6;">
           my life consists of either watching anime, sitting at my desk, playing
           games or listening to music
         </a>
@@ -222,7 +222,7 @@
       </div>
     </div>
 
-    <!-- Audio Player with Glass -->
+    <!-- Audio Player -->
     <div class="audio-player glass">
       <img src="album.png" alt="Album Art" />
       <div class="info">
