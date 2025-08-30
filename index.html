@@ -30,11 +30,11 @@
         overflow: hidden;
       }
 
-      /* New Glass Effect */
+      /* Unified Glass Effect */
       .glass {
         backdrop-filter: blur(18px) saturate(180%);
         -webkit-backdrop-filter: blur(18px) saturate(180%);
-        background-color: rgba(255, 255, 255, 0.08);
+        background-color: rgba(255, 255, 255, 0.15); /* Default frosted glass color */
         border-radius: 18px;
         border: 1px solid rgba(255, 255, 255, 0.25);
         box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
@@ -42,7 +42,7 @@
       }
 
       .glass:hover {
-        background-color: rgba(255, 255, 255, 0.12);
+        background-color: rgba(255, 255, 255, 0.2);
         box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
       }
 
@@ -50,14 +50,11 @@
         text-shadow: #fdc8ce 2px 2px 20px;
       }
 
-      /* Audio Player */
+      /* Audio Player with Glass */
       .audio-player {
         position: fixed;
         bottom: 20px;
         right: 20px;
-        background: rgba(20, 20, 20, 0.75);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        border-radius: 12px;
         padding: 12px;
         display: flex;
         align-items: center;
@@ -65,14 +62,13 @@
         color: white;
         width: 320px;
         box-sizing: border-box;
-        backdrop-filter: blur(10px);
       }
 
       .audio-player img {
         width: 64px;
         height: 64px;
         object-fit: cover;
-        border-radius: 8px;
+        border-radius: 12px;
         flex-shrink: 0;
       }
 
@@ -100,7 +96,7 @@
         margin-top: 4px;
       }
 
-      /* Social Icons Left Side */
+      /* Social Icons Left Side with Glass */
       .social-box {
         position: fixed;
         top: 50%;
@@ -110,10 +106,7 @@
         flex-direction: column;
         gap: 50px;
         padding: 20px 10px;
-        background-color: rgba(20, 20, 20, 0.5);
-        border: 1px solid rgba(255, 255, 255, 0.15);
-        border-radius: 12px;
-        backdrop-filter: blur(10px);
+        border-radius: 18px;
       }
 
       .social-box img {
@@ -174,7 +167,7 @@
     </div>
 
     <!-- Social Icons Left -->
-    <div class="social-box">
+    <div class="social-box glass">
       <a href="https://steamcommunity.com/id/captainflames" target="_blank">
         <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/steam.svg" alt="Steam"/>
       </a>
@@ -225,8 +218,8 @@
       </div>
     </div>
 
-    <!-- Audio Player -->
-    <div class="audio-player">
+    <!-- Audio Player with Glass -->
+    <div class="audio-player glass">
       <img src="album.png" alt="Album Art" />
       <div class="info">
         <strong>Scourge Of Iron</strong>
