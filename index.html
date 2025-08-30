@@ -24,11 +24,11 @@
       color: white;
     }
 
-    /* PURE WHITE FROSTED GLASS */
+    /* Neutral Frosted Glass Effect */
     .glass {
       backdrop-filter: blur(20px) saturate(180%);
       -webkit-backdrop-filter: blur(20px) saturate(180%);
-      background-color: rgba(255, 255, 255, 0.12); /* Neutral white, no tint */
+      background-color: rgba(255, 255, 255, 0.1); /* Pure neutral glass, no blue */
       border-radius: 18px;
       border: 1px solid rgba(255, 255, 255, 0.25);
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
@@ -36,7 +36,7 @@
     }
 
     .glass:hover {
-      background-color: rgba(255, 255, 255, 0.18);
+      background-color: rgba(255, 255, 255, 0.15); /* Slightly brighter on hover */
       box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
     }
 
@@ -78,6 +78,7 @@
       display: flex;
       flex-direction: column;
       gap: 10px;
+      padding: 10px;
     }
 
     .social-icons a {
