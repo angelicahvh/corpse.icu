@@ -36,19 +36,6 @@
         border: 1px solid rgba(255, 255, 255, 0.1);
       }
 
-      .button {
-        display: flex;
-        align-items: center;
-        padding-left: 12px;
-        padding-right: 12px;
-        transition-duration: 0.2s;
-        border: 1px solid white;
-      }
-
-      .button:hover {
-        border-color: white;
-      }
-
       .glow {
         text-shadow: #fdc8ce 2px 2px 20px;
       }
@@ -87,98 +74,31 @@
         margin-top: 0.5rem;
       }
 
-      audio::-webkit-media-controls-panel {
-        background-color: transparent;
-      }
-
-      audio::-webkit-media-controls-timeline {
-        background: #fdc8ce;
-        border-radius: 10px;
-      }
-
-      audio::-webkit-media-controls-current-time-display,
-      audio::-webkit-media-controls-time-remaining-display {
-        color: white;
-      }
-
-      audio::-webkit-media-controls-play-button,
-      audio::-webkit-media-controls-volume-slider,
-      audio::-webkit-media-controls-mute-button {
-        filter: invert(1);
-      }
-
-      /* Social Buttons Styles */
-      .social-icons {
-        margin-top: 30px;
-        padding: 20px;
-        width: 425px;
+      /* Social Box Styles */
+      .social-box {
+        margin-left: 30px;
         display: flex;
-        justify-content: center;
-        gap: 24px;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        padding: 20px;
         background-color: rgba(20, 20, 20, 0.75);
         border: 1px solid rgba(255, 255, 255, 0.1);
         border-radius: 1rem;
         box-shadow: 0 8px 24px rgba(164, 161, 205, 0.3);
       }
 
-      .social-icons img {
+      .social-box img {
         width: 48px;
         height: 48px;
         cursor: pointer;
         transition: transform 0.2s ease;
-        filter: invert(94%) sepia(8%) saturate(376%) hue-rotate(305deg) brightness(108%) contrast(96%);
+        filter: invert(94%) sepia(8%) saturate(376%) hue-rotate(305deg)
+          brightness(108%) contrast(96%);
       }
 
-      .social-icons img:hover {
+      .social-box img:hover {
         transform: scale(1.2);
-      }
-
-      /* --- Click Animation --- */
-      @keyframes clickPulse {
-        0% {
-          transform: scale(1);
-          opacity: 1;
-        }
-        100% {
-          transform: scale(1.5);
-          opacity: 0;
-        }
-      }
-
-      .click-animate::after {
-        content: '';
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        border-radius: 50%;
-        animation: clickPulse 0.4s ease-out;
-        background-color: rgba(255, 255, 255, 0.3);
-        pointer-events: none;
-      }
-
-      .clickable {
-        position: relative;
-        overflow: hidden;
-      }
-
-      /* Cursor trail dot */
-      .cursor-dot {
-        position: fixed;
-        width: 8px;
-        height: 8px;
-        background-color: #fdc8ce;
-        border-radius: 50%;
-        pointer-events: none;
-        z-index: 9999;
-        opacity: 0.8;
-        animation: fadeOut 0.6s forwards;
-      }
-
-      @keyframes fadeOut {
-        to {
-          opacity: 0;
-          transform: scale(2);
-        }
       }
     </style>
 
@@ -214,62 +134,69 @@
       >
         <a class="glow text-3xl">𝒞𝒪𝑅𝒫𝒮𝐸</a>
       </div>
-      <div
-        class="glass rounded-2xl w-[425px] h-fit flex flex-col items-center p-[25px] gap-[10px]"
-      >
-        <img
-          class="w-auto h-[125px] rounded-2xl"
-          src="https://discord-info-amber.vercel.app/pfp/417030812010020864"
-          alt="Profile"
-        />
-        <a class="glow text-3xl">CORPSE</a>
-        <a class="text-2xl">𝐇𝐄𝐑𝐌𝐈𝐓 | 𝐍𝐎𝐋𝐈𝐅𝐄 | 𝐕𝐈𝐊𝐈𝐍𝐆</a>
-        <a class="glow text-2xl"></a>
-        <span class="w-full h-px bg-white"></span>
-        <a class="text-1xl">¯\_(ツ)_/¯</a>
-        <a class="text-1xl" style="color: white;">hello, im corpse</a>
-        <a
-          class="text-1xl text-center"
-          style="color: white;"
-        >
-          my life consists of either watching anime, sitting at my desk, playing
-          games or listening to music
-        </a>
-        <span class="w-full h-px bg-white"></span>
-        <a class="glow text-2xl">My Discord Server</a>
+
+      <!-- Main content + Social Box side by side -->
+      <div class="flex flex-row items-start">
+        <!-- Main Glass Card -->
         <div
-          class="w-full glass rounded-2xl p-[10px] flex flex-row gap-[10px] items-center"
+          class="glass rounded-2xl w-[425px] h-fit flex flex-col items-center p-[25px] gap-[10px]"
         >
           <img
-            class="w-auto h-[75px] rounded-2xl"
-            src="discord.png"
-            alt="CantThinkOfName"
+            class="w-auto h-[125px] rounded-2xl"
+            src="pfp.png"
+            alt="Profile"
           />
-          <a class="glow shrink-0">CantThinkOfName</a>
-          <div class="w-full grow flex flex-row-reverse">
-            <a
-              href="https://discord.gg/fwYzVKN9cx"
-              class="glow-hover clickable transition-transform transform hover:scale-105 cursor-pointer rounded-md button py-[6px]"
-              >ᴊᴏɪɴ :3</a
-            >
+          <a class="glow text-3xl">CORPSE</a>
+          <a class="text-2xl">𝐇𝐄𝐑𝐌𝐈𝐓 | 𝐍𝐎𝐋𝐈𝐅𝐄 | 𝐕𝐈𝐊𝐈𝐍𝐆</a>
+          <span class="w-full h-px bg-white"></span>
+          <a class="text-1xl">¯\_(ツ)_/¯</a>
+          <a class="text-1xl" style="color: white;">hello, im corpse</a>
+          <a class="text-1xl text-center" style="color: white;">
+            my life consists of either watching anime, sitting at my desk, playing
+            games or listening to music
+          </a>
+          <span class="w-full h-px bg-white"></span>
+          <a class="glow text-2xl">My Discord Server</a>
+          <div
+            class="w-full glass rounded-2xl p-[10px] flex flex-row gap-[10px] items-center"
+          >
+            <img
+              class="w-auto h-[75px] rounded-2xl"
+              src="discord.png"
+              alt="CantThinkOfName"
+            />
+            <a class="glow shrink-0">CantThinkOfName</a>
+            <div class="w-full grow flex flex-row-reverse">
+              <a
+                href="https://discord.gg/fwYzVKN9cx"
+                class="glow-hover clickable transition-transform transform hover:scale-105 cursor-pointer rounded-md button py-[6px]"
+                >ᴊᴏɪɴ :3</a
+              >
+            </div>
           </div>
         </div>
-      </div>
 
-      <!-- Social Buttons Section Separate Box -->
-      <div class="social-icons">
-        <a href="https://steamcommunity.com/id/captainflames" target="_blank" rel="noopener noreferrer" aria-label="Steam">
-          <div class="clickable"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/steam.svg" alt="Steam"/></div>
-        </a>
-        <a href="https://github.com/rabbitcorpse" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-          <div class="clickable"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" alt="GitHub"/></div>
-        </a>
-        <a href="https://twitter.com/bloodcorpse7" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-          <div class="clickable"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/twitter.svg" alt="Twitter"/></div>
-        </a>
-        <a href="https://open.spotify.com/user/31mf24d6tezrz57jrn57ogv4uguq?si=9ddeec8e8c0a49b5" target="_blank" rel="noopener noreferrer" aria-label="Spotify">
-          <div class="clickable"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/spotify.svg" alt="Spotify"/></div>
-        </a>
+        <!-- Social Icons Box -->
+        <div class="social-box">
+          <a href="https://steamcommunity.com/id/captainflames" target="_blank">
+            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/steam.svg" alt="Steam"/>
+          </a>
+          <a href="https://github.com/rabbitcorpse" target="_blank">
+            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" alt="GitHub"/>
+          </a>
+          <a href="https://twitter.com/bloodcorpse7" target="_blank">
+            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/twitter.svg" alt="Twitter"/>
+          </a>
+          <a href="https://open.spotify.com/user/31mf24d6tezrz57jrn57ogv4uguq" target="_blank">
+            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/spotify.svg" alt="Spotify"/>
+          </a>
+          <a href="https://discord.com" target="_blank">
+            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/discord.svg" alt="Discord"/>
+          </a>
+          <a href="https://youtube.com" target="_blank">
+            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/youtube.svg" alt="YouTube"/>
+          </a>
+        </div>
       </div>
 
       <!-- Custom Audio Player -->
@@ -278,7 +205,7 @@
         <div class="info">
           <strong class="text-sm">Scourge Of Iron</strong>
           <span class="text-xs">Cannibal Corpse</span>
-          <audio controls>
+          <audio id="bg-music" autoplay controls>
             <source src="audio.mp3" type="audio/mp3" />
             Your browser does not support the audio element.
           </audio>
@@ -292,29 +219,12 @@
         cover.hide(200);
       });
 
-      // Click effect on .clickable elements
-      document.querySelectorAll('.clickable').forEach(el => {
-        el.addEventListener('click', (e) => {
-          const ripple = document.createElement('span');
-          ripple.classList.add('click-animate');
-          ripple.style.position = 'absolute';
-          ripple.style.left = `${e.offsetX - el.offsetWidth / 2}px`;
-          ripple.style.top = `${e.offsetY - el.offsetHeight / 2}px`;
-          ripple.style.width = `${el.offsetWidth}px`;
-          ripple.style.height = `${el.offsetHeight}px`;
-          el.appendChild(ripple);
-          setTimeout(() => ripple.remove(), 400);
+      // Auto play music when page loads
+      window.addEventListener("load", () => {
+        const audio = document.getElementById("bg-music");
+        audio.play().catch(() => {
+          console.log("Autoplay blocked by browser until user interacts.");
         });
-      });
-
-      // Cursor trail effect
-      document.addEventListener('mousemove', (e) => {
-        const dot = document.createElement('div');
-        dot.classList.add('cursor-dot');
-        dot.style.left = `${e.clientX}px`;
-        dot.style.top = `${e.clientY}px`;
-        document.body.appendChild(dot);
-        setTimeout(() => dot.remove(), 600);
       });
     </script>
   </body>
