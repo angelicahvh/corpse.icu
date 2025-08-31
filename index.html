@@ -11,10 +11,7 @@
       href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet"
     />
-
-    <!-- Website Icon / Favicon -->
     <link rel="icon" type="image/png" href="pfp.png" />
-
     <title>corpse</title>
 
     <style>
@@ -35,23 +32,6 @@
         overflow: hidden;
       }
 
-      /* Twinkling Stars Background */
-      .stars {
-        position: fixed;
-        width: 100%;
-        height: 100%;
-        background: transparent url("https://www.transparenttextures.com/patterns/stardust.png") repeat;
-        animation: twinkle 5s infinite;
-        z-index: -1;
-      }
-
-      @keyframes twinkle {
-        0% { opacity: 0.6; }
-        50% { opacity: 1; }
-        100% { opacity: 0.6; }
-      }
-
-      /* Glass Effect */
       .glass {
         backdrop-filter: blur(6px);
         -webkit-backdrop-filter: blur(6px);
@@ -66,10 +46,34 @@
         background-color: rgba(255, 255, 255, 0.12);
       }
 
-      /* Softer Glow (TONED DOWN) */
+      /* Subtle glow */
       .glow {
-        text-shadow: 0 0 6px rgba(255, 255, 255, 0.25),
-                     0 0 12px rgba(255, 255, 255, 0.15);
+        text-shadow: 0 0 8px rgba(255, 255, 255, 0.35);
+      }
+
+      /* Social Icons */
+      .social-box {
+        position: fixed;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        display: flex;
+        flex-direction: column;
+        gap: 35px;
+        padding: 20px 10px;
+        border-radius: 18px;
+      }
+
+      .social-box img {
+        width: 48px;
+        height: 48px;
+        cursor: pointer;
+        transition: transform 0.2s ease;
+        filter: invert(100%) brightness(100%);
+      }
+
+      .social-box img:hover {
+        transform: scale(1.15);
       }
 
       /* Audio Player */
@@ -118,32 +122,6 @@
         margin-top: 4px;
       }
 
-      /* Social Icons */
-      .social-box {
-        position: fixed;
-        top: 50%;
-        left: 0;
-        transform: translateY(-50%);
-        display: flex;
-        flex-direction: column;
-        gap: 35px;
-        padding: 20px 10px;
-        border-radius: 18px;
-      }
-
-      .social-box img {
-        width: 48px;
-        height: 48px;
-        cursor: pointer;
-        transition: transform 0.2s ease, filter 0.2s ease;
-        filter: invert(90%) brightness(80%) drop-shadow(0 0 3px rgba(255,255,255,0.3));
-      }
-
-      .social-box img:hover {
-        transform: scale(1.15);
-        filter: invert(100%) brightness(95%) drop-shadow(0 0 6px rgba(255,255,255,0.6));
-      }
-
       /* Discord Invite */
       .discord-invite {
         position: fixed;
@@ -152,39 +130,9 @@
         width: 360px;
       }
     </style>
-
-    <script>
-      // Animated Title Script
-      const fullTitle = "nuwdep";
-      let index = 1;
-      let direction = 1;
-      const speed = 150;
-
-      function typewriterLoop() {
-        document.title = fullTitle.substring(0, index);
-        if (direction === 1 && index === fullTitle.length) {
-          direction = -1;
-          setTimeout(typewriterLoop, 1000);
-        } else if (direction === -1 && index === 1) {
-          direction = 1;
-          setTimeout(typewriterLoop, 500);
-        } else {
-          index += direction;
-          setTimeout(typewriterLoop, speed);
-        }
-      }
-
-      window.addEventListener("load", () => {
-        typewriterLoop();
-      });
-    </script>
   </head>
 
   <body>
-    <!-- Twinkling Stars Layer -->
-    <div class="stars"></div>
-
-    <!-- Cover Screen -->
     <div
       id="cover"
       class="cursor-pointer fixed w-full h-full z-50 bg-black flex flex-col items-center justify-center"
@@ -214,19 +162,36 @@
       </a>
     </div>
 
-    <!-- Main Box Centered -->
+    <!-- Main Box -->
     <div class="w-screen h-screen flex items-center justify-center">
-      <div class="glass w-[425px] h-fit flex flex-col items-center p-[30px] gap-[20px]">
-        <img class="w-auto h-[125px]" src="pfp.png" alt="Profile" />
-        <a class="glow text-5xl font-bold">Nuwdep</a>
-        <a class="text-3xl font-semibold text-center">𝐉𝐚𝐯𝐚𝐒𝐜𝐫𝐢𝐩𝐭</a>
-        <span class="w-full h-px bg-white"></span>
-        <a class="text-xl font-medium" style="color: #e6e6e6;">𝘣𝘪𝘴𝘦𝘹𝘶𝘢𝘭</a>
-        <a class="text-lg text-center leading-relaxed" style="color: #e6e6e6;">
-          15 year old living in the U.K who is learning JavaScript, drinks a lot of Monster,
-          is always bored, and obsessed with Dexter
-        </a>
-        <span class="w-full h-px bg-white"></span>
+      <div class="glass w-[600px] h-fit flex flex-col p-[25px] gap-[18px]">
+        <!-- Top Section -->
+        <div class="flex flex-row items-center justify-between w-full">
+          <!-- Left: PFP + Name + Subtitle -->
+          <div class="flex flex-row items-center gap-[15px]">
+            <img class="w-[110px] h-[110px] rounded-[12px]" src="pfp.png" alt="Profile" />
+            <div class="flex flex-col">
+              <a class="glow text-4xl font-bold">Nuwdep</a>
+              <a class="text-xl text-gray-300">JavaScript</a>
+            </div>
+          </div>
+          <!-- Right: Discord Badges -->
+          <div class="flex flex-row gap-[4px] items-center">
+            <img src="badge1.png" class="w-[22px] h-[22px]" alt="Badge1" />
+            <img src="badge2.png" class="w-[22px] h-[22px]" alt="Badge2" />
+            <img src="badge3.png" class="w-[22px] h-[22px]" alt="Badge3" />
+            <img src="badge4.png" class="w-[22px] h-[22px]" alt="Badge4" />
+          </div>
+        </div>
+
+        <!-- Divider -->
+        <span class="w-full h-[2px] bg-white/80"></span>
+
+        <!-- Bio Section -->
+        <p class="text-center text-lg leading-relaxed text-gray-200">
+          15-year-old living in the U.K. learning JavaScript, drinks a lot of Monster,
+          always bored, and obsessed with Dexter.
+        </p>
       </div>
     </div>
 
@@ -238,8 +203,7 @@
         <a
           href="https://discord.gg/fwYzVKN9cx"
           class="glow-hover transition-transform transform hover:scale-105 cursor-pointer border border-white py-[6px] px-[12px]"
-          >🡆</a
-        >
+        >🡆</a>
       </div>
     </div>
 
@@ -256,11 +220,14 @@
       </div>
     </div>
 
-    <!-- Hide Cover on Click -->
     <script>
       const cover = $("#cover");
       cover.on("click", function () {
         cover.hide(200);
+        const audio = document.getElementById("bg-music");
+        audio.play().catch(() => {
+          console.log("Autoplay blocked until user interaction.");
+        });
       });
     </script>
   </body>
