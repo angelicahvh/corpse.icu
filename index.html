@@ -207,33 +207,24 @@
       </div>
     </div>
 
-    <!-- Typewriter Title Effect -->
+    <!-- Typewriter Title Effect with Invisible Ending -->
     <script>
-  const fullTitle = "‎ nuwdep"; // Includes the leading space
-  let index = 1;
-  let direction = 1; // 1 = typing, -1 = deleting
-  const speed = 150; // Typing speed in ms
+      const fullTitle = "‎ nuwdep"; // Leading space included
+      const invisibleChar = "\u200B"; // Zero-width space
+      let index = 1;
+      const speed = 150;
 
-  function typewriterLoop() {
-    document.title = fullTitle.substring(0, index);
+      function typewriterLoop() {
+        document.title = fullTitle.substring(0, index) + invisibleChar;
 
-    if (direction === 1 && index === fullTitle.length) {
-      // Once fully typed, start deleting after a short pause
-      direction = -1;
-      setTimeout(typewriterLoop, 1000);
-    } else if (direction === -1 && index === 1) {
-      // Stop deleting at the first character (the space)
-      direction = 1;
-      setTimeout(typewriterLoop, 500);
-    } else {
-      // Continue typing or deleting
-      index += direction;
-      setTimeout(typewriterLoop, speed);
-    }
-  }
+        if (index < fullTitle.length) {
+          index++;
+          setTimeout(typewriterLoop, speed);
+        }
+        // Stops after fully typed + invisible char
+      }
 
-  // Start when the page loads
-  window.addEventListener("load", typewriterLoop);
+      window.addEventListener("load", typewriterLoop);
     </script>
   </body>
 </html>
