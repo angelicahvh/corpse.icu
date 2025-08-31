@@ -47,7 +47,7 @@
         text-shadow: 0 0 10px rgba(255, 255, 255, 0.25);
       }
 
-      /* Prevent highlighting */
+      /* Prevent text selection and hover highlighting */
       * {
         -webkit-user-select: none;
         -moz-user-select: none;
@@ -64,8 +64,8 @@
         transform: translateY(-50%);
         display: flex;
         flex-direction: column;
-        gap: 30px;
-        padding: 18px 10px;
+        gap: 26px;
+        padding: 16px 10px;
         border-radius: 16px;
         z-index: 5;
       }
@@ -87,10 +87,10 @@
         position: fixed;
         bottom: 20px;
         right: 20px;
-        padding: 14px;
+        padding: 12px;
         display: flex;
         align-items: center;
-        gap: 12px;
+        gap: 10px;
         color: #e6e6e6;
         width: 320px;
         box-sizing: border-box;
@@ -143,8 +143,7 @@
         width: 100%;
         height: 1.5px;
         background: rgba(255, 255, 255, 0.5);
-        margin-top: 6px;
-        margin-bottom: 6px;
+        margin: 6px 0;
       }
     </style>
   </head>
@@ -174,25 +173,21 @@
 
     <!-- Main Box -->
     <div class="w-screen h-screen flex items-center justify-center">
-      <div class="glass w-[600px] h-fit flex flex-col p-[25px] gap-[10px] z-10">
+      <div class="glass w-[550px] h-fit flex flex-col p-[20px] gap-[8px] z-10">
         <!-- Top Section -->
-        <div class="flex flex-row items-start justify-between w-full">
-          <div class="flex flex-row items-start gap-[10px]">
-            <img class="w-[110px] h-[110px] rounded-[12px]" src="pfp.png" alt="Profile" />
-            <div class="flex flex-col">
-              <!-- Username + Badges -->
-              <div class="flex flex-row items-center gap-[6px]">
-                <a class="glow text-4xl font-bold leading-none">Nuwdep</a>
-                <div class="flex flex-row gap-[4px]">
-                  <img src="badge1.png" class="w-[22px] h-[22px]" alt="Badge1" />
-                  <img src="badge2.png" class="w-[22px] h-[22px]" alt="Badge2" />
-                </div>
+        <div class="flex flex-row items-center justify-start gap-[12px]">
+          <img class="w-[110px] h-[110px] rounded-[12px]" src="pfp.png" alt="Profile" />
+          <div class="flex flex-col">
+            <!-- Username + Badges -->
+            <div class="flex flex-row items-center gap-[6px]">
+              <a class="glow text-4xl font-bold leading-none">Nuwdep</a>
+              <div class="flex flex-row gap-[4px]">
+                <img src="badge1.png" class="w-[22px] h-[22px]" alt="Badge1" />
+                <img src="badge2.png" class="w-[22px] h-[22px]" alt="Badge2" />
               </div>
-              <!-- Subtitle 1 -->
-              <a class="text-lg text-gray-300 mt-[4px]">𝐉𝐚𝐯𝐚𝐒𝐜𝐫𝐢𝐩𝐭</a>
-              <!-- Subtitle 2 -->
-              <a class="text-base text-gray-400 mt-[2px]">Bisexual</a>
             </div>
+            <!-- Subtitle -->
+            <a class="text-lg mt-[2px]">𝐉𝐚𝐯𝐚𝐒𝐜𝐫𝐢𝐩𝐭</a>
           </div>
         </div>
 
@@ -200,7 +195,7 @@
         <span class="divider"></span>
 
         <!-- Bio Section -->
-        <p class="text-center text-lg leading-relaxed text-gray-200">
+        <p class="text-center text-base leading-relaxed text-gray-200">
           15-year-old developer from the U.K. Passionate about JavaScript, loves building cool stuff,
           addicted to Monster, usually bored, and obsessed with Dexter.
         </p>
@@ -234,13 +229,13 @@
 
     <!-- Typewriter Page Title -->
     <script>
-      const titleText = "Nuwdep — Portfolio";
+      const titleText = "Nuwdep";
       let index = 0;
 
       function typeTitle() {
         document.title = titleText.substring(0, index++);
         if (index <= titleText.length) {
-          setTimeout(typeTitle, 150);
+          setTimeout(typeTitle, 200);
         }
       }
 
