@@ -8,17 +8,17 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap"
       rel="stylesheet"
     />
     <link rel="icon" type="image/png" href="pfp.png" />
-    <title>corpse</title>
+    <title>Nuwdep — Portfolio</title>
 
     <style>
       :root {
         padding: 0;
         margin: 0;
-        font-family: "Roboto", sans-serif;
+        font-family: "Fira Code", monospace;
         color: #e6e6e6;
         box-sizing: border-box;
       }
@@ -32,26 +32,32 @@
         overflow: hidden;
       }
 
+      /* Glass effect for main elements */
       .glass {
-        backdrop-filter: blur(6px);
-        -webkit-backdrop-filter: blur(6px);
-        background-color: rgba(255, 255, 255, 0.08);
-        border-radius: 18px;
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        background-color: rgba(255, 255, 255, 0.06);
+        border-radius: 16px;
         border: 1px solid rgba(255, 255, 255, 0.15);
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
-        transition: background-color 0.3s ease-in-out;
+        box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+        transition: none; /* No hover brightness change */
       }
 
-      .glass:hover {
-        background-color: rgba(255, 255, 255, 0.12);
-      }
-
-      /* Subtle glow */
+      /* Subtle glow for headings */
       .glow {
-        text-shadow: 0 0 8px rgba(255, 255, 255, 0.35);
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.25);
       }
 
-      /* Social Icons */
+      /* Prevent selection highlighting */
+      * {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        outline: none !important;
+      }
+
+      /* Social Box Styling */
       .social-box {
         position: fixed;
         top: 50%;
@@ -59,21 +65,23 @@
         transform: translateY(-50%);
         display: flex;
         flex-direction: column;
-        gap: 35px;
-        padding: 20px 10px;
-        border-radius: 18px;
+        gap: 30px;
+        padding: 18px 10px;
+        border-radius: 16px;
       }
 
       .social-box img {
-        width: 48px;
-        height: 48px;
+        width: 46px;
+        height: 46px;
         cursor: pointer;
-        transition: transform 0.2s ease;
-        filter: invert(100%) brightness(100%);
+        transition: transform 0.2s ease, filter 0.3s ease;
+        filter: invert(100%) brightness(95%);
       }
 
+      /* Keep hover scale but remove brightness change */
       .social-box img:hover {
         transform: scale(1.15);
+        filter: invert(100%) brightness(95%);
       }
 
       /* Audio Player */
@@ -81,7 +89,7 @@
         position: fixed;
         bottom: 20px;
         right: 20px;
-        padding: 12px;
+        padding: 14px;
         display: flex;
         align-items: center;
         gap: 12px;
@@ -129,6 +137,15 @@
         left: 20px;
         width: 360px;
       }
+
+      /* Divider */
+      .divider {
+        width: 100%;
+        height: 1.5px;
+        background: rgba(255, 255, 255, 0.5);
+        margin-top: 6px;
+        margin-bottom: 6px;
+      }
     </style>
   </head>
 
@@ -137,7 +154,7 @@
       id="cover"
       class="cursor-pointer fixed w-full h-full z-50 bg-black flex flex-col items-center justify-center"
     >
-      <a class="glow text-3xl">CORPSE.ICU</a>
+      <a class="glow text-3xl">NUWDEP</a>
     </div>
 
     <!-- Social Icons Left -->
@@ -167,68 +184,11 @@
       <div class="glass w-[600px] h-fit flex flex-col p-[25px] gap-[18px]">
         <!-- Top Section -->
         <div class="flex flex-row items-center justify-between w-full">
-          <!-- Left: PFP + Name + Subtitle -->
           <div class="flex flex-row items-center gap-[15px]">
             <img class="w-[110px] h-[110px] rounded-[12px]" src="pfp.png" alt="Profile" />
             <div class="flex flex-col">
-              <a class="glow text-4xl font-bold">Nuwdep</a>
-              <a class="text-xl text-gray-300">JavaScript</a>
-            </div>
-          </div>
-          <!-- Right: Discord Badges -->
-          <div class="flex flex-row gap-[4px] items-center">
-            <img src="badge1.png" class="w-[22px] h-[22px]" alt="Badge1" />
-            <img src="badge2.png" class="w-[22px] h-[22px]" alt="Badge2" />
-            <img src="badge3.png" class="w-[22px] h-[22px]" alt="Badge3" />
-            <img src="badge4.png" class="w-[22px] h-[22px]" alt="Badge4" />
-          </div>
-        </div>
-
-        <!-- Divider -->
-        <span class="w-full h-[2px] bg-white/80"></span>
-
-        <!-- Bio Section -->
-        <p class="text-center text-lg leading-relaxed text-gray-200">
-          15-year-old living in the U.K. learning JavaScript, drinks a lot of Monster,
-          always bored, and obsessed with Dexter.
-        </p>
-      </div>
-    </div>
-
-    <!-- Discord Server Invite Bottom Left -->
-    <div class="discord-invite glass p-[10px] flex flex-row gap-[10px] items-center">
-      <img class="w-auto h-[75px]" src="discord.png" alt="CantThinkOfName" />
-      <a class="glow shrink-0">CantThinkOfName</a>
-      <div class="w-full grow flex flex-row-reverse">
-        <a
-          href="https://discord.gg/fwYzVKN9cx"
-          class="glow-hover transition-transform transform hover:scale-105 cursor-pointer border border-white py-[6px] px-[12px]"
-        >🡆</a>
-      </div>
-    </div>
-
-    <!-- Audio Player -->
-    <div class="audio-player glass">
-      <img src="album.png" alt="Album Art" />
-      <div class="info">
-        <strong>Scourge Of Iron</strong>
-        <span>Cannibal Corpse</span>
-        <audio id="bg-music" autoplay controls>
-          <source src="audio.mp3" type="audio/mp3" />
-          Your browser does not support the audio element.
-        </audio>
-      </div>
-    </div>
-
-    <script>
-      const cover = $("#cover");
-      cover.on("click", function () {
-        cover.hide(200);
-        const audio = document.getElementById("bg-music");
-        audio.play().catch(() => {
-          console.log("Autoplay blocked until user interaction.");
-        });
-      });
-    </script>
-  </body>
-</html>
+              <!-- Username + Badges -->
+              <div class="flex flex-row items-center gap-[6px]">
+                <a class="glow text-4xl font-bold">Nuwdep</a>
+                <div class="flex flex-row gap-[4px]">
+                  <img src="badge1.png" class="w-[22px] h-[22px]" alt="Badge1" />
