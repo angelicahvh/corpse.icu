@@ -32,7 +32,7 @@
         overflow: hidden;
       }
 
-      /* Glass effect for main elements */
+      /* Glass effect */
       .glass {
         backdrop-filter: blur(8px);
         -webkit-backdrop-filter: blur(8px);
@@ -40,15 +40,15 @@
         border-radius: 16px;
         border: 1px solid rgba(255, 255, 255, 0.15);
         box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
-        transition: none; /* No hover brightness change */
+        transition: none;
       }
 
-      /* Subtle glow for headings */
+      /* Subtle glow */
       .glow {
         text-shadow: 0 0 10px rgba(255, 255, 255, 0.25);
       }
 
-      /* Prevent selection highlighting */
+      /* Prevent highlighting */
       * {
         -webkit-user-select: none;
         -moz-user-select: none;
@@ -57,7 +57,7 @@
         outline: none !important;
       }
 
-      /* Social Box Styling */
+      /* Social Box */
       .social-box {
         position: fixed;
         top: 50%;
@@ -68,20 +68,19 @@
         gap: 30px;
         padding: 18px 10px;
         border-radius: 16px;
+        z-index: 5;
       }
 
       .social-box img {
         width: 46px;
         height: 46px;
         cursor: pointer;
-        transition: transform 0.2s ease, filter 0.3s ease;
+        transition: transform 0.2s ease;
         filter: invert(100%) brightness(95%);
       }
 
-      /* Keep hover scale but remove brightness change */
       .social-box img:hover {
         transform: scale(1.15);
-        filter: invert(100%) brightness(95%);
       }
 
       /* Audio Player */
@@ -96,6 +95,7 @@
         color: #e6e6e6;
         width: 320px;
         box-sizing: border-box;
+        z-index: 5;
       }
 
       .audio-player img {
@@ -136,6 +136,7 @@
         bottom: 20px;
         left: 20px;
         width: 360px;
+        z-index: 5;
       }
 
       /* Divider */
@@ -146,15 +147,60 @@
         margin-top: 6px;
         margin-bottom: 6px;
       }
+
+      /* Fullscreen Overlay (Entry Screen) */
+      #cover {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: black;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 9999;
+        flex-direction: column;
+      }
+
+      /* Typewriter effect */
+      .typewriter {
+        color: white;
+        font-size: 40px;
+        font-weight: bold;
+        border-right: 2px solid #fff;
+        white-space: nowrap;
+        overflow: hidden;
+        width: 0;
+        animation: typing 2.5s steps(20, end) forwards, blink 0.8s step-end infinite;
+      }
+
+      @keyframes typing {
+        from {
+          width: 0;
+        }
+        to {
+          width: 10ch;
+        }
+      }
+
+      @keyframes blink {
+        from,
+        to {
+          border-color: transparent;
+        }
+        50% {
+          border-color: white;
+        }
+      }
     </style>
   </head>
 
   <body>
-    <div
-      id="cover"
-      class="cursor-pointer fixed w-full h-full z-50 bg-black flex flex-col items-center justify-center"
-    >
-      <a class="glow text-3xl">NUWDEP</a>
+    <!-- Entry Overlay -->
+    <div id="cover">
+      <a class="typewriter">NUWDEP</a>
     </div>
 
     <!-- Social Icons Left -->
@@ -181,7 +227,7 @@
 
     <!-- Main Box -->
     <div class="w-screen h-screen flex items-center justify-center">
-      <div class="glass w-[600px] h-fit flex flex-col p-[25px] gap-[18px]">
+      <div class="glass w-[600px] h-fit flex flex-col p-[25px] gap-[18px] z-10">
         <!-- Top Section -->
         <div class="flex flex-row items-center justify-between w-full">
           <div class="flex flex-row items-center gap-[15px]">
@@ -192,3 +238,61 @@
                 <a class="glow text-4xl font-bold">Nuwdep</a>
                 <div class="flex flex-row gap-[4px]">
                   <img src="badge1.png" class="w-[22px] h-[22px]" alt="Badge1" />
+                  <img src="badge2.png" class="w-[22px] h-[22px]" alt="Badge2" />
+                  <img src="badge3.png" class="w-[22px] h-[22px]" alt="Badge3" />
+                  <img src="badge4.png" class="w-[22px] h-[22px]" alt="Badge4" />
+                </div>
+              </div>
+              <a class="text-lg text-gray-300">JavaScript Developer</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Divider -->
+        <span class="divider"></span>
+
+        <!-- Bio Section -->
+        <p class="text-center text-lg leading-relaxed text-gray-200">
+          15-year-old developer from the U.K. Passionate about JavaScript, loves building cool stuff,
+          addicted to Monster, usually bored, and obsessed with Dexter.
+        </p>
+      </div>
+    </div>
+
+    <!-- Discord Server Invite -->
+    <div class="discord-invite glass p-[10px] flex flex-row gap-[10px] items-center">
+      <img class="w-auto h-[75px]" src="discord.png" alt="CantThinkOfName" />
+      <a class="glow shrink-0">CantThinkOfName</a>
+      <div class="w-full grow flex flex-row-reverse">
+        <a
+          href="https://discord.gg/fwYzVKN9cx"
+          class="glow-hover transition-transform transform hover:scale-105 cursor-pointer border border-white py-[6px] px-[12px]"
+        >🡆</a>
+      </div>
+    </div>
+
+    <!-- Audio Player -->
+    <div class="audio-player glass">
+      <img src="album.png" alt="Album Art" />
+      <div class="info">
+        <strong>Scourge Of Iron</strong>
+        <span>Cannibal Corpse</span>
+        <audio id="bg-music" autoplay controls>
+          <source src="audio.mp3" type="audio/mp3" />
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+    </div>
+
+    <script>
+      const cover = $("#cover");
+      cover.on("click", function () {
+        cover.fadeOut(300);
+        const audio = document.getElementById("bg-music");
+        audio.play().catch(() => {
+          console.log("Autoplay blocked until user interaction.");
+        });
+      });
+    </script>
+  </body>
+</html>
