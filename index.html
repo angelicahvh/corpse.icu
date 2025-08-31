@@ -12,7 +12,7 @@
       rel="stylesheet"
     />
     <link rel="icon" type="image/png" href="pfp.png" />
-    <title>Nuwdep — Portfolio</title>
+    <title>Nuwdep</title>
 
     <style>
       :root {
@@ -40,7 +40,6 @@
         border-radius: 16px;
         border: 1px solid rgba(255, 255, 255, 0.15);
         box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
-        transition: none;
       }
 
       /* Subtle glow */
@@ -147,62 +146,10 @@
         margin-top: 6px;
         margin-bottom: 6px;
       }
-
-      /* Fullscreen Overlay (Entry Screen) */
-      #cover {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: black;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        z-index: 9999;
-        flex-direction: column;
-      }
-
-      /* Typewriter effect */
-      .typewriter {
-        color: white;
-        font-size: 40px;
-        font-weight: bold;
-        border-right: 2px solid #fff;
-        white-space: nowrap;
-        overflow: hidden;
-        width: 0;
-        animation: typing 2.5s steps(20, end) forwards, blink 0.8s step-end infinite;
-      }
-
-      @keyframes typing {
-        from {
-          width: 0;
-        }
-        to {
-          width: 10ch;
-        }
-      }
-
-      @keyframes blink {
-        from,
-        to {
-          border-color: transparent;
-        }
-        50% {
-          border-color: white;
-        }
-      }
     </style>
   </head>
 
   <body>
-    <!-- Entry Overlay -->
-    <div id="cover">
-      <a class="typewriter">NUWDEP</a>
-    </div>
-
     <!-- Social Icons Left -->
     <div class="social-box glass">
       <a href="https://steamcommunity.com/id/DexterMogran" target="_blank">
@@ -227,7 +174,7 @@
 
     <!-- Main Box -->
     <div class="w-screen h-screen flex items-center justify-center">
-      <div class="glass w-[600px] h-fit flex flex-col p-[25px] gap-[18px] z-10">
+      <div class="glass w-[600px] h-fit flex flex-col p-[25px] gap-[10px] z-10">
         <!-- Top Section -->
         <div class="flex flex-row items-center justify-between w-full">
           <div class="flex flex-row items-center gap-[15px]">
@@ -239,11 +186,10 @@
                 <div class="flex flex-row gap-[4px]">
                   <img src="badge1.png" class="w-[22px] h-[22px]" alt="Badge1" />
                   <img src="badge2.png" class="w-[22px] h-[22px]" alt="Badge2" />
-                  <img src="badge3.png" class="w-[22px] h-[22px]" alt="Badge3" />
-                  <img src="badge4.png" class="w-[22px] h-[22px]" alt="Badge4" />
                 </div>
               </div>
-              <a class="text-lg text-gray-300">JavaScript Developer</a>
+              <!-- Subtitle -->
+              <a class="text-lg text-gray-300">𝐉𝐚𝐯𝐚𝐒𝐜𝐫𝐢𝐩𝐭</a>
             </div>
           </div>
         </div>
@@ -277,22 +223,26 @@
       <div class="info">
         <strong>Scourge Of Iron</strong>
         <span>Cannibal Corpse</span>
-        <audio id="bg-music" autoplay controls>
+        <audio autoplay controls>
           <source src="audio.mp3" type="audio/mp3" />
           Your browser does not support the audio element.
         </audio>
       </div>
     </div>
 
+    <!-- Typewriter Page Title -->
     <script>
-      const cover = $("#cover");
-      cover.on("click", function () {
-        cover.fadeOut(300);
-        const audio = document.getElementById("bg-music");
-        audio.play().catch(() => {
-          console.log("Autoplay blocked until user interaction.");
-        });
-      });
+      const titleText = "Nuwdep — Portfolio";
+      let index = 0;
+
+      function typeTitle() {
+        document.title = titleText.substring(0, index++);
+        if (index <= titleText.length) {
+          setTimeout(typeTitle, 150);
+        }
+      }
+
+      typeTitle();
     </script>
   </body>
 </html>
