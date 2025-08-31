@@ -209,8 +209,8 @@
 
     <!-- Looping Typewriter Title with Invisible Leading Character -->
     <script>
-      const fullTitle = "\u200Bnuwdep"; // Invisible zero-width space before "n"
-      let index = 1;
+      const fullTitle = "\u200Bnuwdep"; // Invisible character before "n"
+      let index = 1; // Start at 1 to never delete invisible char
       let direction = 1;
       const speed = 150;
 
@@ -221,6 +221,7 @@
           direction = -1;
           setTimeout(typewriterLoop, 1000);
         } else if (direction === -1 && index === 1) {
+          // Stop deleting at the invisible character
           direction = 1;
           setTimeout(typewriterLoop, 500);
         } else {
