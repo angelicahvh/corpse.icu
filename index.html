@@ -15,9 +15,6 @@
     <!-- Website Icon / Favicon -->
     <link rel="icon" type="image/png" href="pfp.png" />
 
-    <!-- Particles.js Library -->
-    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-
     <title>corpse</title>
 
     <style>
@@ -38,14 +35,20 @@
         overflow: hidden;
       }
 
-      /* Particles.js Container */
-      #particles-js {
+      /* Twinkling Stars Background */
+      .stars {
         position: fixed;
-        top: 0;
-        left: 0;
         width: 100%;
         height: 100%;
-        z-index: -1; /* Behind everything */
+        background: transparent url("https://www.transparenttextures.com/patterns/stardust.png") repeat;
+        animation: twinkle 5s infinite;
+        z-index: -1;
+      }
+
+      @keyframes twinkle {
+        0% { opacity: 0.6; }
+        50% { opacity: 1; }
+        100% { opacity: 0.6; }
       }
 
       /* Glass Effect */
@@ -63,9 +66,10 @@
         background-color: rgba(255, 255, 255, 0.12);
       }
 
-      /* Softer Glow */
+      /* Softer Glow (TONED DOWN) */
       .glow {
-        text-shadow: 0 0 6px rgba(255, 255, 255, 0.4);
+        text-shadow: 0 0 6px rgba(255, 255, 255, 0.25),
+                     0 0 12px rgba(255, 255, 255, 0.15);
       }
 
       /* Audio Player */
@@ -132,12 +136,12 @@
         height: 48px;
         cursor: pointer;
         transition: transform 0.2s ease, filter 0.2s ease;
-        filter: invert(90%) brightness(80%);
+        filter: invert(90%) brightness(80%) drop-shadow(0 0 3px rgba(255,255,255,0.3));
       }
 
       .social-box img:hover {
         transform: scale(1.15);
-        filter: invert(100%) brightness(95%);
+        filter: invert(100%) brightness(95%) drop-shadow(0 0 6px rgba(255,255,255,0.6));
       }
 
       /* Discord Invite */
@@ -177,8 +181,8 @@
   </head>
 
   <body>
-    <!-- Particles.js Background -->
-    <div id="particles-js"></div>
+    <!-- Twinkling Stars Layer -->
+    <div class="stars"></div>
 
     <!-- Cover Screen -->
     <div
@@ -257,44 +261,6 @@
       const cover = $("#cover");
       cover.on("click", function () {
         cover.hide(200);
-      });
-
-      // Initialize Particles.js
-      particlesJS("particles-js", {
-        particles: {
-          number: { value: 80, density: { enable: true, value_area: 800 } },
-          color: { value: "#ffffff" },
-          shape: { type: "circle" },
-          opacity: { value: 0.5, random: false },
-          size: { value: 3, random: true },
-          line_linked: {
-            enable: true,
-            distance: 150,
-            color: "#ffffff",
-            opacity: 0.4,
-            width: 1,
-          },
-          move: {
-            enable: true,
-            speed: 3,
-            direction: "none",
-            random: false,
-            straight: false,
-            out_mode: "out",
-          },
-        },
-        interactivity: {
-          detect_on: "canvas",
-          events: {
-            onhover: { enable: true, mode: "grab" },
-            onclick: { enable: true, mode: "push" },
-          },
-          modes: {
-            grab: { distance: 200, line_linked: { opacity: 0.7 } },
-            repulse: { distance: 150 },
-          },
-        },
-        retina_detect: true,
       });
     </script>
   </body>
