@@ -209,29 +209,31 @@
 
     <!-- Typewriter Title Effect -->
     <script>
-      const text = " nuwdep"; // includes space at start
-      let index = 0;
-      let deleting = false;
+  const fullTitle = " nuwdep"; // Includes the leading space
+  let index = 1;
+  let direction = 1; // 1 = typing, -1 = deleting
+  const speed = 150; // Typing speed in ms
 
-      function typeWriter() {
-        if (!deleting) {
-          document.title = text.substring(0, index);
-          index++;
-          if (index > text.length) {
-            deleting = true;
-            setTimeout(typeWriter, 800);
-            return;
-          }
-        } else {
-          document.title = text.substring(0, index);
-          index--;
-          if (index === 1) {
-            deleting = false;
-          }
-        }
-        setTimeout(typeWriter, deleting ? 100 : 150);
-      }
+  function typewriterLoop() {
+    document.title = fullTitle.substring(0, index);
 
+    if (direction === 1 && index === fullTitle.length) {
+      // Once fully typed, start deleting after a short pause
+      direction = -1;
+      setTimeout(typewriterLoop, 1000);
+    } else if (direction === -1 && index === 1) {
+      // Stop deleting at the first character (the space)
+      direction = 1;
+      setTimeout(typewriterLoop, 500);
+    } else {
+      // Continue typing or deleting
+      index += direction;
+      setTimeout(typewriterLoop, speed);
+    }
+  }
+
+  // Start when the page loads
+  window.addEventListener("load", typewriterLoop);
       typeWriter();
     </script>
   </body>
