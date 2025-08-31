@@ -231,15 +231,26 @@
     <script>
       const titleText = "Nuwdep";
       let index = 0;
+      let deleting = false;
 
-      function typeTitle() {
-        document.title = titleText.substring(0, index++);
-        if (index <= titleText.length) {
-          setTimeout(typeTitle, 200);
+      function typeWriter() {
+        if (!deleting) {
+          document.title = titleText.substring(0, index++);
+          if (index > titleText.length) {
+            deleting = true;
+            setTimeout(typeWriter, 1200);
+            return;
+          }
+        } else {
+          document.title = titleText.substring(0, index--);
+          if (index < 0) {
+            deleting = false;
+          }
         }
+        setTimeout(typeWriter, deleting ? 100 : 150);
       }
 
-      typeTitle();
+      typeWriter();
     </script>
   </body>
 </html>
