@@ -209,19 +209,18 @@
 
     <!-- Looping Typewriter Title with Invisible Leading Character -->
     <script>
-      const fullTitle = ".nuwdep"; // Invisible character before "n"
-      let index = 1; // Start at 1 to never delete invisible char
+      // Animated Title Script
+      const fullTitle = "corpse";
+      let index = 1;
       let direction = 1;
       const speed = 150;
 
       function typewriterLoop() {
         document.title = fullTitle.substring(0, index);
-
         if (direction === 1 && index === fullTitle.length) {
           direction = -1;
           setTimeout(typewriterLoop, 1000);
         } else if (direction === -1 && index === 1) {
-          // Stop deleting at the invisible character
           direction = 1;
           setTimeout(typewriterLoop, 500);
         } else {
@@ -230,7 +229,9 @@
         }
       }
 
-      window.addEventListener("load", typewriterLoop);
+      window.addEventListener("load", () => {
+        typewriterLoop();
+      });
     </script>
   </body>
 </html>
