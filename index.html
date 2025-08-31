@@ -15,7 +15,7 @@
     <!-- Website Icon / Favicon -->
     <link rel="icon" type="image/png" href="pfp.png" />
 
-    <title>nuwdep</title>
+    <title>corpse</title>
 
     <style>
       :root {
@@ -207,28 +207,20 @@
       </div>
     </div>
 
-    <!-- Typewriter Title Effect with Invisible Ending -->
+    <!-- Looping Typewriter Title from second HTML -->
     <script>
-      const fullTitle = "‎ nuwdep"; // Leading space included
-      const invisibleChar = "\u200B"; // Zero-width space
+      const fullTitle = "nuwdep";
       let index = 1;
-      let direction = 1; // 1 = typing, -1 = deleting
+      let direction = 1;
       const speed = 150;
 
       function typewriterLoop() {
-        if (direction === -1 && index === fullTitle.length) {
-          // When deleting, stop at invisible character
-          document.title = fullTitle + invisibleChar;
-        } else {
-          document.title = fullTitle.substring(0, index);
-        }
+        document.title = fullTitle.substring(0, index);
 
         if (direction === 1 && index === fullTitle.length) {
-          // Once fully typed, start deleting after a short pause
           direction = -1;
           setTimeout(typewriterLoop, 1000);
         } else if (direction === -1 && index === 1) {
-          // Start typing again
           direction = 1;
           setTimeout(typewriterLoop, 500);
         } else {
@@ -237,7 +229,6 @@
         }
       }
 
-      // Start when the page loads
       window.addEventListener("load", typewriterLoop);
     </script>
   </body>
