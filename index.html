@@ -8,17 +8,20 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet"
     />
+
+    <!-- Website Icon / Favicon -->
     <link rel="icon" type="image/png" href="pfp.png" />
-    <title>Nuwdep</title>
+
+    <title> nuwdep</title>
 
     <style>
       :root {
         padding: 0;
         margin: 0;
-        font-family: "Fira Code", monospace;
+        font-family: "Roboto", sans-serif;
         color: #e6e6e6;
         box-sizing: border-box;
       }
@@ -32,54 +35,18 @@
         overflow: hidden;
       }
 
-      /* Glass effect */
+      /* Glass Effect */
       .glass {
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
-        background-color: rgba(255, 255, 255, 0.06);
-        border-radius: 16px;
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+        background-color: rgba(255, 255, 255, 0.08);
         border: 1px solid rgba(255, 255, 255, 0.15);
-        box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
       }
 
-      /* Subtle glow */
+      /* Glow Effect (subtle) */
       .glow {
-        text-shadow: 0 0 10px rgba(255, 255, 255, 0.25);
-      }
-
-      /* Prevent text selection and hover highlighting */
-      * {
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-        outline: none !important;
-      }
-
-      /* Social Box */
-      .social-box {
-        position: fixed;
-        top: 50%;
-        left: 0;
-        transform: translateY(-50%);
-        display: flex;
-        flex-direction: column;
-        gap: 26px;
-        padding: 16px 10px;
-        border-radius: 16px;
-        z-index: 5;
-      }
-
-      .social-box img {
-        width: 46px;
-        height: 46px;
-        cursor: pointer;
-        transition: transform 0.2s ease;
-        filter: invert(100%) brightness(95%);
-      }
-
-      .social-box img:hover {
-        transform: scale(1.15);
+        text-shadow: #ffffff 0px 0px 6px;
       }
 
       /* Audio Player */
@@ -90,18 +57,16 @@
         padding: 12px;
         display: flex;
         align-items: center;
-        gap: 10px;
+        gap: 12px;
         color: #e6e6e6;
         width: 320px;
         box-sizing: border-box;
-        z-index: 5;
       }
 
       .audio-player img {
         width: 64px;
         height: 64px;
         object-fit: cover;
-        border-radius: 12px;
         flex-shrink: 0;
       }
 
@@ -129,21 +94,36 @@
         margin-top: 4px;
       }
 
+      /* Social Icons */
+      .social-box {
+        position: fixed;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        display: flex;
+        flex-direction: column;
+        gap: 35px;
+        padding: 20px 10px;
+      }
+
+      .social-box img {
+        width: 48px;
+        height: 48px;
+        cursor: pointer;
+        filter: invert(100%) brightness(100%);
+        transition: transform 0.2s ease;
+      }
+
+      .social-box img:hover {
+        transform: scale(1.1);
+      }
+
       /* Discord Invite */
       .discord-invite {
         position: fixed;
         bottom: 20px;
         left: 20px;
         width: 360px;
-        z-index: 5;
-      }
-
-      /* Divider */
-      .divider {
-        width: 100%;
-        height: 1.5px;
-        background: rgba(255, 255, 255, 0.5);
-        margin: 6px 0;
       }
     </style>
   </head>
@@ -171,38 +151,37 @@
       </a>
     </div>
 
-    <!-- Main Box -->
+    <!-- Main Profile Box -->
     <div class="w-screen h-screen flex items-center justify-center">
-      <div class="glass w-[550px] h-fit flex flex-col p-[20px] gap-[8px] z-10">
-        <!-- Top Section -->
-        <div class="flex flex-row items-center justify-start gap-[12px]">
-          <img class="w-[110px] h-[110px] rounded-[12px]" src="pfp.png" alt="Profile" />
+      <div class="glass w-[425px] h-fit flex flex-col items-center p-[20px] gap-[10px]">
+        <div class="flex flex-row items-center gap-[12px] w-full">
+          <!-- Profile Picture -->
+          <img class="w-[125px] h-[125px]" src="pfp.png" alt="Profile" />
+
+          <!-- Name + Badges -->
           <div class="flex flex-col">
-            <!-- Username + Badges -->
-            <div class="flex flex-row items-center gap-[6px]">
-              <a class="glow text-4xl font-bold leading-none">Nuwdep</a>
-              <div class="flex flex-row gap-[4px]">
-                <img src="badge1.png" class="w-[22px] h-[22px]" alt="Badge1" />
-                <img src="badge2.png" class="w-[22px] h-[22px]" alt="Badge2" />
-              </div>
+            <div class="flex items-center gap-[6px]">
+              <a class="glow text-3xl">Nuwdep</a>
+              <img src="badge1.png" alt="Badge 1" class="w-[24px] h-[24px]" />
+              <img src="badge2.png" alt="Badge 2" class="w-[24px] h-[24px]" />
             </div>
-            <!-- Subtitle -->
-            <a class="text-lg mt-[2px]">𝐉𝐚𝐯𝐚𝐒𝐜𝐫𝐢𝐩𝐭</a>
+            <a class="text-2xl">𝐉𝐚𝐯𝐚𝐒𝐜𝐫𝐢𝐩𝐭</a>
           </div>
         </div>
 
         <!-- Divider -->
-        <span class="divider"></span>
+        <span class="w-full h-px bg-white"></span>
 
-        <!-- Bio Section -->
-        <p class="text-center text-base leading-relaxed text-gray-200">
-          15-year-old developer from the U.K. Passionate about JavaScript, loves building cool stuff,
-          addicted to Monster, usually bored, and obsessed with Dexter.
-        </p>
+        <!-- Bio -->
+        <a class="text-base text-center" style="color: #e6e6e6;">
+          15 year old living in the U.K whos learning JavaScript, drinks alot of monster,
+          is always bored, and obsessed with Dexter
+        </a>
+        <span class="w-full h-px bg-white"></span>
       </div>
     </div>
 
-    <!-- Discord Server Invite -->
+    <!-- Discord Server Invite Bottom Left -->
     <div class="discord-invite glass p-[10px] flex flex-row gap-[10px] items-center">
       <img class="w-auto h-[75px]" src="discord.png" alt="CantThinkOfName" />
       <a class="glow shrink-0">CantThinkOfName</a>
@@ -210,7 +189,8 @@
         <a
           href="https://discord.gg/fwYzVKN9cx"
           class="glow-hover transition-transform transform hover:scale-105 cursor-pointer border border-white py-[6px] px-[12px]"
-        >🡆</a>
+          >🡆</a
+        >
       </div>
     </div>
 
@@ -220,30 +200,32 @@
       <div class="info">
         <strong>Scourge Of Iron</strong>
         <span>Cannibal Corpse</span>
-        <audio autoplay controls>
+        <audio id="bg-music" autoplay controls>
           <source src="audio.mp3" type="audio/mp3" />
           Your browser does not support the audio element.
         </audio>
       </div>
     </div>
 
-    <!-- Typewriter Page Title -->
+    <!-- Typewriter Title Effect -->
     <script>
-      const titleText = "Nuwdep";
+      const text = " nuwdep"; // includes space at start
       let index = 0;
       let deleting = false;
 
       function typeWriter() {
         if (!deleting) {
-          document.title = titleText.substring(0, index++);
-          if (index > titleText.length) {
+          document.title = text.substring(0, index);
+          index++;
+          if (index > text.length) {
             deleting = true;
-            setTimeout(typeWriter, 1200);
+            setTimeout(typeWriter, 800);
             return;
           }
         } else {
-          document.title = titleText.substring(0, index--);
-          if (index < 0) {
+          document.title = text.substring(0, index);
+          index--;
+          if (index === 1) {
             deleting = false;
           }
         }
