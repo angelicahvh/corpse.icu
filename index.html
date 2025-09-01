@@ -5,16 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
-    <!-- Professional Typewriter Font -->
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
 
-    <!-- Website Icon / Favicon -->
     <link rel="icon" type="image/png" href="pfp.png" />
 
     <title>corpse</title>
@@ -35,7 +33,6 @@
         background: url("bg.png") no-repeat center center fixed;
         background-size: cover;
         overflow: hidden;
-        font-family: "Roboto Mono", monospace;
       }
 
       /* Glass Effect */
@@ -45,12 +42,62 @@
         background-color: rgba(255, 255, 255, 0.08);
         border: 1px solid rgba(255, 255, 255, 0.15);
         box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
-        border-radius: 16px;
       }
 
-      /* Glow Effect */
+      /* Subtle Glow Effect */
       .glow {
-        text-shadow: #ffffff 0px 0px 6px;
+        text-shadow: rgba(255, 255, 255, 0.4) 0px 0px 3px;
+      }
+
+      /* Audio Player */
+      .audio-player {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        padding: 12px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: #e6e6e6;
+        width: 340px;
+        box-sizing: border-box;
+      }
+
+      .audio-player img {
+        width: 64px;
+        height: 64px;
+        object-fit: cover;
+        flex-shrink: 0;
+      }
+
+      .audio-player .info {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        min-width: 0;
+      }
+
+      .audio-player strong {
+        font-size: 14px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .audio-player span {
+        font-size: 12px;
+        color: #cccccc;
+      }
+
+      .controls {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .volume-slider {
+        width: 60px;
+        cursor: pointer;
       }
 
       /* Social Icons */
@@ -85,98 +132,49 @@
         width: 360px;
       }
 
-      /* New Audio Player Styling */
-      .audio-player {
+      /* Clock */
+      #clock {
         position: fixed;
-        bottom: 20px;
+        top: 20px;
         right: 20px;
-        padding: 14px;
-        display: flex;
-        align-items: center;
-        gap: 14px;
-        color: #e6e6e6;
-        width: 320px;
-        border-radius: 16px;
-        box-sizing: border-box;
-        font-family: "Roboto Mono", monospace;
-      }
-
-      .album-art-wrapper {
-        width: 68px;
-        height: 68px;
-        border-radius: 50%;
-        overflow: hidden;
-        flex-shrink: 0;
-      }
-
-      .album-art-wrapper img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-
-      .info {
-        display: flex;
-        flex-direction: column;
-        flex: 1;
-      }
-
-      .info strong {
-        font-size: 14px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-
-      .info span {
-        font-size: 12px;
-        color: #bdbdbd;
-      }
-
-      .progress-container {
-        width: 100%;
-        height: 5px;
-        background: rgba(255, 255, 255, 0.2);
-        border-radius: 4px;
-        margin-top: 8px;
-        overflow: hidden;
-      }
-
-      #progress-bar {
-        width: 0%;
-        height: 100%;
-        background: #ff3b81;
-        transition: width 0.2s;
-      }
-
-      .controls {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 12px;
-        margin-top: 8px;
-      }
-
-      .controls button {
-        background: none;
-        border: none;
-        color: #fff;
         font-size: 18px;
-        cursor: pointer;
-        transition: transform 0.2s ease;
+        color: #fff;
       }
 
-      .controls button:hover {
-        transform: scale(1.2);
+      /* Custom Cursor Glow */
+      html {
+        cursor: none;
       }
 
-      audio {
-        display: none;
+      #cursor-glow {
+        position: fixed;
+        width: 40px;
+        height: 40px;
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 50%;
+        pointer-events: none;
+        transform: translate(-50%, -50%);
+        transition: transform 0.05s linear;
+        z-index: 9999;
+      }
+
+      /* Particles Layer */
+      #particles-js {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: -1;
       }
     </style>
   </head>
 
   <body>
+    <div id="particles-js"></div>
+    <div id="cursor-glow"></div>
+    <div id="clock"></div>
+
     <!-- Social Icons Left -->
     <div class="social-box glass">
       <a href="https://steamcommunity.com/id/DexterMogran" target="_blank">
@@ -201,19 +199,19 @@
 
     <!-- Main Profile Box -->
     <div class="w-screen h-screen flex items-center justify-center">
-      <div class="glass w-[600px] h-fit flex flex-col items-center p-[20px] gap-[12px]">
-        <div class="flex flex-row items-center gap-[14px] w-full">
-          <!-- Smaller Profile Picture -->
-          <img class="w-[85px] h-[85px] rounded-lg" src="pfp.png" alt="Profile" />
+      <div class="glass w-[600px] h-fit flex flex-col items-center p-[20px] gap-[10px]">
+        <div class="flex flex-row items-center gap-[12px] w-full">
+          <!-- Profile Picture -->
+          <img class="w-[100px] h-[100px]" src="pfp.png" alt="Profile" />
 
           <!-- Name + Badges -->
           <div class="flex flex-col">
-            <div class="flex items-center gap-[8px]">
+            <div class="flex items-center gap-[6px]">
               <a class="glow text-3xl">Nuwdep</a>
               <img src="badge1.png" alt="Badge 1" class="w-[24px] h-[24px]" />
               <img src="badge2.png" alt="Badge 2" class="w-[24px] h-[24px]" />
             </div>
-            <a class="text-xl">𝐉𝐚𝐯𝐚𝐒𝐜𝐫𝐢𝐩𝐭</a>
+            <a class="text-2xl">𝐉𝐚𝐯𝐚𝐒𝐜𝐫𝐢𝐩𝐭</a>
           </div>
         </div>
 
@@ -222,8 +220,8 @@
 
         <!-- Bio -->
         <a class="text-base text-center" style="color: #e6e6e6;">
-          15 year old living in the U.K whos learning JavaScript, drinks a lot of monster,
-          is always bored, and obsessed with Dexter.
+          15 year old living in the U.K whos learning JavaScript, drinks alot of monster,
+          is always bored, and obsessed with Dexter
         </a>
         <span class="w-full h-px bg-white"></span>
       </div>
@@ -237,84 +235,35 @@
         <a
           href="https://discord.gg/fwYzVKN9cx"
           class="glow-hover transition-transform transform hover:scale-105 cursor-pointer border border-white py-[6px] px-[12px]"
-          >🡆</a
-        >
+        >🡆</a>
       </div>
     </div>
 
-    <!-- New Audio Player -->
+    <!-- Audio Player -->
     <div class="audio-player glass">
-      <div class="album-art-wrapper">
-        <img id="album-art" src="album.png" alt="Album Art" />
-      </div>
+      <img id="album-art" src="album.png" alt="Album Art" />
       <div class="info">
-        <strong id="song-title">Scourge Of Iron</strong>
-        <span id="artist-name">Cannibal Corpse</span>
-        <div class="progress-container">
-          <div id="progress-bar"></div>
-        </div>
+        <strong>Scourge Of Iron</strong>
+        <span>Cannibal Corpse</span>
         <div class="controls">
-          <button id="prev-btn">⏮</button>
-          <button id="play-btn">▶</button>
-          <button id="next-btn">⏭</button>
+          <audio id="bg-music" autoplay>
+            <source src="audio.mp3" type="audio/mp3" />
+          </audio>
+          <input type="range" id="volume" class="volume-slider" min="0" max="1" step="0.01" value="1" />
+          <span id="time" style="font-size: 12px;">0:00 / 0:00</span>
         </div>
-        <audio id="bg-music" autoplay muted>
-          <source src="audio.mp3" type="audio/mp3" />
-        </audio>
       </div>
     </div>
 
-    <!-- Color Thief + Audio Player Logic -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.2/color-thief.umd.js"></script>
     <script>
-      const audio = document.getElementById("bg-music");
-      const playBtn = document.getElementById("play-btn");
-      const progressBar = document.getElementById("progress-bar");
-      const albumArt = document.getElementById("album-art");
-
-      // Play / Pause
-      playBtn.addEventListener("click", () => {
-        if (audio.paused) {
-          audio.play();
-          playBtn.textContent = "⏸";
-        } else {
-          audio.pause();
-          playBtn.textContent = "▶";
-        }
-      });
-
-      // Progress bar update
-      audio.addEventListener("timeupdate", () => {
-        const progress = (audio.currentTime / audio.duration) * 100;
-        progressBar.style.width = `${progress}%`;
-      });
-
-      // Set progress bar color from album art
-      albumArt.onload = () => {
-        const colorThief = new ColorThief();
-        const color = colorThief.getColor(albumArt);
-        progressBar.style.backgroundColor = `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
-      };
-
-      // Unmute after autoplay starts
-      window.addEventListener("load", () => {
-        setTimeout(() => {
-          audio.muted = false;
-          audio.play();
-        }, 500);
-      });
-    </script>
-
-    <!-- Looping Typewriter Title -->
-    <script>
-      const fullTitle = ".nuwdep"; 
+      // Typewriter Title
+      const fullTitle = ".nuwdep";
       let index = 1;
       let direction = 1;
       const speed = 150;
 
       function typewriterLoop() {
         document.title = fullTitle.substring(0, index);
-
         if (direction === 1 && index === fullTitle.length) {
           direction = -1;
           setTimeout(typewriterLoop, 1000);
@@ -326,8 +275,62 @@
           setTimeout(typewriterLoop, speed);
         }
       }
-
       window.addEventListener("load", typewriterLoop);
+
+      // Audio Duration + Volume Control
+      const audio = document.getElementById("bg-music");
+      const time = document.getElementById("time");
+      const volumeSlider = document.getElementById("volume");
+
+      audio.addEventListener("loadedmetadata", () => {
+        updateTime();
+      });
+
+      audio.addEventListener("timeupdate", updateTime);
+
+      function updateTime() {
+        const current = formatTime(audio.currentTime);
+        const total = formatTime(audio.duration);
+        time.textContent = `${current} / ${total}`;
+      }
+
+      function formatTime(seconds) {
+        if (isNaN(seconds)) return "0:00";
+        const minutes = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60).toString().padStart(2, "0");
+        return `${minutes}:${secs}`;
+      }
+
+      volumeSlider.addEventListener("input", () => {
+        audio.volume = volumeSlider.value;
+      });
+
+      // Clock
+      function updateClock() {
+        const now = new Date();
+        document.getElementById("clock").innerText = now.toLocaleTimeString();
+      }
+      setInterval(updateClock, 1000);
+      updateClock();
+
+      // Custom Cursor Glow
+      const glow = document.getElementById("cursor-glow");
+      document.addEventListener("mousemove", e => {
+        glow.style.left = e.pageX + "px";
+        glow.style.top = e.pageY + "px";
+      });
+
+      // Particles.js Config (Subtle)
+      particlesJS("particles-js", {
+        particles: {
+          number: { value: 30 },
+          color: { value: "#ffffff" },
+          shape: { type: "circle" },
+          opacity: { value: 0.2 },
+          size: { value: 2 },
+          move: { speed: 0.6 }
+        }
+      });
     </script>
   </body>
 </html>
