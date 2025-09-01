@@ -1,327 +1,325 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&display=swap"
-      rel="stylesheet"
-    />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="icon" type="image/png" href="pfp.png" />
 
-    <link rel="icon" type="image/png" href="pfp.png" />
+  <title>corpse</title>
 
-    <title>corpse</title>
+  <style>
+    :root {
+      padding: 0;
+      margin: 0;
+      font-family: "Roboto Mono", monospace;
+      color: #e6e6e6;
+      box-sizing: border-box;
+    }
 
-    <style>
-      :root {
-        padding: 0;
-        margin: 0;
-        font-family: "Roboto Mono", monospace;
-        color: #e6e6e6;
-        box-sizing: border-box;
-      }
+    body {
+      margin: 0;
+      height: 100vh;
+      width: 100vw;
+      background: url("bg.png") no-repeat center center fixed;
+      background-size: cover;
+      overflow: hidden;
+    }
 
-      body {
-        margin: 0;
-        height: 100vh;
-        width: 100vw;
-        background: url("bg.png") no-repeat center center fixed;
-        background-size: cover;
-        overflow: hidden;
-        cursor: none; /* Hide mouse cursor */
-      }
+    /* Glass Effect */
+    .glass {
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      background-color: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+    }
 
-      /* Glass Effect */
-      .glass {
-        backdrop-filter: blur(6px);
-        -webkit-backdrop-filter: blur(6px);
-        background-color: rgba(255, 255, 255, 0.08);
-        border: 1px solid rgba(255, 255, 255, 0.15);
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
-      }
+    /* Subtle Glow Effect */
+    .glow {
+      text-shadow: rgba(255, 255, 255, 0.3) 0px 0px 3px;
+    }
 
-      /* Subtle Glow Effect */
-      .glow {
-        text-shadow: rgba(255, 255, 255, 0.3) 0px 0px 3px;
-      }
+    /* Audio Player */
+    .audio-player {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      padding: 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #e6e6e6;
+      width: 340px;
+      box-sizing: border-box;
+    }
 
-      /* Audio Player */
-      .audio-player {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        padding: 12px;
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        color: #e6e6e6;
-        width: 340px;
-        box-sizing: border-box;
-      }
+    .audio-player img {
+      width: 64px;
+      height: 64px;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
 
-      .audio-player img {
-        width: 64px;
-        height: 64px;
-        object-fit: cover;
-        flex-shrink: 0;
-      }
+    .audio-player .info {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      min-width: 0;
+    }
 
-      .audio-player .info {
-        display: flex;
-        flex-direction: column;
-        flex: 1;
-        min-width: 0;
-      }
+    .audio-player strong {
+      font-size: 14px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
 
-      .audio-player strong {
-        font-size: 14px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
+    .audio-player span {
+      font-size: 12px;
+      color: #cccccc;
+    }
 
-      .audio-player span {
-        font-size: 12px;
-        color: #cccccc;
-      }
+    .progress-container {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 5px;
+    }
 
-      .progress-container {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        margin-top: 5px;
-      }
+    #progress {
+      flex: 1;
+      height: 4px;
+      border-radius: 2px;
+      background: #555;
+      outline: none;
+      cursor: pointer;
+      -webkit-appearance: none;
+    }
 
-      #progress {
-        flex: 1;
-        height: 4px;
-        border-radius: 2px;
-        background: #555;
-        outline: none;
-        cursor: pointer;
-        -webkit-appearance: none;
-      }
+    #progress::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 10px;
+      height: 10px;
+      background: #fff;
+      border-radius: 50%;
+      cursor: pointer;
+    }
 
-      #progress::-webkit-slider-thumb {
-        -webkit-appearance: none;
-        width: 10px;
-        height: 10px;
-        background: #fff;
-        border-radius: 50%;
-        cursor: pointer;
-      }
+    /* Social Icons */
+    .social-box {
+      position: fixed;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 35px;
+      padding: 20px 10px;
+    }
 
-      /* Social Icons */
-      .social-box {
-        position: fixed;
-        top: 50%;
-        left: 0;
-        transform: translateY(-50%);
-        display: flex;
-        flex-direction: column;
-        gap: 35px;
-        padding: 20px 10px;
-      }
+    .social-box img {
+      width: 48px;
+      height: 48px;
+      cursor: pointer;
+      filter: invert(100%) brightness(100%);
+      transition: transform 0.2s ease;
+    }
 
-      .social-box img {
-        width: 48px;
-        height: 48px;
-        cursor: pointer;
-        filter: invert(100%) brightness(100%);
-        transition: transform 0.2s ease;
-      }
+    .social-box img:hover {
+      transform: scale(1.1);
+    }
 
-      .social-box img:hover {
-        transform: scale(1.1);
-      }
+    /* Discord Invite */
+    .discord-invite {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      width: 360px;
+    }
 
-      /* Discord Invite */
-      .discord-invite {
-        position: fixed;
-        bottom: 20px;
-        left: 20px;
-        width: 360px;
-      }
+    /* Clock */
+    #clock {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      font-size: 18px;
+      color: #fff;
+    }
 
-      /* Clock */
-      #clock {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        font-size: 18px;
-        color: #fff;
-      }
+    /* Particles Layer */
+    #particles-js {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+  </style>
+</head>
 
-      /* Particles Layer */
-      #particles-js {
-        position: fixed;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        z-index: -1;
-      }
-    </style>
-  </head>
+<body>
+  <div id="particles-js"></div>
+  <div id="clock"></div>
 
-  <body>
-    <div id="particles-js"></div>
-    <div id="clock"></div>
+  <!-- Social Icons Left -->
+  <div class="social-box glass">
+    <a href="https://steamcommunity.com/id/DexterMogran" target="_blank">
+      <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/steam.svg" alt="Steam" />
+    </a>
+    <a href="https://github.com/rabbitcorpse" target="_blank">
+      <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" alt="GitHub" />
+    </a>
+    <a href="https://open.spotify.com/user/31mf24d6tezrz57jrn57ogv4uguq" target="_blank">
+      <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/spotify.svg" alt="Spotify" />
+    </a>
+    <a href="https://youtube.com" target="_blank">
+      <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/youtube.svg" alt="YouTube" />
+    </a>
+    <a href="https://twitter.com/Nuwdep" target="_blank">
+      <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/twitter.svg" alt="Twitter" />
+    </a>
+    <a href="https://discord.com" target="_blank">
+      <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/discord.svg" alt="Discord" />
+    </a>
+  </div>
 
-    <!-- Social Icons Left -->
-    <div class="social-box glass">
-      <a href="https://steamcommunity.com/id/DexterMogran" target="_blank">
-        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/steam.svg" alt="Steam"/>
-      </a>
-      <a href="https://github.com/rabbitcorpse" target="_blank">
-        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" alt="GitHub"/>
-      </a>
-      <a href="https://open.spotify.com/user/31mf24d6tezrz57jrn57ogv4uguq" target="_blank">
-        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/spotify.svg" alt="Spotify"/>
-      </a>
-      <a href="https://youtube.com" target="_blank">
-        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/youtube.svg" alt="YouTube"/>
-      </a>
-      <a href="https://twitter.com/Nuwdep" target="_blank">
-        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/twitter.svg" alt="Twitter"/>
-      </a>
-      <a href="https://discord.com" target="_blank">
-        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/discord.svg" alt="Discord"/>
-      </a>
-    </div>
+  <!-- Main Profile Box -->
+  <div class="w-screen h-screen flex items-center justify-center">
+    <div class="glass w-[600px] h-fit flex flex-col items-center p-[20px] gap-[10px]">
+      <div class="flex flex-row items-center gap-[12px] w-full">
+        <!-- Profile Picture -->
+        <img class="w-[100px] h-[100px]" src="pfp.png" alt="Profile" />
 
-    <!-- Main Profile Box -->
-    <div class="w-screen h-screen flex items-center justify-center">
-      <div class="glass w-[600px] h-fit flex flex-col items-center p-[20px] gap-[10px]">
-        <div class="flex flex-row items-center gap-[12px] w-full">
-          <!-- Profile Picture -->
-          <img class="w-[100px] h-[100px]" src="pfp.png" alt="Profile" />
-
-          <!-- Name + Badges -->
-          <div class="flex flex-col">
-            <div class="flex items-center gap-[6px]">
-              <a class="glow text-3xl">Nuwdep</a>
-              <img src="badge1.png" alt="Badge 1" class="w-[24px] h-[24px]" />
-              <img src="badge2.png" alt="Badge 2" class="w-[24px] h-[24px]" />
-            </div>
-            <a class="text-2xl">𝐉𝐚𝐯𝐚𝐒𝐜𝐫𝐢𝐩𝐭</a>
+        <!-- Name + Badges -->
+        <div class="flex flex-col">
+          <div class="flex items-center gap-[6px]">
+            <a class="glow text-3xl">Nuwdep</a>
+            <img src="badge1.png" alt="Badge 1" class="w-[24px] h-[24px]" />
+            <img src="badge2.png" alt="Badge 2" class="w-[24px] h-[24px]" />
           </div>
+          <a class="text-2xl">𝐉𝐚𝐯𝐚𝐒𝐜𝐫𝐢𝐩𝐭</a>
         </div>
-
-        <!-- Divider -->
-        <span class="w-full h-px bg-white"></span>
-
-        <!-- Bio -->
-        <a class="text-base text-center" style="color: #e6e6e6;">
-          15 year old living in the U.K whos learning JavaScript, drinks alot of monster,
-          is always bored, and obsessed with Dexter
-        </a>
-        <span class="w-full h-px bg-white"></span>
       </div>
-    </div>
 
-    <!-- Discord Server Invite Bottom Left -->
-    <div class="discord-invite glass p-[10px] flex flex-row gap-[10px] items-center">
-      <img class="w-auto h-[75px]" src="discord.png" alt="CantThinkOfName" />
-      <a class="glow shrink-0">CantThinkOfName</a>
-      <div class="w-full grow flex flex-row-reverse">
-        <a
-          href="https://discord.gg/fwYzVKN9cx"
-          class="glow-hover transition-transform transform hover:scale-105 cursor-pointer border border-white py-[6px] px-[12px]"
-        >🡆</a>
+      <!-- Divider -->
+      <span class="w-full h-px bg-white"></span>
+
+      <!-- Bio -->
+      <a class="text-base text-center" style="color: #e6e6e6;">
+        15 year old living in the U.K whos learning JavaScript, drinks alot of monster,
+        is always bored, and obsessed with Dexter
+      </a>
+      <span class="w-full h-px bg-white"></span>
+    </div>
+  </div>
+
+  <!-- Discord Server Invite Bottom Left -->
+  <div class="discord-invite glass p-[10px] flex flex-row gap-[10px] items-center">
+    <img class="w-auto h-[75px]" src="discord.png" alt="CantThinkOfName" />
+    <a class="glow shrink-0">CantThinkOfName</a>
+    <div class="w-full grow flex flex-row-reverse">
+      <a
+        href="https://discord.gg/fwYzVKN9cx"
+        class="glow-hover transition-transform transform hover:scale-105 cursor-pointer border border-white py-[6px] px-[12px]"
+      >🡆</a>
+    </div>
+  </div>
+
+  <!-- Audio Player -->
+  <div class="audio-player glass">
+    <img id="album-art" src="album.png" alt="Album Art" />
+    <div class="info">
+      <strong>Scourge Of Iron</strong>
+      <span>Cannibal Corpse</span>
+      <div class="progress-container">
+        <span id="current-time">0:00</span>
+        <input type="range" id="progress" min="0" value="0" step="1">
+        <span id="duration">0:00</span>
       </div>
+      <audio id="bg-music" autoplay>
+        <source src="audio.mp3" type="audio/mp3" />
+      </audio>
     </div>
+  </div>
 
-    <!-- Audio Player -->
-    <div class="audio-player glass">
-      <img id="album-art" src="album.png" alt="Album Art" />
-      <div class="info">
-        <strong>Scourge Of Iron</strong>
-        <span>Cannibal Corpse</span>
-        <div class="progress-container">
-          <span id="current-time">0:00</span>
-          <input type="range" id="progress" min="0" value="0" step="1">
-          <span id="duration">0:00</span>
-        </div>
-        <audio id="bg-music" autoplay>
-          <source src="audio.mp3" type="audio/mp3" />
-        </audio>
-      </div>
-    </div>
+  <script>
+    // Typewriter Title
+    const fullTitle = ".nuwdep";
+    let index = 1;
+    let direction = 1;
+    const speed = 150;
 
-    <script>
-      // Typewriter Title
-      const fullTitle = ".nuwdep";
-      let index = 1;
-      let direction = 1;
-      const speed = 150;
-
-      function typewriterLoop() {
-        document.title = fullTitle.substring(0, index);
-        if (direction === 1 && index === fullTitle.length) {
-          direction = -1;
-          setTimeout(typewriterLoop, 1000);
-        } else if (direction === -1 && index === 1) {
-          direction = 1;
-          setTimeout(typewriterLoop, 500);
-        } else {
-          index += direction;
-          setTimeout(typewriterLoop, speed);
-        }
+    function typewriterLoop() {
+      document.title = fullTitle.substring(0, index);
+      if (direction === 1 && index === fullTitle.length) {
+        direction = -1;
+        setTimeout(typewriterLoop, 1000);
+      } else if (direction === -1 && index === 1) {
+        direction = 1;
+        setTimeout(typewriterLoop, 500);
+      } else {
+        index += direction;
+        setTimeout(typewriterLoop, speed);
       }
-      window.addEventListener("load", typewriterLoop);
+    }
+    window.addEventListener("load", typewriterLoop);
 
-      // Audio Player Controls
-      const audio = document.getElementById("bg-music");
-      const progress = document.getElementById("progress");
-      const currentTimeEl = document.getElementById("current-time");
-      const durationEl = document.getElementById("duration");
+    // Audio Player Controls
+    const audio = document.getElementById("bg-music");
+    const progress = document.getElementById("progress");
+    const currentTimeEl = document.getElementById("current-time");
+    const durationEl = document.getElementById("duration");
 
-      audio.addEventListener("loadedmetadata", () => {
-        progress.max = Math.floor(audio.duration);
-        durationEl.textContent = formatTime(audio.duration);
-      });
+    audio.addEventListener("loadedmetadata", () => {
+      progress.max = Math.floor(audio.duration);
+      durationEl.textContent = formatTime(audio.duration);
+    });
 
-      audio.addEventListener("timeupdate", () => {
-        progress.value = Math.floor(audio.currentTime);
-        currentTimeEl.textContent = formatTime(audio.currentTime);
-      });
+    audio.addEventListener("timeupdate", () => {
+      progress.value = Math.floor(audio.currentTime);
+      currentTimeEl.textContent = formatTime(audio.currentTime);
+    });
 
-      progress.addEventListener("input", () => {
-        audio.currentTime = progress.value;
-      });
+    progress.addEventListener("input", () => {
+      audio.currentTime = progress.value;
+    });
 
-      function formatTime(seconds) {
-        if (isNaN(seconds)) return "0:00";
-        const minutes = Math.floor(seconds / 60);
-        const secs = Math.floor(seconds % 60).toString().padStart(2, "0");
-        return `${minutes}:${secs}`;
+    function formatTime(seconds) {
+      if (isNaN(seconds)) return "0:00";
+      const minutes = Math.floor(seconds / 60);
+      const secs = Math.floor(seconds % 60).toString().padStart(2, "0");
+      return `${minutes}:${secs}`;
+    }
+
+    // Clock
+    function updateClock() {
+      const now = new Date();
+      document.getElementById("clock").innerText = now.toLocaleTimeString();
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // Particles.js Config (Subtle)
+    particlesJS("particles-js", {
+      particles: {
+        number: { value: 30 },
+        color: { value: "#ffffff" },
+        shape: { type: "circle" },
+        opacity: { value: 0.2 },
+        size: { value: 2 },
+        move: { speed: 0.6 }
       }
-
-      // Clock
-      function updateClock() {
-        const now = new Date();
-        document.getElementById("clock").innerText = now.toLocaleTimeString();
-      }
-      setInterval(updateClock, 1000);
-      updateClock();
-
-      // Particles.js Config (Subtle)
-      particlesJS("particles-js", {
-        particles: {
-          number: { value: 30 },
-          color: { value: "#ffffff" },
-          shape: { type: "circle" },
-          opacity: { value: 0.2 },
-          size: { value: 2 },
-          move: { speed: 0.6 }
-        }
-      });
-    </script>
-  </body>
+    });
+  </script>
+</body>
 </html>
