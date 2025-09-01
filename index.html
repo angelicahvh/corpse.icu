@@ -12,7 +12,7 @@
     href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&display=swap"
     rel="stylesheet"
   />
-  <link rel="icon" type="image/png" href="pfp.gif" />
+  <link rel="icon" type="image/png" href="pfp.png" />
 
   <title>nuwdep</title>
 
@@ -34,7 +34,6 @@
       overflow: hidden;
     }
 
-    /* Glass Effect */
     .glass {
       backdrop-filter: blur(6px);
       -webkit-backdrop-filter: blur(6px);
@@ -43,12 +42,10 @@
       box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
     }
 
-    /* Subtle Glow */
     .glow {
       text-shadow: rgba(255, 255, 255, 0.3) 0px 0px 3px;
     }
 
-    /* Audio Player */
     .audio-player {
       position: fixed;
       bottom: 20px;
@@ -78,7 +75,6 @@
       border-radius: 50%;
     }
 
-    /* Vinyl spin */
     .spinning {
       animation: spin 5s linear infinite;
       animation-play-state: paused;
@@ -156,7 +152,6 @@
       display: none;
     }
 
-    /* Social Icons */
     .social-box {
       position: fixed;
       top: 50%;
@@ -180,7 +175,6 @@
       transform: scale(1.1);
     }
 
-    /* Discord Invite */
     .discord-invite {
       position: fixed;
       bottom: 20px;
@@ -188,7 +182,6 @@
       width: 360px;
     }
 
-    /* Clock */
     #clock {
       position: fixed;
       top: 20px;
@@ -197,7 +190,6 @@
       color: #fff;
     }
 
-    /* Particles Layer */
     #particles-js {
       position: fixed;
       width: 100%;
@@ -207,7 +199,6 @@
       z-index: -1;
     }
 
-    /* Cover */
     #cover {
       position: fixed;
       top: 0; left: 0;
@@ -227,13 +218,11 @@
 </head>
 
 <body>
-  <!-- Cover -->
   <div id="cover">𝐂𝐎𝐑𝐏𝐒𝐄.ɪᴄᴜ</div>
 
   <div id="particles-js"></div>
   <div id="clock"></div>
 
-  <!-- Social Icons Left -->
   <div class="social-box glass">
     <a href="https://steamcommunity.com/id/DexterMogran" target="_blank">
       <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/steam.svg" alt="Steam" />
@@ -255,14 +244,10 @@
     </a>
   </div>
 
-  <!-- Main Profile Box -->
   <div class="w-screen h-screen flex items-center justify-center">
     <div class="glass w-[600px] h-fit flex flex-col items-center p-[20px] gap-[10px]">
       <div class="flex flex-row items-center gap-[12px] w-full">
-        <!-- Profile Picture -->
         <img class="w-[100px] h-[100px]" src="pfp.gif" alt="Profile" />
-
-        <!-- Name + Badges -->
         <div class="flex flex-col">
           <div class="flex items-center gap-[6px]">
             <a class="glow text-3xl">ᑎᑌᗯDEP</a>
@@ -273,10 +258,8 @@
         </div>
       </div>
 
-      <!-- Divider -->
       <span class="w-full h-px bg-white"></span>
 
-      <!-- Bio -->
       <a class="text-base text-center" style="color: #e6e6e6;">
         15 year old living in the U.K whos learning JavaScript, drinks alot of monster,
         is always bored, and obsessed with Dexter
@@ -285,9 +268,8 @@
     </div>
   </div>
 
-  <!-- Discord Server Invite Bottom Left -->
   <div class="discord-invite glass p-[10px] flex flex-row gap-[10px] items-center">
-    <img class="w-auto h-[75px]" src="discord.png" alt="CantThinkOfName" />
+    <img class="w-auto h-[75px]" src="server.png" alt="CantThinkOfName" />
     <a class="glow shrink-0">CantThinkOfName</a>
     <div class="w-full grow flex flex-row-reverse">
       <a
@@ -297,7 +279,6 @@
     </div>
   </div>
 
-  <!-- Audio Player -->
   <div class="audio-player glass">
     <div class="album-art-wrapper">
       <img id="album-art" class="spinning" src="album.png" alt="Album Art" />
@@ -325,19 +306,16 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.2/color-thief.umd.js"></script>
   <script>
-    // --- Cover Click & Audio ---
     const cover = document.getElementById("cover");
     const audio = document.getElementById("bg-music");
     const playBtn = document.getElementById("play-btn");
     const albumArt = document.getElementById("album-art");
 
     cover.addEventListener("click", () => {
-      // Fade out cover
       cover.style.transition = "opacity 0.5s";
       cover.style.opacity = 0;
       setTimeout(() => cover.remove(), 500);
 
-      // Play audio with sound
       audio.muted = false;
       audio.play().then(() => {
         playBtn.textContent = "⏸";
@@ -345,11 +323,10 @@
       }).catch(err => console.warn("Autoplay blocked:", err));
     });
 
-    // Typewriter Title
     const fullTitle = ".nuwdep";
     let index = 1;
     let direction = 1;
-    const speed = 150;
+    const speed = 200;
 
     function typewriterLoop() {
       document.title = fullTitle.substring(0, index);
@@ -366,13 +343,11 @@
     }
     window.addEventListener("load", typewriterLoop);
 
-    // Audio Player Logic
     const progressBar = document.getElementById("progress-bar");
     const currentTimeEl = document.getElementById("current-time");
     const durationEl = document.getElementById("duration");
     const progressContainer = document.getElementById("progress-bar-container");
 
-    // Play / Pause button toggle
     playBtn.addEventListener("click", () => {
       if (audio.paused) {
         audio.play();
@@ -386,7 +361,6 @@
     audio.addEventListener("play", () => albumArt.style.animationPlayState = "running");
     audio.addEventListener("pause", () => albumArt.style.animationPlayState = "paused");
 
-    // Update progress & timestamps
     audio.addEventListener("timeupdate", () => {
       if (!isDragging) {
         const progress = (audio.currentTime / audio.duration) * 100;
@@ -426,23 +400,21 @@
       progressBar.style.backgroundColor = `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
     };
 
-    // Clock
     function updateClock() {
       const now = new Date();
       document.getElementById("clock").innerText = now.toLocaleTimeString();
     }
-    setInterval(updateClock, 1000);
+    setInterval(updateClock, 2000);
     updateClock();
 
-    // Particles.js Config
     particlesJS("particles-js", {
       particles: {
-        number: { value: 30 },
+        number: { value: 15 },
         color: { value: "#ffffff" },
         shape: { type: "circle" },
-        opacity: { value: 0.2 },
+        opacity: { value: 0.15 },
         size: { value: 2 },
-        move: { speed: 0.8 }
+        move: { speed: 0.5 }
       }
     });
   </script>
