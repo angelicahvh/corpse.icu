@@ -45,7 +45,39 @@
       border-radius: 12px;
     }
 
-    /* Smooth Custom Audio Player */
+    /* Social Icons */
+    .social-box {
+      position: fixed;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 35px;
+      padding: 20px 10px;
+    }
+
+    .social-box img {
+      width: 48px;
+      height: 48px;
+      cursor: pointer;
+      filter: invert(100%) brightness(100%);
+      transition: transform 0.2s ease;
+    }
+
+    .social-box img:hover {
+      transform: scale(1.1);
+    }
+
+    /* Discord Invite */
+    .discord-invite {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      width: 360px;
+    }
+
+    /* Custom Audio Player */
     .custom-audio-player {
       position: fixed;
       bottom: 20px;
@@ -139,7 +171,71 @@
   </style>
 </head>
 <body>
-  <!-- Audio Player -->
+  <!-- Social Icons Left -->
+  <div class="social-box glass">
+    <a href="https://steamcommunity.com/id/DexterMogran" target="_blank">
+      <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/steam.svg" alt="Steam"/>
+    </a>
+    <a href="https://github.com/rabbitcorpse" target="_blank">
+      <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" alt="GitHub"/>
+    </a>
+    <a href="https://open.spotify.com/user/31mf24d6tezrz57jrn57ogv4uguq" target="_blank">
+      <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/spotify.svg" alt="Spotify"/>
+    </a>
+    <a href="https://youtube.com" target="_blank">
+      <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/youtube.svg" alt="YouTube"/>
+    </a>
+    <a href="https://twitter.com/Nuwdep" target="_blank">
+      <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/twitter.svg" alt="Twitter"/>
+    </a>
+    <a href="https://discord.com" target="_blank">
+      <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/discord.svg" alt="Discord"/>
+    </a>
+  </div>
+
+  <!-- Main Profile Box -->
+  <div class="w-screen h-screen flex items-center justify-center">
+    <div class="glass w-[425px] h-fit flex flex-col items-center p-[20px] gap-[10px]">
+      <div class="flex flex-row items-center gap-[12px] w-full">
+        <!-- Profile Picture -->
+        <img class="w-[125px] h-[125px]" src="pfp.png" alt="Profile" />
+
+        <!-- Name + Badges -->
+        <div class="flex flex-col">
+          <div class="flex items-center gap-[6px]">
+            <a class="glow text-3xl">Nuwdep</a>
+            <img src="badge1.png" alt="Badge 1" class="w-[24px] h-[24px]" />
+            <img src="badge2.png" alt="Badge 2" class="w-[24px] h-[24px]" />
+          </div>
+          <a class="text-2xl">𝐉𝐚𝐯𝐚𝐒𝐜𝐫𝐢𝐩𝐭</a>
+        </div>
+      </div>
+
+      <!-- Divider -->
+      <span class="w-full h-px bg-white"></span>
+
+      <!-- Bio -->
+      <a class="text-base text-center" style="color: #e6e6e6;">
+        15 year old living in the U.K whos learning JavaScript, drinks alot of monster,
+        is always bored, and obsessed with Dexter
+      </a>
+      <span class="w-full h-px bg-white"></span>
+    </div>
+  </div>
+
+  <!-- Discord Server Invite Bottom Left -->
+  <div class="discord-invite glass p-[10px] flex flex-row gap-[10px] items-center">
+    <img class="w-auto h-[75px]" src="discord.png" alt="CantThinkOfName" />
+    <a class="glow shrink-0">CantThinkOfName</a>
+    <div class="w-full grow flex flex-row-reverse">
+      <a
+        href="https://discord.gg/fwYzVKN9cx"
+        class="glow-hover transition-transform transform hover:scale-105 cursor-pointer border border-white py-[6px] px-[12px]"
+        >🡆</a>
+    </div>
+  </div>
+
+  <!-- Custom Audio Player -->
   <div class="custom-audio-player glass">
     <img src="album.png" alt="Album Cover" />
     <div class="info">
