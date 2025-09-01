@@ -1,236 +1,211 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
-      rel="stylesheet"
-    />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap"
+    rel="stylesheet"
+  />
 
-    <!-- Website Icon / Favicon -->
-    <link rel="icon" type="image/png" href="pfp.png" />
+  <!-- Website Icon / Favicon -->
+  <link rel="icon" type="image/png" href="pfp.png" />
 
-    <title>corpse</title>
+  <title>corpse</title>
 
-    <style>
-      :root {
-        padding: 0;
-        margin: 0;
-        font-family: "Roboto", sans-serif;
-        color: #e6e6e6;
-        box-sizing: border-box;
-      }
+  <style>
+    :root {
+      padding: 0;
+      margin: 0;
+      font-family: "Special Elite", monospace; /* Typewriter Font */
+      color: #e6e6e6;
+      box-sizing: border-box;
+    }
 
-      body {
-        margin: 0;
-        height: 100vh;
-        width: 100vw;
-        background: url("bg.png") no-repeat center center fixed;
-        background-size: cover;
-        overflow: hidden;
-      }
+    body {
+      margin: 0;
+      height: 100vh;
+      width: 100vw;
+      background: url("bg.png") no-repeat center center fixed;
+      background-size: cover;
+      overflow: hidden;
+    }
 
-      /* Glass Effect */
-      .glass {
-        backdrop-filter: blur(6px);
-        -webkit-backdrop-filter: blur(6px);
-        background-color: rgba(255, 255, 255, 0.08);
-        border: 1px solid rgba(255, 255, 255, 0.15);
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
-      }
+    /* Glass Effect */
+    .glass {
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      background-color: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+      border-radius: 12px;
+    }
 
-      /* Glow Effect (subtle) */
-      .glow {
-        text-shadow: #ffffff 0px 0px 6px;
-      }
+    /* Smooth Custom Audio Player */
+    .custom-audio-player {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 15px;
+      width: 350px;
+      box-sizing: border-box;
+      transition: all 0.3s ease;
+    }
 
-      /* Audio Player */
-      .audio-player {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        padding: 12px;
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        color: #e6e6e6;
-        width: 320px;
-        box-sizing: border-box;
-      }
+    .custom-audio-player img {
+      width: 64px;
+      height: 64px;
+      object-fit: cover;
+      border-radius: 8px;
+      flex-shrink: 0;
+    }
 
-      .audio-player img {
-        width: 64px;
-        height: 64px;
-        object-fit: cover;
-        flex-shrink: 0;
-      }
+    .custom-audio-player .info {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      min-width: 0;
+    }
 
-      .audio-player .info {
-        display: flex;
-        flex-direction: column;
-        flex: 1;
-        min-width: 0;
-      }
+    .custom-audio-player .title {
+      font-size: 15px;
+      font-weight: bold;
+      color: #fff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
 
-      .audio-player strong {
-        font-size: 14px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
+    .custom-audio-player .artist {
+      font-size: 13px;
+      color: #aaa;
+    }
 
-      .audio-player span {
-        font-size: 12px;
-        color: #cccccc;
-      }
+    /* Progress bar container */
+    .progress-container {
+      width: 100%;
+      height: 6px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+      margin: 8px 0;
+      cursor: pointer;
+    }
 
-      .audio-player audio {
-        width: 100%;
-        margin-top: 4px;
-      }
+    /* Progress bar itself */
+    .progress-bar {
+      height: 6px;
+      background-color: #00ff00; /* Green progress */
+      width: 0%;
+      border-radius: 4px;
+      transition: width 0.2s ease;
+    }
 
-      /* Social Icons */
-      .social-box {
-        position: fixed;
-        top: 50%;
-        left: 0;
-        transform: translateY(-50%);
-        display: flex;
-        flex-direction: column;
-        gap: 35px;
-        padding: 20px 10px;
-      }
+    /* Controls */
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 5px;
+    }
 
-      .social-box img {
-        width: 48px;
-        height: 48px;
-        cursor: pointer;
-        filter: invert(100%) brightness(100%);
-        transition: transform 0.2s ease;
-      }
+    .play-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: #00ff00;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(0, 255, 0, 0.4);
+      transition: transform 0.15s ease;
+    }
 
-      .social-box img:hover {
-        transform: scale(1.1);
-      }
+    .play-btn:hover {
+      transform: scale(1.08);
+    }
 
-      /* Discord Invite */
-      .discord-invite {
-        position: fixed;
-        bottom: 20px;
-        left: 20px;
-        width: 360px;
-      }
-    </style>
-  </head>
+    .time {
+      font-size: 12px;
+      color: #ccc;
+    }
+  </style>
+</head>
+<body>
+  <!-- Audio Player -->
+  <div class="custom-audio-player glass">
+    <img src="album.png" alt="Album Cover" />
+    <div class="info">
+      <div class="title">Scourge Of Iron</div>
+      <div class="artist">Cannibal Corpse</div>
 
-  <body>
-    <!-- Social Icons Left -->
-    <div class="social-box glass">
-      <a href="https://steamcommunity.com/id/DexterMogran" target="_blank">
-        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/steam.svg" alt="Steam"/>
-      </a>
-      <a href="https://github.com/rabbitcorpse" target="_blank">
-        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" alt="GitHub"/>
-      </a>
-      <a href="https://open.spotify.com/user/31mf24d6tezrz57jrn57ogv4uguq" target="_blank">
-        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/spotify.svg" alt="Spotify"/>
-      </a>
-      <a href="https://youtube.com" target="_blank">
-        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/youtube.svg" alt="YouTube"/>
-      </a>
-      <a href="https://twitter.com/Nuwdep" target="_blank">
-        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/twitter.svg" alt="Twitter"/>
-      </a>
-      <a href="https://discord.com" target="_blank">
-        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/discord.svg" alt="Discord"/>
-      </a>
-    </div>
+      <!-- Progress Bar -->
+      <div class="progress-container" id="progress-container">
+        <div class="progress-bar" id="progress-bar"></div>
+      </div>
 
-    <!-- Main Profile Box -->
-    <div class="w-screen h-screen flex items-center justify-center">
-      <div class="glass w-[425px] h-fit flex flex-col items-center p-[20px] gap-[10px]">
-        <div class="flex flex-row items-center gap-[12px] w-full">
-          <!-- Profile Picture -->
-          <img class="w-[125px] h-[125px]" src="pfp.png" alt="Profile" />
-
-          <!-- Name + Badges -->
-          <div class="flex flex-col">
-            <div class="flex items-center gap-[6px]">
-              <a class="glow text-3xl">Nuwdep</a>
-              <img src="badge1.png" alt="Badge 1" class="w-[24px] h-[24px]" />
-              <img src="badge2.png" alt="Badge 2" class="w-[24px] h-[24px]" />
-            </div>
-            <a class="text-2xl">𝐉𝐚𝐯𝐚𝐒𝐜𝐫𝐢𝐩𝐭</a>
-          </div>
+      <!-- Controls -->
+      <div class="controls">
+        <div class="play-btn" id="play-btn">
+          ▶
         </div>
-
-        <!-- Divider -->
-        <span class="w-full h-px bg-white"></span>
-
-        <!-- Bio -->
-        <a class="text-base text-center" style="color: #e6e6e6;">
-          15 year old living in the U.K whos learning JavaScript, drinks alot of monster,
-          is always bored, and obsessed with Dexter
-        </a>
-        <span class="w-full h-px bg-white"></span>
+        <span class="time" id="current-time">0:00</span>
+        <span class="time" id="duration">0:00</span>
       </div>
     </div>
+    <audio id="audio" src="audio.mp3"></audio>
+  </div>
 
-    <!-- Discord Server Invite Bottom Left -->
-    <div class="discord-invite glass p-[10px] flex flex-row gap-[10px] items-center">
-      <img class="w-auto h-[75px]" src="discord.png" alt="CantThinkOfName" />
-      <a class="glow shrink-0">CantThinkOfName</a>
-      <div class="w-full grow flex flex-row-reverse">
-        <a
-          href="https://discord.gg/fwYzVKN9cx"
-          class="glow-hover transition-transform transform hover:scale-105 cursor-pointer border border-white py-[6px] px-[12px]"
-          >🡆</a
-        >
-      </div>
-    </div>
+  <script>
+    const audio = document.getElementById("audio");
+    const playBtn = document.getElementById("play-btn");
+    const progressContainer = document.getElementById("progress-container");
+    const progressBar = document.getElementById("progress-bar");
+    const currentTimeEl = document.getElementById("current-time");
+    const durationEl = document.getElementById("duration");
 
-    <!-- Audio Player -->
-    <div class="audio-player glass">
-      <img src="album.png" alt="Album Art" />
-      <div class="info">
-        <strong>Scourge Of Iron</strong>
-        <span>Cannibal Corpse</span>
-        <audio id="bg-music" autoplay controls>
-          <source src="audio.mp3" type="audio/mp3" />
-          Your browser does not support the audio element.
-        </audio>
-      </div>
-    </div>
-
-    <!-- Looping Typewriter Title with Invisible Leading Character -->
-    <script>
-      const fullTitle = ".nuwdep"; // Invisible character before "n"
-      let index = 1; // Start at 1 to never delete invisible char
-      let direction = 1;
-      const speed = 150;
-
-      function typewriterLoop() {
-        document.title = fullTitle.substring(0, index);
-
-        if (direction === 1 && index === fullTitle.length) {
-          direction = -1;
-          setTimeout(typewriterLoop, 1000);
-        } else if (direction === -1 && index === 1) {
-          // Stop deleting at the invisible character
-          direction = 1;
-          setTimeout(typewriterLoop, 500);
-        } else {
-          index += direction;
-          setTimeout(typewriterLoop, speed);
-        }
+    // Toggle play/pause
+    playBtn.addEventListener("click", () => {
+      if (audio.paused) {
+        audio.play();
+        playBtn.textContent = "⏸";
+      } else {
+        audio.pause();
+        playBtn.textContent = "▶";
       }
+    });
 
-      window.addEventListener("load", typewriterLoop);
-    </script>
-  </body>
+    // Update progress bar
+    audio.addEventListener("timeupdate", () => {
+      const { currentTime, duration } = audio;
+      const progressPercent = (currentTime / duration) * 100;
+      progressBar.style.width = `${progressPercent}%`;
+      updateTime(currentTimeEl, currentTime);
+      updateTime(durationEl, duration);
+    });
+
+    // Click to seek in audio
+    progressContainer.addEventListener("click", (e) => {
+      const width = progressContainer.clientWidth;
+      const clickX = e.offsetX;
+      const duration = audio.duration;
+      audio.currentTime = (clickX / width) * duration;
+    });
+
+    // Format time (mm:ss)
+    function updateTime(element, time) {
+      const minutes = Math.floor(time / 60);
+      let seconds = Math.floor(time % 60);
+      if (seconds < 10) seconds = `0${seconds}`;
+      element.textContent = `${minutes}:${seconds}`;
+    }
+  </script>
+</body>
 </html>
