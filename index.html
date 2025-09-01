@@ -43,7 +43,7 @@
       box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
     }
 
-    /* Subtle Glow Effect */
+    /* Subtle Glow */
     .glow {
       text-shadow: rgba(255, 255, 255, 0.3) 0px 0px 3px;
     }
@@ -53,65 +53,95 @@
       position: fixed;
       bottom: 20px;
       right: 20px;
-      padding: 12px;
+      padding: 14px;
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
       color: #e6e6e6;
-      width: 340px;
+      width: 380px; /* Wider for timestamps */
+      border-radius: 16px;
       box-sizing: border-box;
     }
 
-    .audio-player img {
-      width: 64px;
-      height: 64px;
-      object-fit: cover;
+    .album-art-wrapper {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      overflow: hidden;
       flex-shrink: 0;
     }
 
-    .audio-player .info {
+    .album-art-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .info {
       display: flex;
       flex-direction: column;
       flex: 1;
       min-width: 0;
     }
 
-    .audio-player strong {
+    .info strong {
       font-size: 14px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
-    .audio-player span {
+    .info span {
       font-size: 12px;
-      color: #cccccc;
+      color: #bdbdbd;
     }
 
     .progress-container {
       display: flex;
       align-items: center;
       gap: 8px;
-      margin-top: 5px;
+      margin-top: 8px;
     }
 
-    #progress {
+    #progress-bar-container {
       flex: 1;
-      height: 4px;
-      border-radius: 2px;
-      background: #555;
-      outline: none;
+      height: 5px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 4px;
+      overflow: hidden;
       cursor: pointer;
-      -webkit-appearance: none;
     }
 
-    #progress::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      width: 10px;
-      height: 10px;
-      background: #fff;
-      border-radius: 50%;
+    #progress-bar {
+      width: 0%;
+      height: 100%;
+      background: #ff3b81;
+      transition: width 0.2s;
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .controls button {
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 18px;
       cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .controls button:hover {
+      transform: scale(1.2);
+    }
+
+    audio {
+      display: none;
     }
 
     /* Social Icons */
@@ -237,14 +267,23 @@
 
   <!-- Audio Player -->
   <div class="audio-player glass">
-    <img id="album-art" src="album.png" alt="Album Art" />
+    <div class="album-art-wrapper">
+      <img id="album-art" src="album.png" alt="Album Art" />
+    </div>
     <div class="info">
-      <strong>Scourge Of Iron</strong>
-      <span>Cannibal Corpse</span>
+      <strong id="song-title">Scourge Of Iron</strong>
+      <span id="artist-name">Cannibal Corpse</span>
       <div class="progress-container">
         <span id="current-time">0:00</span>
-        <input type="range" id="progress" min="0" value="0" step="1">
+        <div id="progress-bar-container">
+          <div id="progress-bar"></div>
+        </div>
         <span id="duration">0:00</span>
+      </div>
+      <div class="controls">
+        <button id="prev-btn">⏮</button>
+        <button id="play-btn">▶</button>
+        <button id="next-btn">⏭</button>
       </div>
       <audio id="bg-music" autoplay>
         <source src="audio.mp3" type="audio/mp3" />
@@ -252,6 +291,7 @@
     </div>
   </div>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.2/color-thief.umd.js"></script>
   <script>
     // Typewriter Title
     const fullTitle = ".nuwdep";
@@ -274,24 +314,41 @@
     }
     window.addEventListener("load", typewriterLoop);
 
-    // Audio Player Controls
+    // Audio Player Logic
     const audio = document.getElementById("bg-music");
-    const progress = document.getElementById("progress");
+    const playBtn = document.getElementById("play-btn");
+    const progressBar = document.getElementById("progress-bar");
     const currentTimeEl = document.getElementById("current-time");
     const durationEl = document.getElementById("duration");
+    const albumArt = document.getElementById("album-art");
+    const progressContainer = document.getElementById("progress-bar-container");
 
-    audio.addEventListener("loadedmetadata", () => {
-      progress.max = Math.floor(audio.duration);
-      durationEl.textContent = formatTime(audio.duration);
+    // Play / Pause button toggle
+    playBtn.addEventListener("click", () => {
+      if (audio.paused) {
+        audio.play();
+        playBtn.textContent = "⏸";
+      } else {
+        audio.pause();
+        playBtn.textContent = "▶";
+      }
     });
 
+    // Update progress & timestamps
     audio.addEventListener("timeupdate", () => {
-      progress.value = Math.floor(audio.currentTime);
+      const progress = (audio.currentTime / audio.duration) * 100;
+      progressBar.style.width = `${progress}%`;
       currentTimeEl.textContent = formatTime(audio.currentTime);
     });
 
-    progress.addEventListener("input", () => {
-      audio.currentTime = progress.value;
+    audio.addEventListener("loadedmetadata", () => {
+      durationEl.textContent = formatTime(audio.duration);
+    });
+
+    progressContainer.addEventListener("click", (e) => {
+      const width = progressContainer.clientWidth;
+      const clickX = e.offsetX;
+      audio.currentTime = (clickX / width) * audio.duration;
     });
 
     function formatTime(seconds) {
@@ -300,6 +357,13 @@
       const secs = Math.floor(seconds % 60).toString().padStart(2, "0");
       return `${minutes}:${secs}`;
     }
+
+    // Set progress bar color based on album art dominant color
+    albumArt.onload = () => {
+      const colorThief = new ColorThief();
+      const color = colorThief.getColor(albumArt);
+      progressBar.style.backgroundColor = `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
+    };
 
     // Clock
     function updateClock() {
