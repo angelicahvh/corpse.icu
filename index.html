@@ -294,9 +294,9 @@
         <span id="duration">0:00</span>
       </div>
       <div class="controls">
-        <button id="prev-btn">⏮</button>
+        <button id="prev-btn">«</button>
         <button id="play-btn">▶</button>
-        <button id="next-btn">⏭</button>
+        <button id="next-btn">»</button>
       </div>
       <audio id="bg-music" muted>
         <source src="audio.mp3" type="audio/mp3" />
@@ -318,7 +318,7 @@
 
       audio.muted = false;
       audio.play().then(() => {
-        playBtn.textContent = "⏸";
+        playBtn.textContent = "▐▐ ";
         albumArt.style.animationPlayState = "running";
       }).catch(err => console.warn("Autoplay blocked:", err));
     });
