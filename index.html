@@ -7,9 +7,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <!-- Typewriter Font -->
+
+    <!-- Professional Typewriter Font -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
 
@@ -22,7 +23,7 @@
       :root {
         padding: 0;
         margin: 0;
-        font-family: "Special Elite", monospace;
+        font-family: "Roboto Mono", monospace;
         color: #e6e6e6;
         box-sizing: border-box;
       }
@@ -34,7 +35,7 @@
         background: url("bg.png") no-repeat center center fixed;
         background-size: cover;
         overflow: hidden;
-        font-family: "Special Elite", monospace;
+        font-family: "Roboto Mono", monospace;
       }
 
       /* Glass Effect */
@@ -96,7 +97,7 @@
         width: 320px;
         border-radius: 16px;
         box-sizing: border-box;
-        font-family: "Special Elite", monospace;
+        font-family: "Roboto Mono", monospace;
       }
 
       .album-art-wrapper {
@@ -256,7 +257,7 @@
           <button id="play-btn">▶</button>
           <button id="next-btn">⏭</button>
         </div>
-        <audio id="bg-music">
+        <audio id="bg-music" autoplay muted>
           <source src="audio.mp3" type="audio/mp3" />
         </audio>
       </div>
@@ -293,6 +294,14 @@
         const color = colorThief.getColor(albumArt);
         progressBar.style.backgroundColor = `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
       };
+
+      // Unmute after autoplay starts
+      window.addEventListener("load", () => {
+        setTimeout(() => {
+          audio.muted = false;
+          audio.play();
+        }, 500);
+      });
     </script>
 
     <!-- Looping Typewriter Title -->
