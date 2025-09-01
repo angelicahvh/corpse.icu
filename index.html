@@ -33,6 +33,7 @@
         background: url("bg.png") no-repeat center center fixed;
         background-size: cover;
         overflow: hidden;
+        cursor: none; /* Hide mouse cursor */
       }
 
       /* Glass Effect */
@@ -46,7 +47,7 @@
 
       /* Subtle Glow Effect */
       .glow {
-        text-shadow: rgba(255, 255, 255, 0.4) 0px 0px 3px;
+        text-shadow: rgba(255, 255, 255, 0.3) 0px 0px 3px;
       }
 
       /* Audio Player */
@@ -89,14 +90,29 @@
         color: #cccccc;
       }
 
-      .controls {
+      .progress-container {
         display: flex;
         align-items: center;
         gap: 8px;
+        margin-top: 5px;
       }
 
-      .volume-slider {
-        width: 60px;
+      #progress {
+        flex: 1;
+        height: 4px;
+        border-radius: 2px;
+        background: #555;
+        outline: none;
+        cursor: pointer;
+        -webkit-appearance: none;
+      }
+
+      #progress::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 10px;
+        height: 10px;
+        background: #fff;
+        border-radius: 50%;
         cursor: pointer;
       }
 
@@ -141,23 +157,6 @@
         color: #fff;
       }
 
-      /* Custom Cursor Glow */
-      html {
-        cursor: none;
-      }
-
-      #cursor-glow {
-        position: fixed;
-        width: 40px;
-        height: 40px;
-        background: rgba(255, 255, 255, 0.15);
-        border-radius: 50%;
-        pointer-events: none;
-        transform: translate(-50%, -50%);
-        transition: transform 0.05s linear;
-        z-index: 9999;
-      }
-
       /* Particles Layer */
       #particles-js {
         position: fixed;
@@ -172,7 +171,6 @@
 
   <body>
     <div id="particles-js"></div>
-    <div id="cursor-glow"></div>
     <div id="clock"></div>
 
     <!-- Social Icons Left -->
@@ -245,13 +243,14 @@
       <div class="info">
         <strong>Scourge Of Iron</strong>
         <span>Cannibal Corpse</span>
-        <div class="controls">
-          <audio id="bg-music" autoplay>
-            <source src="audio.mp3" type="audio/mp3" />
-          </audio>
-          <input type="range" id="volume" class="volume-slider" min="0" max="1" step="0.01" value="1" />
-          <span id="time" style="font-size: 12px;">0:00 / 0:00</span>
+        <div class="progress-container">
+          <span id="current-time">0:00</span>
+          <input type="range" id="progress" min="0" value="0" step="1">
+          <span id="duration">0:00</span>
         </div>
+        <audio id="bg-music" autoplay>
+          <source src="audio.mp3" type="audio/mp3" />
+        </audio>
       </div>
     </div>
 
@@ -277,22 +276,25 @@
       }
       window.addEventListener("load", typewriterLoop);
 
-      // Audio Duration + Volume Control
+      // Audio Player Controls
       const audio = document.getElementById("bg-music");
-      const time = document.getElementById("time");
-      const volumeSlider = document.getElementById("volume");
+      const progress = document.getElementById("progress");
+      const currentTimeEl = document.getElementById("current-time");
+      const durationEl = document.getElementById("duration");
 
       audio.addEventListener("loadedmetadata", () => {
-        updateTime();
+        progress.max = Math.floor(audio.duration);
+        durationEl.textContent = formatTime(audio.duration);
       });
 
-      audio.addEventListener("timeupdate", updateTime);
+      audio.addEventListener("timeupdate", () => {
+        progress.value = Math.floor(audio.currentTime);
+        currentTimeEl.textContent = formatTime(audio.currentTime);
+      });
 
-      function updateTime() {
-        const current = formatTime(audio.currentTime);
-        const total = formatTime(audio.duration);
-        time.textContent = `${current} / ${total}`;
-      }
+      progress.addEventListener("input", () => {
+        audio.currentTime = progress.value;
+      });
 
       function formatTime(seconds) {
         if (isNaN(seconds)) return "0:00";
@@ -301,10 +303,6 @@
         return `${minutes}:${secs}`;
       }
 
-      volumeSlider.addEventListener("input", () => {
-        audio.volume = volumeSlider.value;
-      });
-
       // Clock
       function updateClock() {
         const now = new Date();
@@ -312,13 +310,6 @@
       }
       setInterval(updateClock, 1000);
       updateClock();
-
-      // Custom Cursor Glow
-      const glow = document.getElementById("cursor-glow");
-      document.addEventListener("mousemove", e => {
-        glow.style.left = e.pageX + "px";
-        glow.style.top = e.pageY + "px";
-      });
 
       // Particles.js Config (Subtle)
       particlesJS("particles-js", {
