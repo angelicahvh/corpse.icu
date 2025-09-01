@@ -58,7 +58,7 @@
       align-items: center;
       gap: 14px;
       color: #e6e6e6;
-      width: 380px; /* Wider for timestamps */
+      width: 380px;
       border-radius: 16px;
       box-sizing: border-box;
     }
@@ -75,6 +75,18 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      border-radius: 50%;
+    }
+
+    /* Vinyl spin */
+    .spinning {
+      animation: spin 5s linear infinite;
+      animation-play-state: paused;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
     }
 
     .info {
@@ -268,7 +280,7 @@
   <!-- Audio Player -->
   <div class="audio-player glass">
     <div class="album-art-wrapper">
-      <img id="album-art" src="album.png" alt="Album Art" />
+      <img id="album-art" class="spinning" src="album.png" alt="Album Art" />
     </div>
     <div class="info">
       <strong id="song-title">Scourge Of Iron</strong>
@@ -332,6 +344,14 @@
         audio.pause();
         playBtn.textContent = "▶";
       }
+    });
+
+    // Sync vinyl spin with play/pause
+    audio.addEventListener("play", () => {
+      albumArt.style.animationPlayState = "running";
+    });
+    audio.addEventListener("pause", () => {
+      albumArt.style.animationPlayState = "paused";
     });
 
     // Update progress & timestamps
